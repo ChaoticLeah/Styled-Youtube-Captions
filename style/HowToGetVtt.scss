@@ -1,0 +1,48 @@
+$base-color: #222121;
+$base-color-2: #333333;
+$secondary-color: #2095d8;
+$scrollHandles: #196ea0;
+
+//General Stuff
+
+* {
+  background-color: $base-color;
+}
+body {
+  font-family: "Rubik", sans-serif;
+}
+div {
+  background-color: $base-color-2;
+  border-radius: 10px;
+  margin: 5px 5px;
+}
+h1,
+h2,
+h3,
+h4,
+p,
+a {
+  text-align: center;
+  color: white;
+}
+
+img {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+#back {
+  position: relative;
+  left: 50%;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#Content {
+  height: fit-content;
+  padding: 10px;
+}

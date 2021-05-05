@@ -1,0 +1,193 @@
+$base-color: #222121;
+$base-color-2: #333333;
+$secondary-color: #2095d8;
+$scrollHandles: #196ea0;
+
+//General Stuff
+
+* {
+  background-color: $base-color;
+}
+body {
+  font-family: "Rubik", sans-serif;
+}
+div {
+  background-color: $base-color-2;
+  border-radius: 10px;
+  margin: 5px 5px;
+}
+#main {
+  background-color: $base-color;
+}
+
+button,
+.button {
+  display: inline-block;
+  padding: 12px 18px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: $secondary-color;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  border: none;
+}
+
+p,
+h3 {
+  color: white;
+}
+//This is for the upload page
+#uploadVTT {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
+  h3,
+  a {
+    position: relative;
+    top: 50%;
+    text-align: center;
+    background-color: transparent;
+    color: white;
+  }
+  #vttSelectorButton {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #LoadMenu {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+//This is for each subtitle block
+
+.SubtitleDiv {
+  background-color: $base-color;
+  padding: 16px;
+  padding-top: 5px;
+  width: 50%;
+  margin: 5px 5px;
+
+  h2 {
+    color: white;
+    background-color: transparent;
+  }
+  textarea {
+    width: 100%;
+    height: fit-content;
+    min-height: 80px;
+    color: white;
+    font-size: 16px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+  }
+}
+
+//This is for the div that holds all the style related stuff
+#styleHolder {
+  position: sticky;
+  top: 5vh;
+  left: 55vw;
+  width: 40vw;
+  height: 90vh;
+  background-color: $base-color;
+  padding: 3px;
+
+  h1 {
+    background-color: transparent;
+    color: white;
+    text-align: center;
+  }
+  #styleButtons {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: auto;
+    max-height: 10%;
+    padding: 12px;
+    overflow: auto;
+    .selected {
+      background-color: red;
+    }
+  }
+  #styleEditor {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-height: 68%;
+    height: auto;
+
+    padding: 12px;
+    overflow: auto;
+
+    select,
+    input,
+    p {
+      color: white;
+      background-color: transparent;
+      margin: 8px 0;
+      border: none;
+      font-family: "Rubik", sans-serif;
+    }
+  }
+  .styleButton {
+    background-color: $secondary-color; /* Green */
+    border: none;
+    color: white;
+    padding: 1px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px;
+  }
+}
+//The download button
+#download {
+  position: relative;
+  top: 10%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, 0%);
+  border: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $base-color-2;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $scrollHandles;
+}
+
+//all the toolbar stuff at the top of the page explaining how to use it and all that.
+#toolbar {
+  background-color: transparent;
+  position: absolute;
+  top: 0px;
+  width: 50%;
+  p {
+    background-color: transparent;
+  }
+  h1 {
+    color: white;
+  }
+}
