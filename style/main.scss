@@ -190,4 +190,12 @@ h3 {
   h1 {
     color: white;
   }
+  #github {
+    color: white;
+    background-color: transparent;
+    filter: drop-shadow(1px 1px 4px white);
+    img {
+      background-color: transparent;
+    }
+  }
 }

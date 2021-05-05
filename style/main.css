@@ -202,4 +202,15 @@ h3 {
 #toolbar h1 {
   color: white;
 }
+
+#toolbar #github {
+  color: white;
+  background-color: transparent;
+  -webkit-filter: drop-shadow(1px 1px 4px white);
+          filter: drop-shadow(1px 1px 4px white);
+}
+
+#toolbar #github img {
+  background-color: transparent;
+}
 /*# sourceMappingURL=main.css.map */
