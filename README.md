@@ -1,10 +1,6 @@
 # Styled Youtube Captions
 
-<img src="https://img.shields.io/github/license/kevinwh0/Styled-Youtube-Captions" />
-<img src="https://img.shields.io/github/issues-raw/kevinwh0/Styled-Youtube-Captions" />
-<img src="https://img.shields.io/github/contributors/kevinwh0/Styled-Youtube-Captions" />
-<img src="https://img.shields.io/github/forks/kevinwh0/Styled-Youtube-Captions?style=social" />
-<img src="https://img.shields.io/github/stars/kevinwh0/Styled-Youtube-Captions?style=social" />
+<img src="https://img.shields.io/github/license/kevinwh0/Styled-Youtube-Captions" /> <img src="https://img.shields.io/github/issues-raw/kevinwh0/Styled-Youtube-Captions" /> <img src="https://img.shields.io/github/contributors/kevinwh0/Styled-Youtube-Captions" /> <img src="https://img.shields.io/github/forks/kevinwh0/Styled-Youtube-Captions?style=social" /> <img src="https://img.shields.io/github/stars/kevinwh0/Styled-Youtube-Captions?style=social" />
 
 ### Features:
 
