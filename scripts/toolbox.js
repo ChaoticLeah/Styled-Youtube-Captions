@@ -120,3 +120,38 @@ export function replaceHtml(
   //return the text
   return newText;
 }
+//Used for wrapping the selected area of a textArea in a tag
+export function wrapSelection(txtarea, surrounder) {
+  let selection = getSelection(txtarea);
+  //If there is no selection dont run
+  if (selection.start == selection.finish) return;
+  //Set the text
+  txtarea.value = txtarea.value
+    .splice(selection.start, surrounder)
+    .splice(selection.finish + surrounder.length, surrounder);
+}
+
+export function getSelection(txtarea) {
+  var start = txtarea.selectionStart;
+  // obtain the index of the last selected character
+  var finish = txtarea.selectionEnd;
+
+  //console.log(finish);
+  return { start: start, finish: finish };
+}
+
+/**
+ * {JSDoc}
+ *
+ * The splice() method changes the content of a string by removing a range of
+ * characters and/or adding new characters.
+ *
+ * @this {String}
+ * @param {number} start Index at which to start changing the string.
+ * @param {number} delCount An integer indicating the number of old chars to remove.
+ * @param {string} newSubStr The String that is spliced in.
+ * @return {string} A new string with the spliced substring.
+ */
+String.prototype.splice = function (start, newSubStr) {
+  return this.slice(0, start) + newSubStr + this.slice(start);
+};

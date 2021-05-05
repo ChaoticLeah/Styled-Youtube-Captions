@@ -1,7 +1,11 @@
 import { generateFile } from "./generateFile.js";
 import { load } from "./saveSystem.js";
-import { AddStyle } from "./styleManager.js";
-import { download, readText } from "./toolbox.js";
+import { AddStyle, selectedStyle } from "./styleManager.js";
+import { download, readText, wrapSelection } from "./toolbox.js";
+
+//This is used to give each textbox a unique ID
+let uniqueIdentifierCounter = 0;
+let lastSelectedTextArea = -1;
 
 //Hide the main display until a file is selected
 document.getElementById("main").style.display = "none";
@@ -61,11 +65,29 @@ export function appendSubtitle(text, time) {
   div.setAttribute("class", "SubtitleDiv");
   let title = time;
   div.innerHTML = `        <h2 class = "h2">${title}</h2>
-  <textarea class="subtitleText">${text}</textarea>`;
+  <textarea class="subtitleText" id="textArea${uniqueIdentifierCounter}">${text}</textarea>`;
   document.getElementById("subtitleHolder").appendChild(div);
+
+  //This lets us detect a selection of a textbox, this is used for the shortcut that autosurrounds
+  document
+    .getElementById(`textArea${uniqueIdentifierCounter}`)
+    .addEventListener("select", (evnt) => {
+      lastSelectedTextArea = evnt.target.id;
+    });
+
+  uniqueIdentifierCounter++;
 }
 
 //Add the download listener to download the file when download is hit
 document.getElementById("download").addEventListener("click", () => {
   download(generateFile(), "fancyFontTranscript.ytt");
 });
+
+document.body.onkeydown = function (e) {
+  //if F1/Alt is pressed then attempt to surround the selected texbox area with the style tags
+  if (e.key == "F1" || e.key == "Alt") {
+    e.preventDefault();
+    let textArea = document.getElementById(lastSelectedTextArea);
+    wrapSelection(textArea, `(${selectedStyle})`);
+  }
+};
