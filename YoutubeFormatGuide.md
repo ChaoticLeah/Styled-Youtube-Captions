@@ -1,6 +1,6 @@
 # Youtube formatting guide (Incomplete)
 
-Keep in mind this is based on observation and may not be fully correct. If you would like to add or improve to this doc you can open a PR.
+Keep in mind this is based on observation and may not be fully correct. If you would like to add or improve this doc you can open a PR.
 
 - t - start time of caption (in milliseconds)
 - d - duration of caption (in milliseconds)
