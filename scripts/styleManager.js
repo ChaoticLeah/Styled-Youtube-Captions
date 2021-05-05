@@ -1,5 +1,8 @@
 //All the users style data
 export let styleData = [];
+//This is the style that they are currently editing.
+export let selectedStyle = 1;
+
 //A setter for when we are loading in a existing project
 export function setStyleData(data) {
   styleData = data;
@@ -115,6 +118,8 @@ function handleStyleSelect(button) {
   button.classList.add("selected");
   //get the id of the button
   let buttonID = Number(button.innerHTML.split(" ")[0]) - startingNumber;
+  //Used for shortcute/hotkeys
+  selectedStyle = buttonID + 1;
   //get the current style data from the styleData list
   let style = styleData[buttonID];
   //Remove all previous elements from the style editor
