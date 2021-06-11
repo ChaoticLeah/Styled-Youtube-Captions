@@ -73,10 +73,36 @@ h3 {
   padding-top: 5px;
   width: 50%;
   margin: 5px 5px;
+  white-space: nowrap;
 }
 
 .SubtitleDiv h2 {
   color: white;
+  background-color: transparent;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.SubtitleDiv .titleHolder {
+  width: 100px;
+  float: left;
+  background-color: transparent;
+}
+
+.SubtitleDiv .titleHolder * {
+  padding: 0px;
+  margin: 0px;
+}
+
+.SubtitleDiv .controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
   background-color: transparent;
 }
 
@@ -93,6 +119,18 @@ h3 {
           box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 4px;
+}
+
+.SubtitleDiv .deleteButton {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  right: 5px;
+  background-color: red;
+  color: white;
+  margin: 0;
+  padding: 0;
+  align: right;
 }
 
 #styleHolder {

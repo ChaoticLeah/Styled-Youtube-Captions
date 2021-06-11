@@ -74,9 +74,26 @@ h3 {
   padding-top: 5px;
   width: 50%;
   margin: 5px 5px;
+  white-space: nowrap;
 
   h2 {
     color: white;
+    background-color: transparent;
+    width: fit-content;
+  }
+  .titleHolder {
+    width: 100px;
+    float: left;
+    background-color: transparent;
+
+    * {
+      padding: 0px;
+      margin: 0px;
+    }
+  }
+  .controls {
+    display: flex;
+    flex-direction: row-reverse;
     background-color: transparent;
   }
   textarea {
@@ -89,6 +106,17 @@ h3 {
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
+  }
+  .deleteButton {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    right: 5px;
+    background-color: red;
+    color: white;
+    margin: 0;
+    padding: 0;
+    align: right;
   }
 }
 
