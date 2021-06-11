@@ -64,8 +64,14 @@ export function appendSubtitle(text, time) {
   let div = document.createElement("div");
   div.setAttribute("class", "SubtitleDiv");
   let title = time;
-  div.innerHTML = `        <h2 class = "h2">${title}</h2>
-  <textarea class="subtitleText" id="textArea${uniqueIdentifierCounter}">${text}</textarea>`;
+  div.innerHTML = `<div class = "titleHolder"><h2 class = "h2">${title}</h2></div>
+  <div class = "controls">
+    <button class = "deleteButton" onClick = "this.parentElement.parentElement.remove();">X</button>
+  </div>
+  <br>
+
+  <textarea class="subtitleText" id="textArea${uniqueIdentifierCounter}">${text}</textarea>
+`;
   document.getElementById("subtitleHolder").appendChild(div);
 
   //This lets us detect a selection of a textbox, this is used for the shortcut that autosurrounds
