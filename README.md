@@ -1,3 +1,5 @@
+![IconStyledYTCaptions](https://user-images.githubusercontent.com/45321184/121992564-bdcad400-cd56-11eb-96c0-bb4821a7481b.png)
+
 # Styled Youtube Captions
 
 <img src="https://img.shields.io/github/license/kevinwh0/Styled-Youtube-Captions" /> <img src="https://img.shields.io/github/issues-raw/kevinwh0/Styled-Youtube-Captions" /> <img src="https://img.shields.io/github/contributors/kevinwh0/Styled-Youtube-Captions" /> <img src="https://img.shields.io/github/forks/kevinwh0/Styled-Youtube-Captions?style=social" /> <img src="https://img.shields.io/github/stars/kevinwh0/Styled-Youtube-Captions?style=social" />
