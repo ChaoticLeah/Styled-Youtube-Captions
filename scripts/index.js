@@ -63,7 +63,8 @@ document.getElementById("LoadMenu").addEventListener("click", () => {
 export function appendSubtitle(text, time, id = 0) {
   let div = document.createElement("div");
   div.setAttribute("class", "SubtitleDiv");
-  let title = time;
+  let title = time.split(" --> ");
+  /*
   div.innerHTML = `<div class = "titleHolder" id="subtitle${id}"><h2 class = "h2">${title}</h2></div>
   <div class = "controls">
     <button class = "deleteButton" onClick = "this.parentElement.parentElement.remove();">X</button>
@@ -71,6 +72,16 @@ export function appendSubtitle(text, time, id = 0) {
   <br>
 
   <textarea class="subtitleText" id="textArea${uniqueIdentifierCounter}">${text}</textarea>
+`;
+*/
+  div.innerHTML = `<div class = "titleHolder" id="subtitle${id}">          <input type="text" class = "h2" id = "start" value = "${title[0]}"><input type="text" class = "h2" id = "stop" value = "${title[1]}">
+</div>
+<div class = "controls">
+  <button class = "deleteButton" onClick = "this.parentElement.parentElement.remove();">X</button>
+</div>
+<br>
+
+<textarea class="subtitleText" id="textArea${uniqueIdentifierCounter}">${text}</textarea>
 `;
   document.getElementById("subtitleHolder").appendChild(div);
 
@@ -86,7 +97,9 @@ export function appendSubtitle(text, time, id = 0) {
 
 //Add the download listener to download the file when download is hit
 document.getElementById("download").addEventListener("click", () => {
-  download(generateFile(), "fancyFontTranscript.ytt");
+  let file = generateFile();
+  //If the file was made without problems download it
+  if (file != null) download(file, "fancyFontTranscript.ytt");
 });
 
 document.body.onkeydown = function (e) {

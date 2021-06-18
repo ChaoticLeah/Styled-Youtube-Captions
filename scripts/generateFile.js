@@ -5,6 +5,7 @@ import {
   replaceHtml,
   toMillis,
 } from "./toolbox.js";
+//If errors are found, this will be false
 
 //This is the bare bones of the file. It will be filled in when it runs
 let baseFile = `
@@ -54,17 +55,28 @@ export function generateFile() {
   for (let i = 0; i < subtitles.length; i++) {
     //get a subtitle
     let subtitle = subtitles[i];
-    //get the "header" of the subtitle (This just contains the start and stop timestamp we will need)
-    let headers = subtitle
-      .getElementsByClassName("h2")[0]
-      .innerHTML.split(" --&gt; ");
+    //get the times of the subtitle (This just contains the start and stop timestamp we will need)
+    let times = subtitle.getElementsByClassName("h2");
+    //Get the start time
+    let startTime = times[0].value;
+    //get the end time
+    let stopTime = times[1].value;
 
     //Convert the start time to milliseconds
-    let startTime = toMillis(headers[0]);
+    startTime = toMillis(startTime);
 
     //convert the duration to milliseconds
-    let dir = toMillis(headers[1]) - startTime;
-
+    let dir = toMillis(stopTime) - startTime;
+    //Check if the times are all valid
+    if (isNaN(dir)) {
+      alert(
+        "One or more of your start of stop times is incorrectly formatted."
+      );
+      //Bring the user to the error
+      location.href = "#subtitle" + i;
+      //Dont download it
+      return null;
+    }
     //Get the text of that subtitle section
     let text = subtitle.getElementsByClassName("subtitleText")[0].value;
 

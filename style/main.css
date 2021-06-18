@@ -30,7 +30,8 @@ button,
 }
 
 p,
-h3 {
+h3,
+input {
   color: white;
 }
 
