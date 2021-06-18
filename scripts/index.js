@@ -43,7 +43,7 @@ document.getElementById("VTTSELECTOR").addEventListener("change", () => {
       lines.shift();
       lines = lines.join("\n");
       //Add the subtitle
-      appendSubtitle(lines, title);
+      appendSubtitle(lines, title, i);
     }
   });
   //On init we will add a default style that will be auto applied to everything
@@ -60,11 +60,11 @@ document.getElementById("LoadMenu").addEventListener("click", () => {
 });
 
 //Add subtitles to the page
-export function appendSubtitle(text, time) {
+export function appendSubtitle(text, time, id = 0) {
   let div = document.createElement("div");
   div.setAttribute("class", "SubtitleDiv");
   let title = time;
-  div.innerHTML = `<div class = "titleHolder"><h2 class = "h2">${title}</h2></div>
+  div.innerHTML = `<div class = "titleHolder" id="subtitle${id}"><h2 class = "h2">${title}</h2></div>
   <div class = "controls">
     <button class = "deleteButton" onClick = "this.parentElement.parentElement.remove();">X</button>
   </div>
