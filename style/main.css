@@ -133,6 +133,13 @@ input {
   padding: 0;
 }
 
+.SubtitleDiv .addSubtitleBelow {
+  padding: 8px;
+  padding-bottom: 6px;
+  padding-top: 6px;
+  display: block;
+}
+
 #styleHolder {
   position: -webkit-sticky;
   position: sticky;
