@@ -34,9 +34,11 @@ button,
 }
 
 p,
-h3 {
+h3,
+input {
   color: white;
 }
+
 //This is for the upload page
 #uploadVTT {
   position: absolute;
@@ -116,6 +118,12 @@ h3 {
     color: white;
     margin: 0;
     padding: 0;
+  }
+  .addSubtitleBelow {
+    padding: 8px;
+    padding-bottom: 6px;
+    padding-top: 6px;
+    display: block;
   }
 }
 

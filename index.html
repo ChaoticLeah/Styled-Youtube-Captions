@@ -1,58 +1,72 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Youtube Styled Subtitle Creator</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">  
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" media="screen" href="./style/main.css" />
-  </head>
-  <body>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Youtube Styled Subtitle Creator</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" type="text/css" media="screen" href="./style/main.css" />
+</head>
+
+<body>
 
 
-    <div id = "main">
-      <div id="subtitleHolder">
-        <div id = "styleHolder">
-          <h1>Style Manager</h1>
-          <div id = "styleButtons">
-            <button id = "addStyle" class = "styleButton">+</button>
-          </div>
-          <div id = "styleEditor">
-          </div>
+  <div id="main">
+    <div id="subtitleHolder">
+      <div id="styleHolder">
+        <h1>Style Manager</h1>
+        <div id="styleButtons">
+          <button id="addStyle" class="styleButton">+</button>
         </div>
-        <div id = "toolbar">
-          <h1>How to use this tool?</h1>
-          <p id = "desc">To the right you will see a tab called the "Style Manager", if you want to make a new style, you do it there by clicking the +. If you want to then select a style to edit it click on any of the numbered buttons, and it will show you that style as well as giving you a way to modify it. <br> If you want to apply that style to any text you can do that with the captions below by surrounding what you want to have that style with (style number). <br><br>E.g. If a caption says "Hello World", and we want the word "World" to have style 1 then we can make it "Hello (1)World(1)"<br><br> The default style is applied to all the text.</p>
-          <button id = "Save">Save Project</button>
-          <button id = "Load">Load Project</button>
-          <br>
-          <a id = "github" href="https://github.com/KevinWh0/Styled-Youtube-Captions" target="_blank" rel="noopener noreferrer">Want to help improve the tool? You can do it here
-            <img src="./assets/Github_Logo.png" width="20" height="20"/>
-          </a>
-          <p>Tip: select some text and hit Alt/F1 and it will surround the text with the selected style.</p>
+        <div id="styleEditor">
         </div>
-
       </div>
-      <button id = "download">Download</button>
-      <!--Open it in a new tab because they probably dont want to have to re-do it all-->
-      <a hidden href ="./HowToUploadCaptions.html"  id = "uploadCaptions" target="_blank" rel="noopener noreferrer"></a>
-      <button id = "howtoupload" onClick="document.getElementById('uploadCaptions').click();" style = "position:relative; left:50%; transform: translateX(-50%);">How Do I upload it to youtube?</button>
-      
+      <div id="toolbar">
+        <h1>How to use this tool?</h1>
+        <p id="desc">To the right you will see a tab called the "Style Manager", if you want to make a new style, you do
+          it there by clicking the +. If you want to then select a style to edit it click on any of the numbered
+          buttons, and it will show you that style as well as giving you a way to modify it. <br> If you want to apply
+          that style to any text you can do that with the captions below by surrounding what you want to have that style
+          with (style number). <br><br>E.g. If a caption says "Hello World", and we want the word "World" to have style
+          1 then we can make it "Hello (1)World(1)"<br><br> The default style is applied to all the text.</p>
+        <button id="Save">Save Project</button>
+        <button id="Load">Load Project</button>
+        <br>
+        <a id="github" href="https://github.com/KevinWh0/Styled-Youtube-Captions" target="_blank"
+          rel="noopener noreferrer">Want to help improve the tool? You can do it here
+          <img src="./assets/Github_Logo.png" width="20" height="20" />
+        </a>
+        <p>Tip: select some text and hit Alt/F1 and it will surround the text with the selected style.</p>
+      </div>
+
+
+
+
     </div>
+    <button id="download">Download</button>
+    <!--Open it in a new tab because they probably dont want to have to re-do it all-->
+    <a hidden href="./HowToUploadCaptions.html" id="uploadCaptions" target="_blank" rel="noopener noreferrer"></a>
+    <button id="howtoupload" onClick="document.getElementById('uploadCaptions').click();"
+      style="position:relative; left:50%; transform: translateX(-50%);">How Do I upload it to youtube?</button>
+
+  </div>
 
 
 
-    <div id="uploadVTT">
+  <div id="uploadVTT">
 
-        <input hidden type="file" accept=".vtt" id = "VTTSELECTOR"></button>
-        <label class="button" for="VTTSELECTOR" id = "vttSelectorButton">Upload VTT File</label>
-        <button id = "LoadMenu">Load Project</button>
+    <input hidden type="file" accept=".vtt" id="VTTSELECTOR"></button>
+    <label class="button" for="VTTSELECTOR" id="vttSelectorButton">Upload VTT File</label>
+    <button id="LoadMenu">Load Project</button>
 
-        <h3>Currently we only support VTT files. Dont know how to get a VTT file? <a href = "./HowToGetVtt.html">Click Here</a></h3>
-    </div>
+    <h3>Currently we only support VTT files. Dont know how to get a VTT file? <a href="./HowToGetVtt.html">Click
+        Here</a></h3>
+  </div>
 
-  </body>
-  <script src="./scripts/index.js" type="module"></script>
+</body>
+<script src="./scripts/index.js" type="module"></script>
+
 </html>

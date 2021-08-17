@@ -43,7 +43,7 @@ document.getElementById("VTTSELECTOR").addEventListener("change", () => {
       lines.shift();
       lines = lines.join("\n");
       //Add the subtitle
-      appendSubtitle(lines, title);
+      appendSubtitle(lines, title, i);
     }
   });
   //On init we will add a default style that will be auto applied to everything
@@ -60,11 +60,12 @@ document.getElementById("LoadMenu").addEventListener("click", () => {
 });
 
 //Add subtitles to the page
-export function appendSubtitle(text, time) {
+export function appendSubtitle(text, time, id = 0, location = -1) {
   let div = document.createElement("div");
   div.setAttribute("class", "SubtitleDiv");
-  let title = time;
-  div.innerHTML = `<div class = "titleHolder"><h2 class = "h2">${title}</h2></div>
+  let title = time.split(" --> ");
+  /*
+  div.innerHTML = `<div class = "titleHolder" id="subtitle${id}"><h2 class = "h2">${title}</h2></div>
   <div class = "controls">
     <button class = "deleteButton" onClick = "this.parentElement.parentElement.remove();">X</button>
   </div>
@@ -72,7 +73,26 @@ export function appendSubtitle(text, time) {
 
   <textarea class="subtitleText" id="textArea${uniqueIdentifierCounter}">${text}</textarea>
 `;
-  document.getElementById("subtitleHolder").appendChild(div);
+*/
+
+  div.innerHTML = `<div class = "titleHolder" id="subtitle${id}">          <input type="text" class = "h2" id = "start" value = "${title[0]}"><input type="text" class = "h2" id = "stop" value = "${title[1]}">
+</div>
+<div class = "controls">
+  <button class = "deleteButton" onClick = "this.parentElement.parentElement.remove();">X</button>
+</div>
+<br>
+
+<textarea class="subtitleText" id="textArea${uniqueIdentifierCounter}">${text}</textarea>
+<button class = "addSubtitleBelow">+</button>
+
+`;
+  //If no location is specified add it to the end, otherwise add it to the specified location
+  if (location == -1)
+    document.getElementById("subtitleHolder").appendChild(div);
+  else {
+    //Location is a element, we will add the new subtitle div after that element
+    location.after(div);
+  }
 
   //This lets us detect a selection of a textbox, this is used for the shortcut that autosurrounds
   document
@@ -81,12 +101,28 @@ export function appendSubtitle(text, time) {
       lastSelectedTextArea = evnt.target.id;
     });
 
+  //Add a click listener so that when the + button is clicked we can create another subtitle element under that one
+
+  document
+    .getElementById(`subtitle${id}`)
+    .parentElement.getElementsByClassName("addSubtitleBelow")[0]
+    .addEventListener("click", () => {
+      appendSubtitle(
+        "",
+        time,
+        id + 0.00001,
+        document.getElementById(`subtitle${id}`).parentElement
+      );
+    });
+
   uniqueIdentifierCounter++;
 }
 
 //Add the download listener to download the file when download is hit
 document.getElementById("download").addEventListener("click", () => {
-  download(generateFile(), "fancyFontTranscript.ytt");
+  let file = generateFile();
+  //If the file was made without problems download it
+  if (file != null) download(file, "fancyFontTranscript.ytt");
 });
 
 document.body.onkeydown = function (e) {
