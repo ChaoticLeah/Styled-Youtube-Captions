@@ -18,7 +18,7 @@ As you can see in the image above it lets you create fancy captions for youtube.
 - Font support! (change the font of your captions)
 - Size support! Scale your caption text to any size!
 - **Bold**, _italics_, and <u>underlines</u>
-- Colored Dropshadow/Glow
+- Colored Dropshadow / Glow
 - Abity to add captions within the app.
 - Ability to change times within the app.
 - Super simple and has built in tutorials
