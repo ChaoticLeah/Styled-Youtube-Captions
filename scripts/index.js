@@ -9,8 +9,70 @@ let lastSelectedTextArea = -1;
 
 //Hide the main display until a file is selected
 document.getElementById("main").style.display = "none";
+
+function loadFile(file) {
+  //Show the main page
+  document.getElementById("main").style.display = "block";
+  //hide the uploader page
+  document.getElementById("uploadVTT").setAttribute("hidden", true);
+
+  //Read the file as text
+  readText(file, (e) => {
+    //Read it line by line
+    let lines = e.split("\n");
+
+    //Remove the start lines (they specify the language and stuff, we dont need this)
+    lines.shift();
+    lines.shift();
+    lines.shift();
+    //get all the content, and put it back together
+    let content = "\n" + lines.join("\n");
+
+    //This splits the subtitles up by each "section"
+    let sections = content.split("\r").join("").split("\n\n");
+    //Remove the empty lines (there is one at the start and end)
+    sections.shift();
+    sections.pop();
+    //Add all the sections to the page
+    for (let i = 0; i < sections.length; i++) {
+      //Split the text from the timing data in the file
+      let lines = sections[i].split("\n");
+      let title = lines[0];
+      lines.shift();
+      lines = lines.join("\n");
+      //Add the subtitle
+      appendSubtitle(lines, title, i);
+    }
+  });
+  //On init we will add a default style that will be auto applied to everything
+  AddStyle("default");
+}
+
+//For later if an animation is added or anything when a file is dragged into the page to be uploaded
+document.getElementById("uploadVTT").ondragover = function (e) {
+  e.preventDefault();
+  e.stopPropagation();
+  e.dataTransfer.dropEffect = "copy";
+
+  return false;
+};
+//let files be dragged onto uploadVTT to load them
+document.getElementById("uploadVTT").ondrop = function (e) {
+  e.preventDefault();
+  e.stopPropagation();
+  //check the file type and if its the correct type load it
+  if (e.dataTransfer.files[0].name.split(".")[1] == "vtt") {
+    loadFile(e.dataTransfer.files[0]);
+  } else {
+    //If the file is not a vtt file then show an error
+    alert("Please upload a .vtt file");
+  }
+};
+
 //when the file input gets a file go to the main page
 document.getElementById("VTTSELECTOR").addEventListener("change", () => {
+  loadFile(document.getElementById("VTTSELECTOR").files[0]);
+  return;
   //Show the main page
   document.getElementById("main").style.display = "block";
   //hide the uploader page

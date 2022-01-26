@@ -301,8 +301,6 @@ function updatePreview(updateId, updateValue) {
   //If the element is undefined then we will return
   if (previewText == undefined) return;
 
-  console.log(updateId, updateValue);
-
   let stylePreviewData = stylePreview[updateId];
   //If the style preview data is undefined then we will return
   if (stylePreviewData == undefined) return;
