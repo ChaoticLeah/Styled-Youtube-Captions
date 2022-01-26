@@ -35,13 +35,13 @@ export const positionDictornary = {
 //all the styles that can be applied and what input type they will need to be modified along with some perams
 const styleTypes = {
   backgroundColor: "color",
+  backgroundOpacity: "numberRanged 0-255",
   color: "color",
   italics: "boolean",
   bold: "boolean",
   underline: "boolean",
   font: "dropdown " + JSON.stringify(fontDictionary),
   size: "number 100",
-  backgroundOpacity: "numberRanged 0-255",
   fontOpacity: "numberRanged 0-255",
   "Dropshadow Color": "color",
   "Dropshadow Distance": "numberRanged 1-4",
@@ -49,18 +49,76 @@ const styleTypes = {
 //This is a table for convering the data into the correct varible names for youtube
 export const styleToXML = {
   backgroundColor: "bc",
+  backgroundOpacity: "bo",
   color: "fc",
   italics: "i",
   bold: "b",
   underline: "u",
   font: "fs",
   size: "sz",
-  backgroundOpacity: "bo",
   fontOpacity: "fo",
   id: "id",
   "Dropshadow Color": "ec",
   "Dropshadow Distance": "et",
 };
+
+//This is used for the preview
+export const stylePreview = {
+  backgroundColor: {
+    cssName: "background-color",
+    value: "INPUT",
+    effectedElement: "previewText",
+  },
+  backgroundOpacity: {
+    cssName: "btraparency",
+    value: "INPUT",
+    effectedElement: "previewText",
+  },
+  color: { cssName: "color", value: "INPUT", effectedElement: "previewText" },
+  italics: {
+    cssName: "font-style",
+    value: `INPUT == 1 ? "italic" : "normal"`,
+    effectedElement: "previewText",
+  },
+  bold: {
+    cssName: "font-weight",
+    value: `INPUT == 1 ? "bold" : "normal"`,
+    effectedElement: "previewText",
+  },
+  underline: {
+    cssName: "text-decoration",
+    value: `INPUT == 1 ? "underline" : "normal"`,
+    effectedElement: "previewText",
+  },
+  font: {
+    cssName: "font-family",
+    value: "fontDictionary[INPUT]",
+    effectedElement: "previewText",
+  },
+  size: {
+    cssName: "font-size",
+    value: "INPUT%",
+    effectedElement: "previewText",
+  },
+
+  fontOpacity: {
+    cssName: "traparency",
+    value: "INPUT",
+    effectedElement: "previewText",
+  },
+  id: null,
+  "Dropshadow Color": {
+    cssName: "text-shadow",
+    value: "INPUT",
+    effectedElement: "previewText",
+  },
+  "Dropshadow Distance": {
+    cssName: "text-shadow",
+    value: "INPUT",
+    effectedElement: "previewText",
+  },
+};
+
 //Default styling done below here in AddStyle
 
 //This is the offset of what id we will start on when making new styles(start on 1 because 0 is for dealing with weird black edges)
@@ -190,11 +248,149 @@ function handleStyleSelect(button) {
       let id = e.target.id;
       //The new value
       let val = e.target.value;
-
+      updatePreview(id, val);
       styleData[buttonID][id] = val;
     });
   }
 }
+
+//Update the preview
+function truncateDecimals(number, digits) {
+  if (number == 0) return 0;
+  //trunace it as a string
+  let string = number.toString();
+  //get the decimal point
+  let decimalPoint = string.indexOf(".");
+  //if there is no decimal point then return the number
+  if (decimalPoint == -1) return number;
+  //if there is a decimal point then truncate it
+  return Number(string.substring(0, decimalPoint + digits + 1));
+}
+
+function setOpacity(
+  previewText,
+  styleValue,
+  propertyName = "color",
+  colorElement
+) {
+  //get the color to modify
+  let color =
+    previewText.style.getPropertyValue(propertyName) || colorElement.value;
+  //Some reason if it hits 0 it never can be changed so this is a little fix I found
+  styleValue =
+    styleValue / 255 > 0.008 ? truncateDecimals(styleValue / 255, 2) : 0.01;
+  //turn the color into rgba from rgb
+  if (!color.includes("rgba")) {
+    color = color.replace("rgb", "rgba");
+    color = color.replace(")", ", " + styleValue + ")");
+  } else {
+    //replace everything after the last comma with the new value if its already in rgba
+    color = color.replace(/\d+\.\d+/, styleValue + "");
+  }
+
+  //set the new color
+  previewText.style.setProperty(propertyName, color);
+}
+
+function updatePreview(updateId, updateValue) {
+  let previewText = document.getElementById("previewText");
+  //If the element is undefined then we will return
+  if (previewText == undefined) return;
+
+  console.log(updateId, updateValue);
+
+  let stylePreviewData = stylePreview[updateId];
+  //If the style preview data is undefined then we will return
+  if (stylePreviewData == undefined) return;
+
+  let styleValueTemplate = stylePreviewData.value;
+
+  let styleValue = styleValueTemplate.replace(/INPUT/g, updateValue);
+
+  try {
+    styleValue = eval(styleValue);
+  } catch (e) {}
+
+  //for those that cant be handled as easy lets use a switch case
+  switch (updateId) {
+    case "fontOpacity":
+      setOpacity(
+        previewText,
+        styleValue,
+        "color",
+        document.getElementById("color")
+      );
+
+      // //get the color to modify
+      // let color =
+      //   previewText.style.getPropertyValue("color") ||
+      //   document.getElementById("color").value;
+      // //Some reason if it hits 0 it never can be changed so this is a little fix I found
+      // styleValue =
+      //   styleValue / 255 > 0.008 ? truncateDecimals(styleValue / 255, 2) : 0.01;
+      // //turn the color into rgba from rgb
+      // if (!color.includes("rgba")) {
+      //   color = color.replace("rgb", "rgba");
+      //   color = color.replace(")", ", " + styleValue + ")");
+      // } else {
+      //   //replace everything after the last comma with the new value if its already in rgba
+      //   color = color.replace(/\d+\.\d+/, styleValue + "");
+      // }
+
+      // //set the new color
+      // previewText.style.setProperty("color", color);
+
+      break;
+    case "backgroundOpacity":
+      setOpacity(
+        previewText,
+        styleValue,
+        "background-color",
+        document.getElementById("backgroundColor")
+      );
+      // //get the color to modify
+      // let bcolor =
+      //   previewText.style.getPropertyValue("background-color") ||
+      //   document.getElementById("backgroundColor").value;
+      // //Some reason if it hits 0 it never can be changed so this is a little fix I found
+      // styleValue =
+      //   styleValue / 255 > 0.008 ? truncateDecimals(styleValue / 255, 2) : 0.01;
+      // //turn the color into rgba from rgb
+      // if (!bcolor.includes("rgba")) {
+      //   bcolor = bcolor.replace("rgb", "rgba");
+      //   bcolor = bcolor.replace(")", ", " + styleValue + ")");
+      // } else {
+      //   //replace everything after the last comma with the new value if its already in rgba
+      //   bcolor = bcolor.replace(/\d+\.\d+/, styleValue + "");
+      // }
+
+      // //set the new color
+      // previewText.style.setProperty("background-color", bcolor);
+      break;
+    case "text-shadow":
+      previewText.style.textShadow = styleValue;
+      break;
+
+    case "color":
+      console.log(styleValue);
+      setOpacity(
+        previewText,
+        previewText.style
+          .getPropertyValue("color")
+          .split(",")[3]
+          .split(")")[0] * 255,
+        "color",
+        styleValue
+      );
+      break;
+    default:
+      previewText.style.setProperty(stylePreviewData.cssName, styleValue);
+      break;
+  }
+
+  //Update the background color
+}
+
 //Deselects all the buttons in the specified div(removes the selected class)
 function deSelectButtonsInDiv(div) {
   let innerHTMLComponents = div.getElementsByTagName("*");
