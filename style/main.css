@@ -258,4 +258,23 @@ input {
 #toolbar #github img {
   background-color: transparent;
 }
+
+#previewBackground {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  border-radius: 0px;
+  padding: 10px 2px 2px 10px;
+}
+
+#previewText {
+  background-color: transparent;
+  padding: 0px;
+  margin: 0px;
+  text-align: center;
+  z-index: 1;
+}
 /*# sourceMappingURL=main.css.map */
