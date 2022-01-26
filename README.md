@@ -22,6 +22,7 @@ As you can see in the image above it lets you create fancy captions for youtube.
 - Abity to add captions within the app.
 - Ability to change times within the app.
 - Super simple and has built in tutorials
+- Previewing from within the app!
 
 ### TODO:
 
