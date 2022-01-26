@@ -155,7 +155,7 @@ export function AddStyle(overideText, data) {
       backgroundOpacity: 0,
       fontOpacity: 255,
       "Dropshadow Color": 0,
-      "Dropshadow Distance": 4,
+      "Dropshadow Distance": 0,
     };
   }
 
@@ -339,10 +339,22 @@ function updatePreview(updateId, updateValue) {
       previewText.dataset.bopacity = styleValue;
 
       break;
-    case "text-shadow":
-      previewText.style.textShadow = styleValue;
+    case "Dropshadow Color":
+      let shadowDist = document.getElementById("Dropshadow Distance").value;
+      previewText.style.setProperty(
+        "text-shadow",
+        `${shadowDist}px ${shadowDist}px ${styleValue}`
+      );
+
       break;
 
+    case "Dropshadow Distance":
+      let shadowColor = document.getElementById("Dropshadow Color").value;
+      previewText.style.setProperty(
+        "text-shadow",
+        `${styleValue}px ${styleValue}px ${shadowColor}`
+      );
+      break;
     case "color":
       previewText.style.setProperty(stylePreviewData.cssName, styleValue);
       //if there was some color set before then
