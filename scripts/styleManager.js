@@ -290,6 +290,10 @@ function setOpacity(
 
   //set the new color
   previewText.style.setProperty(propertyName, color);
+
+  //if it doesnt have the rgba it should be setup now so run again
+  if (!color.includes("rgba"))
+    setOpacity(previewText, styleValue, propertyName, colorElement);
 }
 
 function updatePreview(updateId, updateValue) {
@@ -320,25 +324,8 @@ function updatePreview(updateId, updateValue) {
         "color",
         document.getElementById("color")
       );
-
-      // //get the color to modify
-      // let color =
-      //   previewText.style.getPropertyValue("color") ||
-      //   document.getElementById("color").value;
-      // //Some reason if it hits 0 it never can be changed so this is a little fix I found
-      // styleValue =
-      //   styleValue / 255 > 0.008 ? truncateDecimals(styleValue / 255, 2) : 0.01;
-      // //turn the color into rgba from rgb
-      // if (!color.includes("rgba")) {
-      //   color = color.replace("rgb", "rgba");
-      //   color = color.replace(")", ", " + styleValue + ")");
-      // } else {
-      //   //replace everything after the last comma with the new value if its already in rgba
-      //   color = color.replace(/\d+\.\d+/, styleValue + "");
-      // }
-
-      // //set the new color
-      // previewText.style.setProperty("color", color);
+      //Save the raw background opacity value for later if the color changes to preserve the opacity
+      previewText.dataset.opacity = styleValue;
 
       break;
     case "backgroundOpacity":
@@ -348,40 +335,38 @@ function updatePreview(updateId, updateValue) {
         "background-color",
         document.getElementById("backgroundColor")
       );
-      // //get the color to modify
-      // let bcolor =
-      //   previewText.style.getPropertyValue("background-color") ||
-      //   document.getElementById("backgroundColor").value;
-      // //Some reason if it hits 0 it never can be changed so this is a little fix I found
-      // styleValue =
-      //   styleValue / 255 > 0.008 ? truncateDecimals(styleValue / 255, 2) : 0.01;
-      // //turn the color into rgba from rgb
-      // if (!bcolor.includes("rgba")) {
-      //   bcolor = bcolor.replace("rgb", "rgba");
-      //   bcolor = bcolor.replace(")", ", " + styleValue + ")");
-      // } else {
-      //   //replace everything after the last comma with the new value if its already in rgba
-      //   bcolor = bcolor.replace(/\d+\.\d+/, styleValue + "");
-      // }
+      //Save the raw background opacity value for later if the color changes to preserve the opacity
+      previewText.dataset.bopacity = styleValue;
 
-      // //set the new color
-      // previewText.style.setProperty("background-color", bcolor);
       break;
     case "text-shadow":
       previewText.style.textShadow = styleValue;
       break;
 
     case "color":
-      console.log(styleValue);
+      previewText.style.setProperty(stylePreviewData.cssName, styleValue);
+      //if there was some color set before then
       setOpacity(
         previewText,
-        previewText.style
-          .getPropertyValue("color")
-          .split(",")[3]
-          .split(")")[0] * 255,
+        previewText.dataset.opacity ||
+          document.getElementById("fontOpacity").value,
         "color",
-        styleValue
+        document.getElementById("color")
       );
+
+      break;
+
+    case "backgroundColor":
+      console.log(previewText.style.getPropertyValue("bopacity"));
+      previewText.style.setProperty(stylePreviewData.cssName, styleValue);
+      setOpacity(
+        previewText,
+        previewText.dataset.bopacity ||
+          document.getElementById("backgroundOpacity").value,
+        "background-color",
+        document.getElementById("backgroundColor")
+      );
+
       break;
     default:
       previewText.style.setProperty(stylePreviewData.cssName, styleValue);
