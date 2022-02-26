@@ -23,7 +23,32 @@ let addedLangSwitcher = false;
 if (!addedLangSwitcher) addLangSelectListener();
 //Add an event listener to the language switcher so that it will change the language when clicked
 export function addLangSelectListener() {
+  if (addedLangSwitcher) return;
+
   addedLangSwitcher = true;
+  //load the supported languages
+  fetch("/languages/supported_languaged.json")
+    .then((response) => response.json())
+    .then((json) => {
+      //loop through the languages and add them to the dropdown
+      let langs = json.supportedLangs;
+
+      //loop though the keys
+      for (var key in langs) {
+        //create a new option element
+        let option = document.createElement("option");
+        //set the value to the key
+        option.value = key;
+        //set the text to the value
+        option.innerHTML = langs[key];
+        //add the option to the dropdown
+        let langSelects = document.getElementsByClassName("langSelect");
+        [...langSelects].forEach((langSelect) => {
+          langSelect.appendChild(option);
+        });
+      }
+    });
+
   //try to pull an already set language from local storage
   var lang = localStorage.getItem("lang");
   //if there is a language set, load it
