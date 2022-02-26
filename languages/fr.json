@@ -1,0 +1,28 @@
+{
+  "title": "Créateur de sous-titres stylisé pour YouTube",
+  "vttSelectorButton": "Téléverser un fichier VTT",
+  "supportMessage": "Actuellement, nous n'utilisons que des fichiers VTT. Comment obtenir un fichier VTT? <a href='./HowToGetVtt.html'>Click Here</a>",
+  "LoadMenu": "Charger le projet",
+  "Load": "Charger le projet",
+  "Save": "Sauvegarder le projet",
+  "styleManagerTitle": "Le directeur du style",
+  "previewTitle": "Aperçu:",
+  "previewText": "Voix ambiguë d'un cœur qui, au zéphyr, préfère les jattes de kiwis.",
+  "github": "Veux tu aider avec cet outil? Voilà <img src='./assets/Github_Logo.png' width='20' height='20' />",
+  "tip": "Tip: select some text and hit Alt/F1 and it will surround the text with the selected style.",
+  "download": "Télécharger",
+  "howtoupload": "Comment le téléverser sur YouTube?",
+  "howToTitle": "How to use this tool?",
+  "desc": "To the right you will see a tab called the 'Style Manager', if you want to make a new style, you do it there by clicking the +. If you want to then select a style to edit it click on any of the numbered buttons, and it will show you that style as well as giving you a way to modify it. <br> If you want to apply that style to any text you can do that with the captions below by surrounding what you want to have that style with (style number). <br><br>E.g. If a caption says 'Hello World', and we want the word 'World' to have style 1 then we can make it 'Hello (1)World(1)'<br><br> The default style is applied to all the text.",
+
+  "howToVTTTitle2": "Comment obtenir un fichier VTT depuis YouTube?",
+  "howToVTTTitle": "Comment obtenir un fichier VTT depuis YouTube?",
+  "howToVTTInfo": "Obtenir un fichier VTT, c'est facile. Premièrement, modifier les sous-titres sur YouTube (ou n'importe quel logiciel), ensuite, si c'est sur YouTube, téléchargez-le comme ça:",
+  "howToVTTInfo2": "1. Ouvrez la vidéo dans YouTube Studio.<br />2. Ouvrir les sous-titres.<br />3. Ajouter une langue.<br />4. Cliquez sur le bouton \"ajouter\". C'est sous la colonne des sous-titres.<br />5. Cliquez sur \"téléverser le fichier\", et choisissez votre fichier VTT!",
+  "back": "Retourner",
+
+  "howToUploadTitle": "Comment le téléverser sur YouTube?",
+  "howToUploadTitle2": "Comment le téléverser sur YouTube?",
+  "howToUploadInfo": "Uploading your captions to youtube is pretty simple (NOTE: that once you upload them, don't edit them in the youtube editor otherwise the styling will break). If this is your first time you might want to test it on a private video first.",
+  "howToUploadInfo2": "1. Go to the video you want to upload your captions to in youtube studio.<br />2. Go to your video's subtitles.<br />3. add a language.<br />4. Click the Add button under the subtitles column.<br />5. Click upload file(with timing), and select your vtt file."
+}
