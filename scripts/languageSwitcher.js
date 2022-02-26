@@ -19,8 +19,11 @@ function loadLangAndSwitch(langPath) {
     });
 }
 
+let addedLangSwitcher = false;
+if (!addedLangSwitcher) addLangSelectListener();
 //Add an event listener to the language switcher so that it will change the language when clicked
 export function addLangSelectListener() {
+  addedLangSwitcher = true;
   //try to pull an already set language from local storage
   var lang = localStorage.getItem("lang");
   //if there is a language set, load it

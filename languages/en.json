@@ -17,8 +17,8 @@
 
   "howToVTTTitle2": "How to get a VTT file from youtube?",
   "howToVTTTitle": "How to get a VTT file from youtube?",
-  "howToVTTInfo": "Getting a VTT is pretty simple. First edit your subtitles in youtube(or any other software), then if its on youtube download it like this:",
-  "howToVTTInfo2": "1. Go to the video you want to upload your captions to in youtube studio.<br />2. Go to your videos subtitles.<br />3. add a language.<br />4. Click the Add button under the subtitles column.<br />5. Click upload file(with timing), and select your vtt file.",
+  "howToVTTInfo": "Getting a VTT is pretty simple. First, edit your subtitles on youtube(or any other software), then if it is on youtube download them like this:",
+  "howToVTTInfo2": "1. Go to the video you want to upload your captions to in youtube studio.<br />2. Go to your video's subtitles.<br />3. add a language.<br />4. Click the Add button under the subtitles column.<br />5. Click upload file(with timing), and select your vtt file.",
   "back": "Back",
 
   "howToUploadTitle": "How to upload it to youtube?",
