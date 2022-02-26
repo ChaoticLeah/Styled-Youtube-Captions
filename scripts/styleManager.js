@@ -1,3 +1,5 @@
+import { currentLang } from "./languageSwitcher.js";
+
 //All the users style data
 export let styleData = [];
 //This is the style that they are currently editing.
@@ -187,6 +189,13 @@ function handleStyleSelect(button) {
   for (let i = 0; i < Object.keys(style).length; i++) {
     //get all the active styles on this style (e.g. bold, underlined, color, ect)
     let styles = Object.keys(style)[i];
+
+    let styleName = styles;
+    //if there is a translation for it, use the translation
+    if (currentLang[styles] != undefined) {
+      styleName = currentLang[styles];
+    }
+    console.log(styles);
     let element;
     if (styleTypes[styles] == null) continue;
     //Generate all the input fields and set their starting values to the style data
@@ -194,7 +203,7 @@ function handleStyleSelect(button) {
     //if the current styletype is a boolean create a dropdown for it
     if (styleTypes[styles].includes("boolean")) {
       element = document.createElement("p");
-      element.innerHTML = `${styles} : <select id="${styles}"><option ${
+      element.innerHTML = `${styleName} : <select id="${styles}"><option ${
         style[styles] == -1 ? "selected" : ""
       } value="-1">Default</option>
       <option ${style[styles] == 1 ? "selected" : ""} value="1">True</option>
@@ -204,14 +213,14 @@ function handleStyleSelect(button) {
       //If its a color make a color selector for it
     } else if (styleTypes[styles].includes("color")) {
       element = document.createElement("p");
-      element.innerHTML = `${styles} : <input type="color" value="${
+      element.innerHTML = `${styleName} : <input type="color" value="${
         style[styles] || 0
       }" id="${styles}" name="colPicker" value="#ff0000">`;
       //if its a ranged number add a ranged number input
     } else if (styleTypes[styles].includes("numberRanged")) {
       let args = styleTypes[styles].split(" ")[1].split("-");
       element = document.createElement("p");
-      element.innerHTML = `${styles} : <input type="number" value="${
+      element.innerHTML = `${styleName} : <input type="number" value="${
         style[styles] || 0
       }" id="${styles}" min="${Number(args[0]) - 1}" max="${Number(args[1])}">`;
       //if its an number make a number input field
@@ -219,7 +228,7 @@ function handleStyleSelect(button) {
       let args = styleTypes[styles].split(" ")[1];
 
       element = document.createElement("p");
-      element.innerHTML = `${styles} : <input type="number" value="${
+      element.innerHTML = `${styleName} : <input type="number" value="${
         style[styles] || args
       }" id="${styles}" >`;
       //if its a dropdown add a dropdown element
@@ -238,7 +247,7 @@ function handleStyleSelect(button) {
         } value="${k}">${args[k]}</option>`;
       }
 
-      element.innerHTML = `${styles} : <select id="${styles}">${htmlData}</select>`;
+      element.innerHTML = `${styleName} : <select id="${styles}">${htmlData}</select>`;
     }
     //Add the element
     document.getElementById("styleEditor").appendChild(element);

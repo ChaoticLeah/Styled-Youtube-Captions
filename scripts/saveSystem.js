@@ -1,4 +1,5 @@
 import { appendSubtitle } from "./index.js";
+import { currentLang } from "./languageSwitcher.js";
 import { setStyleData, styleData, AddStyle } from "./styleManager.js";
 
 export function saveProject(name = "autosave") {
@@ -47,7 +48,7 @@ export function loadProject(name = "autosave") {
   //Add all the style data and buttons
   let styleDat = saveData.StyleData;
   styleDat.forEach((s) => {
-    if (Number(s.id) == 1) AddStyle("default", s);
+    if (Number(s.id) == 1) AddStyle(currentLang["default"], s);
     else AddStyle("", s);
   });
 

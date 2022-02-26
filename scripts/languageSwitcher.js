@@ -1,3 +1,5 @@
+export let currentLang = {};
+
 function switchLanguage(langJSON) {
   //loop though all the keys in the json and find the element with the same id as the key
   for (var key in langJSON) {
@@ -14,7 +16,7 @@ function loadLangAndSwitch(langPath) {
   fetch(langPath)
     .then((response) => response.json())
     .then((json) => {
-      console.log(json);
+      currentLang = json;
       switchLanguage(json);
     });
 }
@@ -58,7 +60,6 @@ export function addLangSelectListener() {
         let langSelects = document.getElementsByClassName("langSelect");
         [...langSelects].forEach((langSelect) => {
           //set the selected value to the language
-          console.log(langSelect);
           langSelect.value = lang;
         });
       }
