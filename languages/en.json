@@ -23,6 +23,6 @@
 
   "howToUploadTitle": "How to upload it to youtube?",
   "howToUploadTitle2": "How to upload it to youtube?",
-  "howToUploadInfo": "Uploading your captions to youtube is pretty simple (NOTE: that once you upload them, dont edit them in the youtube editor otherwise the styling will break). If this is your first time you might want to test it on a private video first.",
-  "howToUploadInfo2": "1. Go to the video you want to upload your captions to in youtube studio.<br />2. Go to your videos subtitles.<br />3. add a language.<br />4. Click the Add button under the subtitles column.<br />5. Click upload file(with timing), and select your vtt file."
+  "howToUploadInfo": "Uploading your captions to youtube is pretty simple (NOTE: that once you upload them, don't edit them in the youtube editor otherwise the styling will break). If this is your first time you might want to test it on a private video first.",
+  "howToUploadInfo2": "1. Go to the video you want to upload your captions to in youtube studio.<br />2. Go to your video's subtitles.<br />3. add a language.<br />4. Click the Add button under the subtitles column.<br />5. Click upload file(with timing), and select your vtt file."
 }
