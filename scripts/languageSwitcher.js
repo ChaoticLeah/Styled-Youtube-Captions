@@ -47,15 +47,22 @@ export function addLangSelectListener() {
           langSelect.appendChild(option);
         });
       }
-    });
 
-  //try to pull an already set language from local storage
-  var lang = localStorage.getItem("lang");
-  //if there is a language set, load it
-  if (lang) {
-    //if it is set, load the language file and switch the language
-    loadLangAndSwitch(`/languages/${lang}.json`);
-  }
+      //try to pull an already set language from local storage
+      var lang = localStorage.getItem("lang");
+      //if there is a language set, load it
+      if (lang) {
+        //if it is set, load the language file and switch the language
+        loadLangAndSwitch(`/languages/${lang}.json`);
+
+        let langSelects = document.getElementsByClassName("langSelect");
+        [...langSelects].forEach((langSelect) => {
+          //set the selected value to the language
+          console.log(langSelect);
+          langSelect.value = lang;
+        });
+      }
+    });
 
   let langSelect = document.getElementsByClassName("langSelect");
   //add the listene to all the language selectors
