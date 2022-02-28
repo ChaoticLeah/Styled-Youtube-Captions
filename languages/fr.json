@@ -1,4 +1,9 @@
 {
+  "extra": {
+    "translators": ["KevinWh0", "nekotogd"],
+    "versionUpdated": "1.1.5"
+  },
+
   "title": "Créateur de sous-titres stylisé pour YouTube",
   "vttSelectorButton": "Téléverser un fichier VTT",
   "supportMessage": "Actuellement, nous n'utilisons que des fichiers VTT. Comment obtenir un fichier VTT? <a href='./HowToGetVtt.html'>Click Here</a>",
@@ -9,11 +14,26 @@
   "previewTitle": "Aperçu:",
   "previewText": "Voix ambiguë d'un cœur qui, au zéphyr, préfère les jattes de kiwis.",
   "github": "Veux tu aider avec cet outil? Voilà <img src='./assets/Github_Logo.png' width='20' height='20' />",
-  "tip": "Tip: select some text and hit Alt/F1 and it will surround the text with the selected style.",
+  "tip": "Indice: Sélectionnez du texte et touchez Alt/F1. Le texte sera entouré du style choisi.",
   "download": "Télécharger",
   "howtoupload": "Comment le téléverser sur YouTube?",
-  "howToTitle": "How to use this tool?",
-  "desc": "To the right you will see a tab called the 'Style Manager', if you want to make a new style, you do it there by clicking the +. If you want to then select a style to edit it click on any of the numbered buttons, and it will show you that style as well as giving you a way to modify it. <br> If you want to apply that style to any text you can do that with the captions below by surrounding what you want to have that style with (style number). <br><br>E.g. If a caption says 'Hello World', and we want the word 'World' to have style 1 then we can make it 'Hello (1)World(1)'<br><br> The default style is applied to all the text.",
+  "howToTitle": "Comment utiliser cet outil?",
+  "desc": "À droite, vous verrez un onglet appelé 'Le directeur du style', si vous voulez faire un nouveau style, Cliquez sur '+'. Pour le modifier, cliquez sur l'un des boutons numérotés. Il vous montrera ce style et vous permettra de le modifier. <br>Si vous souhaitez appliquer ce style à n'importe quel texte, enveloppez-le dans (numéro de style). <br><br>Pour exemple, nous avons 'Bonjour tout le monde!', et nous voulons que le mot 'monde' ait le style 1, puis, remplacer 'Bonjour tout le monde' par 'Bonjour tout le (1)monde(1)'<br><br> Le style par défaut est appliqué à tout le texte.",
+
+
+  "backgroundColor": "Couleur de l'arrière plan",
+  "color": "Couleur",
+  "italics": "Italique",
+  "bold": "Gras",
+  "underline": "Souligner",
+  "font": "Police de caractère",
+  "size": "Taille",
+  "backgroundOpacity": "Opacité de l'arrière-plan",
+  "Dropshadow Color": "Couleur de l'ombre",
+  "Dropshadow Distance": "Distance d'ombre",
+  "default": "Défaut",
+  "true": "Vrai",
+  "false": "Faux",
 
   "howToVTTTitle2": "Comment obtenir un fichier VTT depuis YouTube?",
   "howToVTTTitle": "Comment obtenir un fichier VTT depuis YouTube?",
@@ -23,6 +43,6 @@
 
   "howToUploadTitle": "Comment le téléverser sur YouTube?",
   "howToUploadTitle2": "Comment le téléverser sur YouTube?",
-  "howToUploadInfo": "Uploading your captions to youtube is pretty simple (NOTE: that once you upload them, don't edit them in the youtube editor otherwise the styling will break). If this is your first time you might want to test it on a private video first.",
-  "howToUploadInfo2": "1. Go to the video you want to upload your captions to in youtube studio.<br />2. Go to your video's subtitles.<br />3. add a language.<br />4. Click the Add button under the subtitles column.<br />5. Click upload file(with timing), and select your vtt file."
+  "howToUploadInfo": "Importation de vos sous-titres dans YouTube Studio, c'est facile (Gardez à l'esprit, après le téléchargement, ne les modifiez pas). Si c'est votre première fois, tester d'abord une vidéo privée.",
+  "howToUploadInfo2": "1. Ouvrez la vidéo dans YouTube Studio.<br />2. Ouvrir les sous-titres.<br />3. Ajouter une langue.<br />4. Cliquez sur le bouton \"ajouter\". C'est sous la colonne des sous-titres.<br />5. Cliquez sur \"téléverser le fichier\" (avec chronométrage), et choisissez votre fichier VTT!."
 }
