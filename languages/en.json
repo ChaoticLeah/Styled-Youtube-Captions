@@ -1,0 +1,47 @@
+{
+  "extra": {
+    "translators": ["KevinWh0"],
+    "versionUpdated": "1.1.4"
+  },
+
+  "title": "Youtube Styled Subtitle Creator",
+  "vttSelectorButton": "Upload VTT File",
+  "supportMessage": "Currently we only support VTT files. Dont know how to get a VTT file? <a href='./HowToGetVtt.html'>Click Here</a>",
+  "LoadMenu": "Load Project",
+  "Load": "Load Project",
+  "Save": "Save Project",
+  "styleManagerTitle": "Style Manager",
+  "previewTitle": "Preview:",
+  "previewText": "The quick brown fox jumps over the lazy dog",
+  "github": "Want to help improve the tool? You can do it here <img src='./assets/Github_Logo.png' width='20' height='20' />",
+  "tip": "Tip: select some text and hit Alt/F1 and it will surround the text with the selected style.",
+  "download": "Download",
+  "howtoupload": "How Do I upload it to youtube?",
+  "howToTitle": "How to use this tool?",
+  "desc": "To the right you will see a tab called the 'Style Manager', if you want to make a new style, you do it there by clicking the +. If you want to then select a style to edit it click on any of the numbered buttons, and it will show you that style as well as giving you a way to modify it. <br> If you want to apply that style to any text you can do that with the captions below by surrounding what you want to have that style with (style number). <br><br>E.g. If a caption says 'Hello World', and we want the word 'World' to have style 1 then we can make it 'Hello (1)World(1)'<br><br> The default style is applied to all the text.",
+
+  "backgroundColor": "Background Color",
+  "color": "Color",
+  "italics": "Italics",
+  "bold": "Bold",
+  "underline": "Underline",
+  "font": "Font",
+  "size": "Size",
+  "backgroundOpacity": "Background Opacity",
+  "Dropshadow Color": "Dropshadow Color",
+  "Dropshadow Distance": "Dropshadow Distance",
+  "default": "Default",
+  "true": "True",
+  "false": "False",
+
+  "howToVTTTitle2": "How to get a VTT file from youtube?",
+  "howToVTTTitle": "How to get a VTT file from youtube?",
+  "howToVTTInfo": "Getting a VTT is pretty simple. First, edit your subtitles on youtube(or any other software), then if it is on youtube download them like this:",
+  "howToVTTInfo2": "1. Go to the video you want to upload your captions to in youtube studio.<br />2. Go to your video's subtitles.<br />3. add a language.<br />4. Click the Add button under the subtitles column.<br />5. Click upload file(with timing), and select your vtt file.",
+  "back": "Back",
+
+  "howToUploadTitle": "How to upload it to youtube?",
+  "howToUploadTitle2": "How to upload it to youtube?",
+  "howToUploadInfo": "Uploading your captions to youtube is pretty simple (NOTE: that once you upload them, don't edit them in the youtube editor otherwise the styling will break). If this is your first time you might want to test it on a private video first.",
+  "howToUploadInfo2": "1. Go to the video you want to upload your captions to in youtube studio.<br />2. Go to your video's subtitles.<br />3. add a language.<br />4. Click the Add button under the subtitles column.<br />5. Click upload file(with timing), and select your vtt file."
+}

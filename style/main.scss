@@ -67,6 +67,26 @@ input {
     transform: translateX(-50%);
   }
 }
+#languageSelectContainer {
+  //place it in the bottom right corner of the parent div
+  position: relative;
+  top: 90%;
+  left: 100%;
+  transform: translate(-110%, -300%);
+  width: min-content;
+  //keep stuff on the same line
+  display: flex;
+  flex-direction: row;
+  > * {
+    //center any text vertically
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 5px;
+    background-color: transparent;
+    color: white;
+  }
+}
 
 //This is for each subtitle block
 

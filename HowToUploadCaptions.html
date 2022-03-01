@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>How to get a VTT file from youtube?</title>
+    <title id="howToUploadTitle2">How to get a VTT file from youtube?</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Rubik&display=swap"
@@ -18,19 +18,28 @@
     />
   </head>
   <body>
-    <h1>How to upload your captions to youtube?</h1>
-    <p>
+    <h1 id="howToUploadTitle">How to upload your captions to youtube?</h1>
+    <p id="howToUploadInfo">
       Uploading your captions to youtube is pretty simple (NOTE: that once you
       upload them, dont edit them in the youtube editor otherwise the styling
       will break). If this is your first time you might want to test it on a
-      private video first. First go to your videos subtitles and follow the gif
-      below:
+      private video first.
+    </p>
+    <p id="howToUploadInfo2">
+      1. Go to the video you want to upload your captions to in youtube studio.
+      <br />
+      2. Go to your videos subtitles.<br />
+      3. add a language.<br />
+      4. Click the Add button under the subtitles column.<br />
+      5. Click upload file(with timing), and select your vtt file.
     </p>
     <div id="Content">
       <img src="tutorialAssets/HowToUpload.gif" /><br />
       <a onclick="history.back()" id="back">Back</a>
     </div>
-
+    <!--add a dropdown with different language options-->
+    <select class="langSelect"></select>
     <!--<button>Back</button>-->
   </body>
+  <script src="./scripts/languageSwitcher.js" type="module"></script>
 </html>

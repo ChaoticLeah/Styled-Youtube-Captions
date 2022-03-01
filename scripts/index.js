@@ -1,7 +1,14 @@
 import { generateFile } from "./generateFile.js";
+import { addLangSelectListener } from "./languageSwitcher.js";
 import { load } from "./saveSystem.js";
 import { AddStyle, selectedStyle } from "./styleManager.js";
 import { download, readText, wrapSelection } from "./toolbox.js";
+
+//version format: major.minor.patch
+const version = "1.1.4";
+
+//So that we can change languages
+addLangSelectListener();
 
 //This is used to give each textbox a unique ID
 let uniqueIdentifierCounter = 0;

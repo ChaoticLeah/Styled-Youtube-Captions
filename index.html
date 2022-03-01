@@ -4,9 +4,10 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Youtube Styled Subtitle Creator</title>
+  <title id = "title">Youtube Styled Subtitle Creator</title>
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" type="text/css" media="screen" href="./style/main.css" />
 </head>
@@ -17,19 +18,19 @@
   <div id="main">
     <div id="subtitleHolder">
       <div id="styleHolder">
-        <h1>Style Manager</h1>
+        <h1 id = "styleManagerTitle">Style Manager</h1>
         <div id="styleButtons">
           <button id="addStyle" class="styleButton">+</button>
         </div>
         <div id="styleEditor">  
         </div>
         <div id ="preview">
-          <h2 style="color: white;">Preview:</h2>
+          <h2 id = "previewTitle" style="color: white;">Preview:</h2>
             <p id = "previewText">The quick brown fox jumps over the lazy dog</p>
         </div>
       </div>
       <div id="toolbar">
-        <h1>How to use this tool?</h1>
+        <h1 id = "howToTitle">How to use this tool?</h1>
         <p id="desc">To the right you will see a tab called the "Style Manager", if you want to make a new style, you do
           it there by clicking the +. If you want to then select a style to edit it click on any of the numbered
           buttons, and it will show you that style as well as giving you a way to modify it. <br> If you want to apply
@@ -43,7 +44,7 @@
           rel="noopener noreferrer">Want to help improve the tool? You can do it here
           <img src="./assets/Github_Logo.png" width="20" height="20" />
         </a>
-        <p>Tip: select some text and hit Alt/F1 and it will surround the text with the selected style.</p>
+        <p id = "tip">Tip: select some text and hit Alt/F1 and it will surround the text with the selected style.</p>
       </div>
 
 
@@ -66,8 +67,14 @@
     <label class="button" for="VTTSELECTOR" id="vttSelectorButton">Upload VTT File</label>
     <button id="LoadMenu">Load Project</button>
 
-    <h3>Currently we only support VTT files. Dont know how to get a VTT file? <a href="./HowToGetVtt.html">Click
+    <h3 id = "supportMessage">Currently we only support VTT files. Dont know how to get a VTT file? <a href="./HowToGetVtt.html">Click
         Here</a></h3>
+
+        <!--add a dropdown with different language options-->
+        <div id = "languageSelectContainer">
+          <i class="fa fa-language" style="font-size:150%;"></i>
+        <select class="langSelect">
+        </select></div>
   </div>
 
 </body>
