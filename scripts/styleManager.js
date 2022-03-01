@@ -195,7 +195,6 @@ function handleStyleSelect(button) {
     if (currentLang[styles] != undefined) {
       styleName = currentLang[styles];
     }
-    console.log(styles);
     let element;
     if (styleTypes[styles] == null) continue;
     //Generate all the input fields and set their starting values to the style data
@@ -205,11 +204,13 @@ function handleStyleSelect(button) {
       element = document.createElement("p");
       element.innerHTML = `${styleName} : <select id="${styles}"><option ${
         style[styles] == -1 ? "selected" : ""
-      } value="-1">Default</option>
-      <option ${style[styles] == 1 ? "selected" : ""} value="1">True</option>
-      <option ${
-        style[styles] == 0 ? "selected" : ""
-      } value="0">False</option></select>`;
+      } value="-1">${currentLang["default"]}</option>
+      <option ${style[styles] == 1 ? "selected" : ""} value="1">${
+        currentLang["true"]
+      }</option>
+      <option ${style[styles] == 0 ? "selected" : ""} value="0">${
+        currentLang["false"]
+      }</option></select>`;
       //If its a color make a color selector for it
     } else if (styleTypes[styles].includes("color")) {
       element = document.createElement("p");
@@ -242,9 +243,13 @@ function handleStyleSelect(button) {
       //Read the dropdown arguments, and add the options
       for (let j = 0; j < Object.keys(args).length; j++) {
         let k = Object.keys(args)[j];
+        let translation = currentLang[args[k].toLowerCase()]
+          ? currentLang[args[k].toLowerCase()]
+          : args[k];
+
         htmlData += `<option ${
           style[styles] == k ? "selected" : ""
-        } value="${k}">${args[k]}</option>`;
+        } value="${k}">${translation}</option>`;
       }
 
       element.innerHTML = `${styleName} : <select id="${styles}">${htmlData}</select>`;
