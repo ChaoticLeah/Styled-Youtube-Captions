@@ -29,7 +29,7 @@ export function addLangSelectListener() {
 
   addedLangSwitcher = true;
   //load the supported languages
-  fetch("/languages/supported_languaged.json")
+  fetch("languages/supported_languaged.json")
     .then((response) => response.json())
     .then((json) => {
       //loop through the languages and add them to the dropdown
@@ -55,7 +55,7 @@ export function addLangSelectListener() {
       //if there is a language set, load it
       if (lang) {
         //if it is set, load the language file and switch the language
-        loadLangAndSwitch(`/languages/${lang}.json`);
+        loadLangAndSwitch(`languages/${lang}.json`);
 
         let langSelects = document.getElementsByClassName("langSelect");
         [...langSelects].forEach((langSelect) => {
@@ -73,7 +73,7 @@ export function addLangSelectListener() {
       //set the language in local storage
       localStorage.setItem("lang", lang);
       //load the language file and switch the language
-      loadLangAndSwitch(`/languages/${lang}.json`);
+      loadLangAndSwitch(`languages/${lang}.json`);
     });
   }
 }
