@@ -1,7 +1,7 @@
-$base-color: #222121;
-$base-color-2: #333333;
-$secondary-color: #2095d8;
-$scrollHandles: #196ea0;
+$base-color: #0b0e11;
+$base-color-2: #212932;
+$secondary-color: #282695;
+$scrollHandles: #282695;
 
 //General Stuff
 
@@ -88,15 +88,21 @@ input {
   }
 }
 
+#subtitleHolder {
+  background-color: transparent;
+}
+
 //This is for each subtitle block
 
 .SubtitleDiv {
-  background-color: $base-color;
+  background-color: $base-color-2;
   padding: 16px;
   padding-top: 5px;
-  width: 50%;
-  margin: 5px 5px;
+  width: calc(60% - 20px);
+  margin: 20px 5px;
   white-space: nowrap;
+
+  box-shadow: 0px -4px 0px $secondary-color;
 
   h2 {
     color: white;
@@ -150,12 +156,14 @@ input {
 //This is for the div that holds all the style related stuff
 #styleHolder {
   position: sticky;
-  top: 5vh;
-  left: 55vw;
-  width: 40vw;
-  height: 90vh;
-  background-color: $base-color;
+  top: 0vh;
+  left: 65vw;
+  width: calc(100vw - 65vw);
+  height: 100vh;
+  background-color: $base-color-2;
   padding: 3px;
+
+  overflow: auto;
 
   h1 {
     background-color: transparent;
@@ -176,15 +184,15 @@ input {
     }
   }
   #styleEditor {
+    //center
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    width: 80%;
-    max-height: 68%;
-    height: auto;
+    width: 90%;
 
-    padding: 12px;
+    background-color: $base-color;
     overflow: auto;
+    padding: 12px;
 
     select,
     input,
@@ -256,16 +264,41 @@ input {
 }
 
 //This is for the preview part
-#previewBackground {
-  width: max-content;
-  height: max-content;
-  border-radius: 0px;
-  padding: 10px 2px 2px 10px;
+
+#preview {
+  background-color: $base-color;
+  width: 90%;
+
+  //center
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: auto;
+
+  //padding
+  padding: 12px;
 }
+#previewTitle {
+  color: white;
+  background-color: transparent;
+  text-align: center;
+}
+
 #previewText {
   background-color: transparent;
   padding: 0px;
   margin: 0px;
   text-align: center;
   z-index: 1;
+}
+
+//General Stuff
+input[type="number"] {
+  padding: 8px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+input[type="color"] {
+  border: none;
+  border-radius: 10px;
 }

@@ -1,5 +1,5 @@
 * {
-  background-color: #222121;
+  background-color: #0b0e11;
 }
 
 body {
@@ -7,13 +7,13 @@ body {
 }
 
 div {
-  background-color: #333333;
+  background-color: #212932;
   border-radius: 10px;
   margin: 5px 5px;
 }
 
 #main {
-  background-color: #222121;
+  background-color: #0b0e11;
 }
 
 button,
@@ -22,7 +22,7 @@ button,
   padding: 12px 18px;
   cursor: pointer;
   border-radius: 5px;
-  background-color: #2095d8;
+  background-color: #282695;
   font-size: 16px;
   font-weight: bold;
   color: #fff;
@@ -102,13 +102,19 @@ input {
   color: white;
 }
 
+#subtitleHolder {
+  background-color: transparent;
+}
+
 .SubtitleDiv {
-  background-color: #222121;
+  background-color: #212932;
   padding: 16px;
   padding-top: 5px;
-  width: 50%;
-  margin: 5px 5px;
+  width: calc(60% - 20px);
+  margin: 20px 5px;
   white-space: nowrap;
+  -webkit-box-shadow: 0px -4px 0px #282695;
+          box-shadow: 0px -4px 0px #282695;
 }
 
 .SubtitleDiv h2 {
@@ -177,12 +183,13 @@ input {
 #styleHolder {
   position: -webkit-sticky;
   position: sticky;
-  top: 5vh;
-  left: 55vw;
-  width: 40vw;
-  height: 90vh;
-  background-color: #222121;
+  top: 0vh;
+  left: 65vw;
+  width: calc(100vw - 65vw);
+  height: 100vh;
+  background-color: #212932;
   padding: 3px;
+  overflow: auto;
 }
 
 #styleHolder h1 {
@@ -212,11 +219,10 @@ input {
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
-  width: 80%;
-  max-height: 68%;
-  height: auto;
-  padding: 12px;
+  width: 90%;
+  background-color: #0b0e11;
   overflow: auto;
+  padding: 12px;
 }
 
 #styleHolder #styleEditor select,
@@ -230,7 +236,7 @@ input {
 }
 
 #styleHolder .styleButton {
-  background-color: #2095d8;
+  background-color: #282695;
   /* Green */
   border: none;
   color: white;
@@ -259,12 +265,12 @@ input {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #333333;
+  background: #212932;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #196ea0;
+  background: #282695;
 }
 
 #toolbar {
@@ -293,15 +299,21 @@ input {
   background-color: transparent;
 }
 
-#previewBackground {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-  height: -webkit-max-content;
-  height: -moz-max-content;
-  height: max-content;
-  border-radius: 0px;
-  padding: 10px 2px 2px 10px;
+#preview {
+  background-color: #0b0e11;
+  width: 90%;
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  overflow: auto;
+  padding: 12px;
+}
+
+#previewTitle {
+  color: white;
+  background-color: transparent;
+  text-align: center;
 }
 
 #previewText {
@@ -310,5 +322,16 @@ input {
   margin: 0px;
   text-align: center;
   z-index: 1;
+}
+
+input[type="number"] {
+  padding: 8px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+
+input[type="color"] {
+  border: none;
+  border-radius: 10px;
 }
 /*# sourceMappingURL=main.css.map */
