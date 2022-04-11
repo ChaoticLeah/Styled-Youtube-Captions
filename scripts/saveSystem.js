@@ -55,7 +55,7 @@ export function loadProject(name = "autosave") {
   //Add all the transcripts
   let transcriptDat = saveData.TranscriptData;
   transcriptDat.forEach((dat) => {
-    appendSubtitle(dat.text, dat.timestamp);
+    appendSubtitle(dat.text, `${dat.start} --> ${dat.end}`);
   });
   return true;
 }
@@ -80,7 +80,8 @@ function getTranscript() {
   //add the subtitles and timestamps to an array
   subtitles.forEach((s) => {
     subtitleArr.push({
-      timestamp: s.getElementsByClassName("h2")[0].innerHTML,
+      start: s.getElementsByClassName("h2")[0].value,
+      end: s.getElementsByClassName("h2")[1].value,
       text: s.getElementsByClassName("subtitleText")[0].value,
     });
   });

@@ -57,13 +57,24 @@ export function insertReplace(selector, text, insertion) {
  * @returns String - The output
  */
 export function toMillis(time) {
-  //little hack here for getting the time in milliseconds
-  var d = new Date("July 21, 1983 " + time);
-  var hour = d.getHours() * 60;
-  var min = (hour + d.getMinutes()) * 60;
-  var sec = (d.getSeconds() + min) * 1000;
-  var millis = sec + d.getMilliseconds();
-  return millis;
+  //split the time by :
+  let t = time.split(":");
+  //get the hours
+  let hours = parseInt(t[0]);
+  //get the minutes
+  let minutes = parseInt(t[1]);
+  //get the seconds
+  let seconds = parseInt(t[2]);
+
+  //convert the hours to milliseconds
+  hours = hours * 60 * 60 * 1000;
+  //convert the minutes to milliseconds
+  minutes = minutes * 60 * 1000;
+  //convert the seconds to milliseconds
+  seconds = seconds * 1000;
+  //add the hours, minutes, and seconds to get the total milliseconds
+  let total = hours + minutes + seconds;
+  return total;
 }
 
 /**

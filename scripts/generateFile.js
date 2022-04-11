@@ -57,6 +57,7 @@ export function generateFile() {
     let subtitle = subtitles[i];
     //get the times of the subtitle (This just contains the start and stop timestamp we will need)
     let times = subtitle.getElementsByClassName("h2");
+
     //Get the start time
     let startTime = times[0].value;
     //get the end time
@@ -64,6 +65,7 @@ export function generateFile() {
 
     //Convert the start time to milliseconds
     startTime = toMillis(startTime);
+    console.log(startTime, stopTime);
 
     //convert the duration to milliseconds
     let dir = toMillis(stopTime) - startTime;
