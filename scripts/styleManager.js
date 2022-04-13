@@ -265,6 +265,11 @@ function handleStyleSelect(button) {
       updatePreview(id, val);
       styleData[buttonID][id] = val;
     });
+
+    //update the preview the next frame when all the elements are added
+    requestAnimationFrame(() => {
+      updatePreview(element.childNodes[1].id, element.childNodes[1].value);
+    });
   }
 }
 

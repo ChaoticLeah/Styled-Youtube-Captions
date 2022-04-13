@@ -5,7 +5,7 @@ import { AddStyle, selectedStyle } from "./styleManager.js";
 import { download, readText, wrapSelection } from "./toolbox.js";
 
 //version format: major.minor.patch
-const version = "1.1.6";
+const version = "1.1.7";
 
 //So that we can change languages
 addLangSelectListener();

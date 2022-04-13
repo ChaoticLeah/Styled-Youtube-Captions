@@ -32,7 +32,7 @@ export function loadProject(name = "autosave") {
     //leave the add style button
     if (child.id != "addStyle")
       try {
-        document.getElementById("subtitleHolder").removeChild(child);
+        child.parentNode.removeChild(child);
       } catch (error) {}
   }
 
