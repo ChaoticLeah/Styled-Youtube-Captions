@@ -58,7 +58,7 @@ As you can see in the image above it lets you create fancy captions for youtube.
 3. Make any edits you want
 4. Export and enjoy!
 
-<a href="https://github.com/KevinWh0/Styled-Youtube-Captions/issues">Report and bugs here</a>
+<a href="https://github.com/KevinWh0/Styled-Youtube-Captions/issues">Report any bugs here</a>
 
 
 ## What still needs doing?
