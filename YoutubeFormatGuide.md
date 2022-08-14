@@ -39,6 +39,3 @@ Keep in mind this is based on observation and may not be fully correct. If you w
 - ju - justification id?
 - pd
 - sd
-- ap - anchor point?
-- ah
-- av
