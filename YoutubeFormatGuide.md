@@ -31,7 +31,10 @@ Keep in mind this is based on observation and may not be fully correct. If you w
 
 ## Unknown
 
-- wp
+- wp - Write Position (used as an ID like pen to tell it where to put the text)
+- ap - Anchor point
+- ah - X coordinate (0 = left, 100 = right)
+- av - Y coordinate (0 = top, 100 = bottom)
 - ws
 - ju - justification id?
 - pd
