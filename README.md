@@ -19,7 +19,7 @@
   </h3>
 </div>
 
-![IconStyledYTCaptions](https://user-images.githubusercontent.com/45321184/121992564-bdcad400-cd56-11eb-96c0-bb4821a7481b.png)
+![IconStyledYTCaptions](https://user-images.githubusercontent.com/45321184/203746834-58f5b107-b44a-4e7e-9638-c269eedff971.png)
 
 <br>
 
