@@ -1,0 +1,18 @@
+export type notificationColor =
+	| 'form'
+	| 'gray'
+	| 'red'
+	| 'yellow'
+	| 'green'
+	| 'indigo'
+	| 'default'
+	| 'purple'
+	| 'pink'
+	| 'blue'
+	| 'light'
+	| 'dark'
+	| 'dropdown'
+	| 'navbar'
+	| 'navbarUl'
+	| 'none'
+	| undefined;

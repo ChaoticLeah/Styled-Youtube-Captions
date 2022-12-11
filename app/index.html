@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/Styled-Youtube-Captions/favicon.png" />
+		<meta name="viewport" content="width=device-width" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="/Styled-Youtube-Captions/_app/immutable/assets/_layout-eca00551.css" rel="stylesheet">
+		<link href="/Styled-Youtube-Captions/_app/immutable/assets/_page-6dc04317.css" rel="stylesheet">
+		<link rel="modulepreload" href="/Styled-Youtube-Captions/_app/immutable/start-86cce2a0.js">
+		<link rel="modulepreload" href="/Styled-Youtube-Captions/_app/immutable/chunks/index-8bdcd0bc.js">
+		<link rel="modulepreload" href="/Styled-Youtube-Captions/_app/immutable/chunks/singletons-492d212e.js">
+		<link rel="modulepreload" href="/Styled-Youtube-Captions/_app/immutable/chunks/paths-ed55ec8b.js">
+		<link rel="modulepreload" href="/Styled-Youtube-Captions/_app/immutable/components/pages/_layout.svelte-51eb2d5c.js">
+		<link rel="modulepreload" href="/Styled-Youtube-Captions/_app/immutable/components/pages/_page.svelte-a9ad137a.js">
+		<link rel="modulepreload" href="/Styled-Youtube-Captions/_app/immutable/modules/pages/_page.ts-e9fa0128.js">
+		<link rel="modulepreload" href="/Styled-Youtube-Captions/_app/immutable/chunks/_page-802cc2a3.js"><title>Styled Youtube Captions</title><!-- HEAD_svelte-4snbua_START --><meta name="description" content="An app for creating custom captions on youtube" class="svelte-1ybayfc"><!-- HEAD_svelte-4snbua_END --><!-- HEAD_svelte-1w6irg6_START --><script>// On page load or when changing themes, best to add inline in `head` to avoid FOUC
+		if (
+			localStorage.getItem('color-theme') === 'dark' ||
+			(!('color-theme' in localStorage) &&
+				window.matchMedia('(prefers-color-scheme: dark)').matches)
+		) {
+			document.documentElement.classList.add('dark');
+		} else {
+			document.documentElement.classList.remove('dark');
+		}
+	</script><!-- HEAD_svelte-1w6irg6_END -->
+	</head>
+	<body data-sveltekit-prefetch>
+		<div style="display: contents">
+
+
+<div class="app overflow-hidden bg-gray-50 transition-colors duration-700 dark:bg-slate-900 svelte-ostcr5">
+	
+<div class="flex h-screen w-screen flex-col svelte-1ybayfc"><nav class="bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 border-gray-100 dark:border-gray-700 px-2 sm:px-4 py-2.5 w-full"><div class="mx-auto flex flex-wrap justify-between items-center  container"><a href="/Styled-Youtube-Captions/" class="flex items-center"><span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Styled Youtube Captions
+		</span></a>
+	<div class="flex md:order-2">
+<select id="select-lg" class="block w-full text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer text-sm p-2 !px-0"><option disabled selected value="">Switch Language</option><option value="WORK IN PROGRESS">WORK IN PROGRESS</option></select>
+		
+
+
+<button id="theme-toggle" type="button" class="rounded-lg p-2.5 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700 undefined"><svg id="theme-toggle-dark-icon" class="hidden h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+	<svg id="theme-toggle-light-icon" class="hidden h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg></button>
+</div>
+	<div class="w-full md:block md:w-auto order-1" hidden><ul class="flex flex-col p-4 mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium order-1"><li><a href="/Styled-Youtube-Captions/" class="block py-2 pr-4 pl-3 md:p-0 rounded md:border-0 text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-white dark:bg-blue-600 md:dark:bg-transparent">Home</a></li>
+		<li><a href="/Styled-Youtube-Captions/about" class="block py-2 pr-4 pl-3 md:p-0 rounded md:border-0 text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About</a></li>
+		<li><a href="https://github.com/KevinWh0/Styled-Youtube-Captions" class="block py-2 pr-4 pl-3 md:p-0 rounded md:border-0 text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Github</a></li></ul></div></div></nav>
+
+	
+	<div class="z-0 m-auto flex h-screen max-w-5xl flex-col overflow-hidden p-6 px-8"><img alt="Styled Youtube Captions Logo" src="/Styled-Youtube-Captions/Logo.svg" class="flex-none px-6">
+
+	<div class="flex h-full w-full flex-col place-items-center justify-center"><div class="flex w-4/5 flex-[0_1_0%] flex-col place-items-center justify-center px-8">
+  <label class="text-sm font-medium block text-gray-900 dark:text-gray-300 pb-2 text-xl text-white">Upload .VTT</label>
+			<input accept=".vtt" class="block w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 mb-5 text-sm" type="file"></div>
+		<div class="flex w-4/5 flex-[0_1_0%] flex-col place-items-center px-8 pb-6">
+  <label class="text-sm font-medium block text-gray-900 dark:text-gray-300 pb-2 text-xl text-white">Or</label>
+			
+			
+  <label for="select-lg" class="text-sm font-medium block text-gray-900 dark:text-gray-300 sr-only">Underline large select</label>
+
+			<select id="select-lg" class="block w-full text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer text-base py-3 px-4 !px-0 mb-6 w-1/4"><option disabled selected value="">Load Save</option></select></div></div>
+
+	<footer class="absolute bottom-0 left-1/2 grid -translate-x-1/2 place-items-center p-4">
+  <label class="text-sm font-medium block text-gray-900 dark:text-gray-300 text-slate-900">Visit <a href="https://github.com/KevinWh0/Styled-Youtube-Captions" class="text-fuchsia-500">github.com/KevinWh0/Styled-Youtube-Captions</a> help out with this project</label></footer></div>
+
+	
+
+	<div hidden class="svelte-1ybayfc"><div class="splitpanes default-theme default-theme  splitpanes--vertical" style="height: 100%; width:100vw">
+
+
+
+
+<div class="splitpanes__pane dark:!bg-slate-900" style="min-width: 40%;"><div class="h-full overflow-y-scroll p-12 svelte-1ybayfc"></div></div>
+			
+
+<div class="splitpanes__splitter"></div>
+
+
+<div class="splitpanes__pane  dark:!bg-slate-900" style="min-width: 10%; width: 20%;"><aside class="w-full" aria-label="Sidebar">
+  <label class="text-sm font-medium block text-gray-900 dark:text-gray-300 text-center text-3xl">Styler</label></aside></div>
+</div></div></div>
+
+<div class=" absolute bottom-0 left-0 z-50"></div>
+<div class="absolute bottom-0 right-0 z-50 m-4 flex w-1/6 svelte-1ybayfc">
+</div>
+	
+</div>
+
+
+		<script type="module" data-sveltekit-hydrate="qpq5i6">
+			import { start } from "/Styled-Youtube-Captions/_app/immutable/start-86cce2a0.js";
+
+			start({
+				env: {},
+				hydrate: {
+					status: 200,
+					error: null,
+					node_ids: [0, 2],
+					params: {},
+					route: {"id":"/"},
+					data: [null,null],
+					form: null
+				},
+				paths: {"base":"/Styled-Youtube-Captions","assets":"/Styled-Youtube-Captions"},
+				target: document.querySelector('[data-sveltekit-hydrate="qpq5i6"]').parentNode,
+				version: "1670736179194"
+			});
+		</script>
+	</div>
+	</body>
+</html>
