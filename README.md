@@ -5,8 +5,6 @@
   <img src="https://img.shields.io/github/license/kevinwh0/Styled-Youtube-Captions" /> <img src="https://img.shields.io/github/issues-raw/kevinwh0/Styled-Youtube-Captions" /> <img src="https://img.shields.io/github/contributors/kevinwh0/Styled-Youtube-Captions" /> <img src="https://img.shields.io/github/forks/kevinwh0/Styled-Youtube-Captions?style=social" /> <img src="https://img.shields.io/github/stars/kevinwh0/Styled-Youtube-Captions?style=social" />
 </div>
 
-
-
 <div align="center">
   <h3>
     <a href="https://kevinwh0.github.io/Styled-Youtube-Captions/">
@@ -18,6 +16,8 @@
     </a>
   </h3>
 </div>
+
+## NOTE: This branch is for reference only. Its the old non-svelte version.
 
 <div align="center">
   <img src="https://user-images.githubusercontent.com/45321184/203746834-58f5b107-b44a-4e7e-9638-c269eedff971.png" />
