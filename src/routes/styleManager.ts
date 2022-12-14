@@ -1,6 +1,22 @@
+//Used for neatness and clairity so you know that its not just any string
+type HexColor = string;
+
 //All the users style data
 // eslint-disable-next-line prefer-const
-export let styleData = [];
+export let styleData: {
+	id: string;
+	font: string;
+	fontColor: HexColor;
+	fontOpacity: number;
+	size: number;
+	dropshadowColor: HexColor;
+	dropshadowDistance: number;
+	backgroundColor: HexColor;
+	backgroundOpacity: number;
+	bold: boolean;
+	italics: boolean;
+	underline: boolean;
+}[] = [];
 //This is the style that they are currently editing.
 // eslint-disable-next-line prefer-const
 export let selectedStyle = 1;
