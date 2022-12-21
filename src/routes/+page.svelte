@@ -13,13 +13,13 @@
 	} from 'flowbite-svelte';
 	import { fly } from 'svelte/transition';
 
-	import NotificationHolder from './NotificationHolder.svelte';
-	import LangSwitcher from './LangSwitcher.svelte';
-	import DarkModeToggle from './DarkModeToggle.svelte';
+	import NotificationHolder from '$lib/NotificationHolder.svelte';
+	import LangSwitcher from '$lib/LangSwitcher.svelte';
+	import DarkModeToggle from '$lib/DarkModeToggle.svelte';
 	import StartPage from './StartPage.svelte';
-	import Caption from './Caption.svelte';
-	import StyleSidebar from './StyleSidebar.svelte';
-	import Topbar from './Topbar.svelte';
+	import Caption from '$lib/Caption.svelte';
+	import StyleSidebar from '$lib/StyleSidebar.svelte';
+	import Topbar from '$lib/Topbar.svelte';
 	import { Pane, Splitpanes } from 'svelte-splitpanes';
 
 	let notificationHolder: NotificationHolder;

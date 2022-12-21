@@ -32,15 +32,17 @@
 		<div class="flex w-full items-center justify-center">
 			<ButtonGroup divClass="max-w-full overflow-x-auto whitespace-nowrap" size="sm">
 				<!-- <Button>Default</Button> -->
-				{#each $styles as style, i}
-					<Button
-						outline={$selectedStyle == i}
-						on:click={() => {
-							selectedStyle.update((n) => i);
-							console.log(i);
-						}}>{style.id}</Button
-					>
-				{/each}
+				{#key $selectedStyle}
+					{#each $styles as style, i}
+						<Button
+							outline={$selectedStyle == i}
+							on:click={() => {
+								selectedStyle.update((n) => i);
+								console.log($selectedStyle == i);
+							}}>{style.id}</Button
+						>
+					{/each}
+				{/key}
 				<Button
 					on:click={() => {
 						pushNewStyle();

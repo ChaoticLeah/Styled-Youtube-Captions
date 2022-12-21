@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Button, Input } from 'flowbite-svelte';
-	import DarkModeToggle from './DarkModeToggle.svelte';
-	import LangSwitcher from './LangSwitcher.svelte';
+	import DarkModeToggle from '$lib/DarkModeToggle.svelte';
+	import LangSwitcher from '$lib/LangSwitcher.svelte';
 
 	export let Class: string | undefined = undefined;
 	// let classes = class ? class : "";

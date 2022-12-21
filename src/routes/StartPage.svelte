@@ -15,7 +15,7 @@
 	} from 'flowbite-svelte';
 	import type NotificationHolder from './NotificationHolder.svelte';
 	import { createEventDispatcher } from 'svelte';
-	import { readFile } from './toolbox';
+	import { readFile } from '$lib/toolbox';
 	import { base } from '$app/paths';
 
 	export let notificationHolder: NotificationHolder;
