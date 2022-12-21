@@ -10,6 +10,7 @@
 		SidebarItem,
 		SidebarWrapper
 	} from 'flowbite-svelte';
+	import { pushNewStyle, selectedStyle, styles } from './styleManager';
 
 	let spanClass = 'flex-1 ml-3 whitespace-nowrap';
 </script>
@@ -30,20 +31,19 @@
 
 		<div class="flex w-full items-center justify-center">
 			<ButtonGroup divClass="max-w-full overflow-x-auto whitespace-nowrap" size="sm">
-				<Button outline>Default</Button>
-				<Button>1</Button>
-				<Button>2</Button>
-				<Button>3</Button>
-				<Button>4</Button>
-				<Button>5</Button>
-				<Button>6</Button>
-				<Button>7</Button>
-				<Button>8</Button>
-				<Button>9</Button>
-
+				<!-- <Button>Default</Button> -->
+				{#each $styles as style, i}
+					<Button
+						outline={$selectedStyle == i}
+						on:click={() => {
+							selectedStyle.update((n) => i);
+							console.log(i);
+						}}>{style.id}</Button
+					>
+				{/each}
 				<Button
 					on:click={() => {
-						console.log('hi');
+						pushNewStyle();
 					}}>+</Button
 				>
 			</ButtonGroup>

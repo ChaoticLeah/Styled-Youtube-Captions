@@ -1,9 +1,10 @@
+import { writable, get } from 'svelte/store';
+import type { Writable } from 'svelte/store';
+
 //Used for neatness and clairity so you know that its not just any string
 type HexColor = string;
 
-//All the users style data
-// eslint-disable-next-line prefer-const
-export let styleData: {
+type StyleType = {
 	id: string;
 	font: string;
 	fontColor: HexColor;
@@ -16,10 +17,29 @@ export let styleData: {
 	bold: boolean;
 	italics: boolean;
 	underline: boolean;
-}[] = [];
+};
+
+//All the users style data
+// eslint-disable-next-line prefer-const
+export let styles: Writable<StyleType[]> = writable([] as Array<StyleType>);
 //This is the style that they are currently editing.
 // eslint-disable-next-line prefer-const
-export let selectedStyle = 1;
+export let selectedStyle = writable(0);
+
+const defaultStyle = {
+	id: '', // Needs to be set
+	font: '-1',
+	fontColor: '#ffffff',
+	fontOpacity: 255,
+	size: 100 /*%*/,
+	dropshadowColor: '#000000',
+	dropshadowDistance: 0,
+	backgroundColor: '#000000',
+	backgroundOpacity: 0,
+	bold: false,
+	italics: false,
+	underline: false
+};
 
 //Font dictionary taken from: https://github.com/arcusmaximus/YTSubConverter/blob/3455abe39138348283bc12f9ad2f5b94e2115e61/YTSubConverter/Formats/YttDocument.cs#L1173
 export const fontDictionary = {
@@ -132,3 +152,15 @@ export const stylePreview = {
 		effectedElement: 'previewText'
 	}
 };
+
+export function pushNewStyle(styleData: StyleType = defaultStyle) {
+	const newStyleDat = Object.create(styleData);
+	//If we didnt set a custom style id set it to the index
+	if (!newStyleDat.id)
+		newStyleDat.id = styles.update((prev) => [...prev, { ...newStyleDat, ...{ id: prev.length } }]);
+	//Push it
+	else styles.update((prev) => [...prev, newStyleDat]);
+}
+
+pushNewStyle();
+pushNewStyle();
