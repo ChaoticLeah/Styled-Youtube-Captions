@@ -13,7 +13,7 @@
 		DropdownHeader,
 		Select
 	} from 'flowbite-svelte';
-	import type NotificationHolder from './NotificationHolder.svelte';
+	import type NotificationHolder from '$lib/NotificationHolder.svelte';
 	import { createEventDispatcher } from 'svelte';
 	import { readFile } from '$lib/toolbox';
 	import { base } from '$app/paths';

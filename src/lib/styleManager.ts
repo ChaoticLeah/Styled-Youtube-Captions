@@ -21,7 +21,40 @@ type StyleType = {
 
 //All the users style data
 // eslint-disable-next-line prefer-const
-export let styles: Writable<StyleType[]> = writable([] as Array<StyleType>);
+// export let styles: Writable<StyleType[]> = writable([] as Array<StyleType>);
+
+export const styles = (() => {
+	const internalStore = writable({ selected: 0, styles: [] as Array<StyleType> });
+
+	const push = (styleData = defaultStyle) => {
+		internalStore.update((currentState) => {
+			const newStyle = Object.create(styleData);
+			if (!newStyle.id) newStyle.id = currentState.styles.length;
+			const stylesList = currentState.styles;
+			stylesList.push(newStyle);
+
+			return { ...currentState, styles: stylesList };
+		});
+	};
+
+	const getSize = () => {
+		return get(internalStore).styles.length;
+	};
+
+	const selectStyle = (index: number) => {
+		internalStore.update((currentState) => {
+			return { ...currentState, selected: index };
+		});
+	};
+
+	return {
+		subscribe: internalStore.subscribe,
+		selectStyle,
+		push,
+		getSize
+	};
+})();
+
 //This is the style that they are currently editing.
 // eslint-disable-next-line prefer-const
 export let selectedStyle = writable(0);
@@ -153,13 +186,21 @@ export const stylePreview = {
 	}
 };
 
+// export function pushNewStyle(styleData: StyleType = defaultStyle) {
+// 	const newStyleDat = Object.create(styleData);
+// 	//If we didnt set a custom style id set it to the index
+// 	if (!newStyleDat.id)
+// 		newStyleDat.id = styles.update((prev) => [...prev, { ...newStyleDat, ...{ id: prev.length } }]);
+// 	//Push it
+// 	else styles.update((prev) => [...prev, newStyleDat]);
+// }
+
 export function pushNewStyle(styleData: StyleType = defaultStyle) {
 	const newStyleDat = Object.create(styleData);
 	//If we didnt set a custom style id set it to the index
-	if (!newStyleDat.id)
-		newStyleDat.id = styles.update((prev) => [...prev, { ...newStyleDat, ...{ id: prev.length } }]);
+	if (!newStyleDat.id) newStyleDat.id = styles.getSize().toString();
 	//Push it
-	else styles.update((prev) => [...prev, newStyleDat]);
+	styles.push(newStyleDat);
 }
 
 pushNewStyle();
