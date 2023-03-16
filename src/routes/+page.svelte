@@ -1,147 +1,72 @@
-<script type="ts">
-	import {
-		Fileupload,
-		Label,
-		Toast,
-		Helper,
-		Button,
-		Chevron,
-		Dropdown,
-		DropdownItem,
-		DropdownDivider,
-		DropdownHeader
-	} from 'flowbite-svelte';
-	import { fly } from 'svelte/transition';
+<script lang="ts">
+  import { baseStyle, data } from "$lib/captionDataManager";
+  import CaptionChunkHolder from "$lib/components/CaptionChunkHolder.svelte";
+  import CaptionsArea from "$lib/components/CaptionsArea.svelte";
+  import FieldAdder from "$lib/components/FieldAdder.svelte";
+  import Navbar from "$lib/components/Navbar.svelte";
+  import Sidebar from "$lib/components/Sidebar.svelte";
+  import Styler from "$lib/components/Styler.svelte";
+  import autoAnimate from "@formkit/auto-animate";
 
-	import NotificationHolder from '$lib/NotificationHolder.svelte';
-	import LangSwitcher from '$lib/LangSwitcher.svelte';
-	import DarkModeToggle from '$lib/DarkModeToggle.svelte';
-	import StartPage from './StartPage.svelte';
-	import Caption from '$lib/Caption.svelte';
-	import StyleSidebar from '$lib/StyleSidebar.svelte';
-	import Topbar from '$lib/Topbar.svelte';
-	import { Pane, Splitpanes } from 'svelte-splitpanes';
+  import { onMount } from "svelte";
+  import toast from "svelte-french-toast";
+  import { DocumentArrowDown, Icon } from "svelte-hero-icons";
 
-	let notificationHolder: NotificationHolder;
-
-	let showStartPage = true;
-
-	let currentProjectData: {
-		name: string;
-		transcript: { time: { start: string; end: string }; text: string }[];
-	} = {
-		name: 'autosave',
-		transcript: []
-	};
-
-	function handleRawFileData(event: { detail: { sections: string[] } }) {
-		const sections = event.detail.sections;
-
-		showStartPage = false;
-		//Add all the sections to the page
-		for (let i = 0; i < sections.length; i++) {
-			//Split the text from the timing data in the file
-			let lines: string | string[] = sections[i].split('\n');
-			let times = lines[0].split(' --> ');
-			lines.shift();
-			lines = lines.join('\n');
-
-			//Add the subtitle (Dont use .push since it wont update the html)
-			currentProjectData.transcript = [
-				...currentProjectData.transcript,
-				{ time: { start: times[0], end: times[1] }, text: lines }
-			];
-		}
-	}
-
-	function deleteCaption(event: CustomEvent<Caption>) {
-		currentProjectData.transcript.splice(event.detail.index, 1);
-		//Update it
-		currentProjectData.transcript = [...currentProjectData.transcript];
-	}
+  onMount(() => {
+    toast.success("It works!");
+  });
 </script>
 
-<svelte:head>
-	<title>Styled Youtube Captions</title>
-	<meta name="description" content="An app for creating custom captions on youtube" />
-</svelte:head>
-<div class="flex h-screen w-screen flex-col">
-	<!-- Start Page -->
-	{#if showStartPage}
-		<Topbar />
-		<StartPage {notificationHolder} on:rawFileData={handleRawFileData} />
-	{:else}
-		<div hidden={showStartPage} class="grid h-full grid-cols-6">
-			<Topbar Class="col-start-1 col-end-7 row-start-1 row-end-auto" />
+<div class="absolute top-0 h-screen w-full bg-neutral">
+  <!-- <Navbar></Navbar> -->
 
-			<div class="col-start-1 col-end-5 row-start-2 row-end-auto overflow-y-scroll p-2">
-				{#each currentProjectData.transcript as item, i}
-					<Caption
-						text={item.text}
-						timeStart={item.time.start}
-						timeEnd={item.time.end}
-						index={i}
-						on:delete={deleteCaption}
-					/>
-				{/each}
-			</div>
-			<div class="col-start-5 col-end-7 row-start-2 row-end-auto p-2">
-				<StyleSidebar />
-			</div>
-			<!-- <Splitpanes class="default-theme" style="height: 100%; width:100vw">
-			<Pane minSize={'40'} class="dark:!bg-slate-900">
-				<div class="h-full overflow-y-scroll  p-12">
-					{#each currentProjectData.transcript as item, i}
-						<Caption
-							text={item.text}
-							timeStart={item.time.start}
-							timeEnd={item.time.end}
-							index={i}
-							on:delete={deleteCaption}
-						/>
-					{/each}
-				</div>
-			</Pane>
-			<Pane minSize={'10'} size={'20'} class=" dark:!bg-slate-900"><StyleSidebar /></Pane>
-		</Splitpanes> -->
-		</div>
-	{/if}
+  <Sidebar className="bg-neutral h-full min-w-min" width={250}>
+    <h1 class="p-4 text-center text-xl">Styler</h1>
+    <!-- <div class = "h-12 w-full bg-base-200 rounded-md">
+      <button class=""></button>
+    </div> -->
+    <div class="flex">
+      <div class="btn-group h-12 w-80 overflow-x-scroll rounded-md bg-base-200">
+        <!-- <button class="btn btn-active">Base</button>
+        <button class="btn">1</button>
+        <button class="btn">2</button>
+        <button class="btn">3</button>
+  
+        <button class="btn">4</button>
+        <button class="btn">5</button>
+        <button class="btn">6</button>
+        <button class="btn">7</button>
+        <button class="btn">8</button> -->
+        {#each data.styles as styleData, i}
+          <button class={`btn ${(i == data.selectedStyleIndex) ? "btn-active " : ""}`}
+          on:click={(event)=>{
+            data.selectedStyleIndex = i;
+          }}
+            >{styleData.id}</button
+          >
+        {/each}
+      </div>
+      <button
+        class="btn"
+        on:click={(event) => {
+          let newStyle = Object.create(baseStyle);
+          newStyle.id = data.styles.length.toString();
+          data.styles = [...data.styles, newStyle];
+        }}>+</button
+      >
+    </div>
+    <!-- <h1>Styler</h1>
+    <p>
+      Not Done
+    </p> -->
+    <Styler />
+  </Sidebar>
 
-	<!-- TODO: SAVE, and LOAD under styler panel? -->
+  <div class="mx-auto h-full max-w-4xl overflow-auto overflow-y-scroll p-5">
+    <CaptionsArea />
+
+    <button class="btn glass btn-circle absolute bottom-0 left-0 m-10">
+      <Icon src={DocumentArrowDown} size="24" />
+    </button>
+  </div>
 </div>
-
-<NotificationHolder bind:this={notificationHolder} class="absolute bottom-0 left-0 z-50" />
-<div class="absolute bottom-0 right-0 z-50 m-4 flex w-1/6">
-	<!-- <LangSwitcher />
-
-	<DarkModeToggle /> -->
-</div>
-
-<style>
-	@tailwind base;
-
-	/* Firefox */
-	* {
-		scrollbar-width: thin;
-		scrollbar-color: var(--secondary) var(--primary);
-	}
-
-	/* Chrome, Edge, and Safari */
-	*::-webkit-scrollbar {
-		width: 15px;
-	}
-
-	*::-webkit-scrollbar-track {
-		background: var(--primary);
-		border-radius: 5px;
-	}
-
-	*::-webkit-scrollbar-thumb {
-		background-color: var(--secondary);
-		border-radius: 14px;
-		border: 3px solid var(--primary);
-	}
-
-	@tailwind components;
-	@tailwind utilities;
-</style>
