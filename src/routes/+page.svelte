@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { baseStyle, data, setData } from "$lib/captionDataManager";
+  import { baseStyle, data } from "$lib/captionDataManager";
   import CaptionChunkHolder from "$lib/components/CaptionChunkHolder.svelte";
   import CaptionsArea from "$lib/components/CaptionsArea.svelte";
   import FieldAdder from "$lib/components/FieldAdder.svelte";
@@ -26,7 +26,9 @@
       <button class=""></button>
     </div> -->
     <div class="flex">
-      <div class="btn-group h-12 w-80 overflow-x-scroll rounded-md bg-base-200">
+      <div
+        class="btn-group h-12 w-80 overflow-x-auto overflow-y-hidden rounded-md bg-base-200"
+      >
         <!-- <button class="btn btn-active">Base</button>
         <button class="btn">1</button>
         <button class="btn">2</button>
@@ -38,11 +40,11 @@
         <button class="btn">7</button>
         <button class="btn">8</button> -->
         {#each data.styles as styleData, i}
-          <button class={`btn ${(i == data.selectedStyleIndex) ? "btn-active " : ""}`}
-          on:click={(event)=>{
-            data.selectedStyleIndex = i;
-          }}
-            >{styleData.id}</button
+          <button
+            class={`btn ${i == data.selectedStyleIndex ? "btn-active " : ""}`}
+            on:click={(event) => {
+              data.selectedStyleIndex = i;
+            }}>{styleData.id}</button
           >
         {/each}
       </div>
@@ -65,7 +67,7 @@
   <div class="mx-auto h-full max-w-4xl overflow-auto overflow-y-scroll p-5">
     <CaptionsArea />
 
-    <button class="btn glass btn-circle absolute bottom-0 left-0 m-10">
+    <button class="glass btn-circle btn absolute bottom-0 left-0 m-10">
       <Icon src={DocumentArrowDown} size="24" />
     </button>
   </div>
