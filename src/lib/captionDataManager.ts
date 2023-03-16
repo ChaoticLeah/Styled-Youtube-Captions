@@ -151,5 +151,6 @@ let data: {
   ],
 };
 
+
 export { data, baseStyle, styleUIConfigurations, UITypeEnums, StyleUiEnums };
 export type { captionElem, style, color };

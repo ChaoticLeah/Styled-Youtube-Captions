@@ -1,31 +1,50 @@
 <script lang="ts">
-  import { baseStyle, styleUIConfigurations, UITypeEnums } from "$lib/captionDataManager";
+  import {
+    baseStyle,
+    styleUIConfigurations,
+    UITypeEnums,
+    data,
+  } from "$lib/captionDataManager";
   import ColorPicker from "svelte-awesome-color-picker";
+
+  let selectedStyle;
+
+  $: {
+    console.log("selectedStyleIndex changed:", data.selectedStyleIndex);
+    selectedStyle = data.styles[data.selectedStyleIndex];
+  }
 </script>
 
-{#each styleUIConfigurations as data, i}
+{#key data.selectedStyleIndex}
+  {data.selectedStyleIndex}
+{/key}
+
+{#each styleUIConfigurations as styleUIData, i}
   <div class="ceneter my-4 flex items-center">
-    <p class="mr-7">{data.name}</p>
+    <p class="mr-7">{styleUIData.name}</p>
 
-    {#if data.type == UITypeEnums.DROPDOWN}
-
-    <select class="select-bordered select max-w-xs">
+    {#if styleUIData.type == UITypeEnums.DROPDOWN}
+      <select class="select-bordered select max-w-xs">
         {#each styleUIConfigurations[i].data as arrDat, j}
           <option value={arrDat.value}>{arrDat.label}</option>
         {/each}
       </select>
-    {:else if data.type == UITypeEnums.COLOR_PICKER}
+    {:else if styleUIData.type == UITypeEnums.COLOR_PICKER}
       <ColorPicker />
-    {:else if data.type == UITypeEnums.SLIDER}
+    {:else if styleUIData.type == UITypeEnums.SLIDER}
       <input
         type="range"
-        min={data.data.start}
-        max={data.data.end}
+        min={styleUIData.data.start}
+        max={styleUIData.data.end}
         value="40"
         class="range"
       />
-    {:else if data.type == UITypeEnums.TOGGLE}
-      <input type="checkbox" class="toggle" checked={baseStyle[data.forId]}  />
+    {:else if styleUIData.type == UITypeEnums.TOGGLE}
+      <input
+        type="checkbox"
+        class="toggle"
+        checked={!!data.styles[data.selectedStyleIndex][styleUIData.forId]}
+      />
       <!-- bind:checked={} -->
     {/if}
   </div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { baseStyle, data } from "$lib/captionDataManager";
+  import { baseStyle, data, setData } from "$lib/captionDataManager";
   import CaptionChunkHolder from "$lib/components/CaptionChunkHolder.svelte";
   import CaptionsArea from "$lib/components/CaptionsArea.svelte";
   import FieldAdder from "$lib/components/FieldAdder.svelte";
