@@ -5,9 +5,9 @@
 
 </script>
 
-<FieldAdder id={-1} bind:captionsData={data.captions}></FieldAdder>
+<FieldAdder id={-1} bind:captionsData={$data.captions}></FieldAdder>
 
-{#each data.captions as captionData, i}
-  <CaptionChunkHolder id={i} bind:captionsData={data.captions} />
-  <FieldAdder id={i} bind:captionsData={data.captions}></FieldAdder>
+{#each $data.captions as captionData, i}
+  <CaptionChunkHolder id={i} bind:captionsData={$data.captions} />
+  <FieldAdder id={i} bind:captionsData={$data.captions}></FieldAdder>
 {/each}

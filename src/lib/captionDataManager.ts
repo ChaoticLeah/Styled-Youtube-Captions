@@ -1,3 +1,5 @@
+import { writable, type Writable } from "svelte/store";
+
 type captionElem = {
   startTime: string;
   endTime: string;
@@ -21,6 +23,12 @@ type style = {
   [StyleUiEnums.ITALIC]: boolean;
   [StyleUiEnums.UNDERLINE]: boolean;
 };
+
+type dataType = {
+  selectedStyleIndex: number;
+  styles: style[];
+  captions: captionElem[];
+}
 
 enum UITypeEnums {
   DROPDOWN,
@@ -135,11 +143,7 @@ let baseStyle: style = {
   [StyleUiEnums.UNDERLINE]: false,
 };
 
-let data: {
-  selectedStyleIndex: number;
-  styles: style[];
-  captions: captionElem[];
-} = {
+let data: Writable<dataType> = writable({
   selectedStyleIndex: 0,
   styles: [baseStyle],
   captions: [
@@ -149,8 +153,8 @@ let data: {
       value: "test",
     },
   ],
-};
+});
 
 
 export { data, baseStyle, styleUIConfigurations, UITypeEnums, StyleUiEnums };
-export type { captionElem, style, color };
+export type { captionElem, style, color, dataType };

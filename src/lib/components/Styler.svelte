@@ -7,17 +7,16 @@
   } from "$lib/captionDataManager";
   import ColorPicker from "svelte-awesome-color-picker";
 
-  let selectedStyle;
+  let selectedStyle: number;
 
-  $: {
-    console.log("selectedStyleIndex changed:", data.selectedStyleIndex);
-    selectedStyle = data.styles[data.selectedStyleIndex];
-  }
+  data.subscribe((value) => {
+
+    selectedStyle = value.selectedStyleIndex;
+  });
+
 </script>
 
-{#key data.selectedStyleIndex}
-  {data.selectedStyleIndex}
-{/key}
+{selectedStyle}
 
 {#each styleUIConfigurations as styleUIData, i}
   <div class="ceneter my-4 flex items-center">
@@ -43,7 +42,7 @@
       <input
         type="checkbox"
         class="toggle"
-        checked={!!data.styles[data.selectedStyleIndex][styleUIData.forId]}
+        bind:checked={$data.styles[selectedStyle][styleUIData.forId]}
       />
       <!-- bind:checked={} -->
     {/if}

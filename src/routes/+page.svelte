@@ -1,5 +1,11 @@
 <script lang="ts">
-  import { baseStyle, data } from "$lib/captionDataManager";
+  import {
+    baseStyle,
+    data,
+    type captionElem,
+    type dataType,
+    type style,
+  } from "$lib/captionDataManager";
   import CaptionChunkHolder from "$lib/components/CaptionChunkHolder.svelte";
   import CaptionsArea from "$lib/components/CaptionsArea.svelte";
   import FieldAdder from "$lib/components/FieldAdder.svelte";
@@ -14,6 +20,10 @@
 
   onMount(() => {
     toast.success("It works!");
+  });
+  let dat: dataType;
+  data.subscribe((value) => {
+    dat = value;
   });
 </script>
 
@@ -39,11 +49,14 @@
         <button class="btn">6</button>
         <button class="btn">7</button>
         <button class="btn">8</button> -->
-        {#each data.styles as styleData, i}
+        {#each dat.styles as styleData, i}
           <button
-            class={`btn ${i == data.selectedStyleIndex ? "btn-active " : ""}`}
+            class={`btn ${i == dat.selectedStyleIndex ? "btn-active " : ""}`}
             on:click={(event) => {
-              data.selectedStyleIndex = i;
+              // dat.selectedStyleIndex = i;
+              let newData = $data;
+              newData.selectedStyleIndex = i;
+              data.set(newData);
             }}>{styleData.id}</button
           >
         {/each}
@@ -52,8 +65,8 @@
         class="btn"
         on:click={(event) => {
           let newStyle = Object.create(baseStyle);
-          newStyle.id = data.styles.length.toString();
-          data.styles = [...data.styles, newStyle];
+          newStyle.id = dat.styles.length.toString();
+          dat.styles = [...dat.styles, newStyle];
         }}>+</button
       >
     </div>
