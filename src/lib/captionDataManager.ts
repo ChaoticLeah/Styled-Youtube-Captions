@@ -17,7 +17,7 @@ type color = {
 
 type style = {
   id: string;
-  [StyleUiEnums.FONT]: "";
+  [StyleUiEnums.FONT]: "default" ;
   [StyleUiEnums.FONT_COLOR]: color;
   [StyleUiEnums.FONT_SIZE]: number;
   [StyleUiEnums.SHADOW_COLOR]: color;
@@ -127,7 +127,7 @@ const styleUIConfigurations: {
 
 let baseStyle: style = {
   id: "default",
-  [StyleUiEnums.FONT]: "",
+  [StyleUiEnums.FONT]: "default",
   [StyleUiEnums.FONT_COLOR]: {
     r:255,g:255,b:255,a:1
   },
