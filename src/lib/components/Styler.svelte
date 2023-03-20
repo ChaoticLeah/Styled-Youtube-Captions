@@ -17,7 +17,7 @@
 
 {#key selectedStyle}
   {#each styleUIConfigurations as styleUIData, i}
-    <div class="ceneter my-4 flex items-center">
+    <div class="ceneter my-2 flex items-center">
       <p class="mr-7">{styleUIData.name}</p>
 
       {#if styleUIData.type == UITypeEnums.DROPDOWN}
@@ -53,6 +53,10 @@
   {/each}
 {/key}
 
-<div class="w-full min-h-12 mt-auto bg-red-400">
+<div class="w-full min-h-12 mt-auto rounded-t-lg p-4 text-center bg-base-300">
   The quick brown fox jumps over the lazy dog
 </div>
+
+<!-- <div class="card-actions justify-end bg-base-300">
+  <div class="badge badge-outline">Products</div>
+</div> -->
