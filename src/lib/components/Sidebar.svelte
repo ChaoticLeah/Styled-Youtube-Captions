@@ -43,7 +43,7 @@
   <div class="h-full w-0 border-l border-base-200"></div> 
   </div>
 
-  <div class="flex-grow m-5">
+  <div class="flex-grow m-2">
     <slot />
   </div>
 </div>

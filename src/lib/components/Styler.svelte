@@ -1,4 +1,5 @@
 <script lang="ts">
+  // @ts-nocheck
   import {
     baseStyle,
     styleUIConfigurations,
@@ -10,41 +11,48 @@
   let selectedStyle: number;
 
   data.subscribe((value) => {
-
     selectedStyle = value.selectedStyleIndex;
   });
-
 </script>
 
-{selectedStyle}
+{#key selectedStyle}
+  {#each styleUIConfigurations as styleUIData, i}
+    <div class="ceneter my-4 flex items-center">
+      <p class="mr-7">{styleUIData.name}</p>
 
-{#each styleUIConfigurations as styleUIData, i}
-  <div class="ceneter my-4 flex items-center">
-    <p class="mr-7">{styleUIData.name}</p>
+      {#if styleUIData.type == UITypeEnums.DROPDOWN}
+        <select
+          class="select-bordered select max-w-xs"
+          bind:value={$data.styles[selectedStyle][styleUIData.forId]}
+        >
+          {#each styleUIConfigurations[i].data as arrDat, j}
+            <option value={arrDat.value}>{arrDat.label}</option>
+          {/each}
+        </select>
+      {:else if styleUIData.type == UITypeEnums.COLOR_PICKER}
+        <ColorPicker
+          bind:rgb={$data.styles[selectedStyle][styleUIData.forId]}
+        />
+      {:else if styleUIData.type == UITypeEnums.SLIDER}
+        <input
+          type="range"
+          min={styleUIData.data.start}
+          max={styleUIData.data.end}
+          class="range"
+          bind:value={$data.styles[selectedStyle][styleUIData.forId]}
+        />
+      {:else if styleUIData.type == UITypeEnums.TOGGLE}
+        <!-- @ts-ignore -->
+        <input
+          type="checkbox"
+          class="toggle"
+          bind:checked={$data.styles[selectedStyle][styleUIData.forId]}
+        />
+      {/if}
+    </div>
+  {/each}
+{/key}
 
-    {#if styleUIData.type == UITypeEnums.DROPDOWN}
-      <select class="select-bordered select max-w-xs">
-        {#each styleUIConfigurations[i].data as arrDat, j}
-          <option value={arrDat.value}>{arrDat.label}</option>
-        {/each}
-      </select>
-    {:else if styleUIData.type == UITypeEnums.COLOR_PICKER}
-      <ColorPicker />
-    {:else if styleUIData.type == UITypeEnums.SLIDER}
-      <input
-        type="range"
-        min={styleUIData.data.start}
-        max={styleUIData.data.end}
-        value="40"
-        class="range"
-      />
-    {:else if styleUIData.type == UITypeEnums.TOGGLE}
-      <input
-        type="checkbox"
-        class="toggle"
-        bind:checked={$data.styles[selectedStyle][styleUIData.forId]}
-      />
-      <!-- bind:checked={} -->
-    {/if}
-  </div>
-{/each}
+<div class="w-full min-h-12 mt-auto bg-red-400">
+  The quick brown fox jumps over the lazy dog
+</div>

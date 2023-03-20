@@ -39,16 +39,6 @@
       <div
         class="btn-group h-12 w-80 overflow-x-auto overflow-y-hidden rounded-md bg-base-200"
       >
-        <!-- <button class="btn btn-active">Base</button>
-        <button class="btn">1</button>
-        <button class="btn">2</button>
-        <button class="btn">3</button>
-  
-        <button class="btn">4</button>
-        <button class="btn">5</button>
-        <button class="btn">6</button>
-        <button class="btn">7</button>
-        <button class="btn">8</button> -->
         {#each dat.styles as styleData, i}
           <button
             class={`btn ${i == dat.selectedStyleIndex ? "btn-active " : ""}`}

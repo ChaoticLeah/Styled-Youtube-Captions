@@ -7,8 +7,12 @@ type captionElem = {
 };
 
 type color = {
-  hex: string;
-  opacity: number;
+  // hex: string;
+  // opacity: number;
+  r: number,
+  g: number,
+  b: number,
+  a: number
 };
 
 type style = {
@@ -125,18 +129,15 @@ let baseStyle: style = {
   id: "default",
   [StyleUiEnums.FONT]: "",
   [StyleUiEnums.FONT_COLOR]: {
-    hex: "#ffffff",
-    opacity: 1,
+    r:255,g:255,b:255,a:1
   },
   [StyleUiEnums.FONT_SIZE]: 100,
   [StyleUiEnums.SHADOW_COLOR]: {
-    hex: "#000000",
-    opacity: 1,
+    r:0,g:0,b:0,a:1
   },
   [StyleUiEnums.SHADOW_DISTANCE]: 1,
   [StyleUiEnums.BACKGROUND_COLOR]: {
-    hex: "#ffffff",
-    opacity: 1,
+    r:0,g:0,b:0,a:1
   },
   [StyleUiEnums.BOLD]: false,
   [StyleUiEnums.ITALIC]: false,
@@ -145,7 +146,7 @@ let baseStyle: style = {
 
 let data: Writable<dataType> = writable({
   selectedStyleIndex: 0,
-  styles: [baseStyle],
+  styles: [{...baseStyle}],
   captions: [
     {
       startTime: "1",
