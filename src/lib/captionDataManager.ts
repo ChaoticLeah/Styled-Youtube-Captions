@@ -4,20 +4,22 @@ type captionElem = {
   startTime: string;
   endTime: string;
   value: string;
+  //For if you want just 1 text elem to have a style.
+  customStyle?: style;
 };
 
 type color = {
   // hex: string;
   // opacity: number;
-  r: number,
-  g: number,
-  b: number,
-  a: number
+  r: number;
+  g: number;
+  b: number;
+  a: number;
 };
 
 type style = {
   id: string;
-  [StyleUiEnums.FONT]: "default" ;
+  [StyleUiEnums.FONT]: "default";
   [StyleUiEnums.FONT_COLOR]: color;
   [StyleUiEnums.FONT_SIZE]: number;
   [StyleUiEnums.SHADOW_COLOR]: color;
@@ -26,13 +28,15 @@ type style = {
   [StyleUiEnums.BOLD]: boolean;
   [StyleUiEnums.ITALIC]: boolean;
   [StyleUiEnums.UNDERLINE]: boolean;
+  //Modifiers are things like animations that can modify any of the above set styles
+  modifiers?: [];
 };
 
 type dataType = {
   selectedStyleIndex: number;
   styles: style[];
   captions: captionElem[];
-}
+};
 
 enum UITypeEnums {
   DROPDOWN,
@@ -129,15 +133,24 @@ let baseStyle: style = {
   id: "default",
   [StyleUiEnums.FONT]: "default",
   [StyleUiEnums.FONT_COLOR]: {
-    r:255,g:255,b:255,a:1
+    r: 255,
+    g: 255,
+    b: 255,
+    a: 1,
   },
   [StyleUiEnums.FONT_SIZE]: 100,
   [StyleUiEnums.SHADOW_COLOR]: {
-    r:0,g:0,b:0,a:1
+    r: 0,
+    g: 0,
+    b: 0,
+    a: 1,
   },
   [StyleUiEnums.SHADOW_DISTANCE]: 1,
   [StyleUiEnums.BACKGROUND_COLOR]: {
-    r:0,g:0,b:0,a:1
+    r: 0,
+    g: 0,
+    b: 0,
+    a: 1,
   },
   [StyleUiEnums.BOLD]: false,
   [StyleUiEnums.ITALIC]: false,
@@ -146,7 +159,7 @@ let baseStyle: style = {
 
 let data: Writable<dataType> = writable({
   selectedStyleIndex: 0,
-  styles: [{...baseStyle}],
+  styles: [{ ...baseStyle }],
   captions: [
     {
       startTime: "1",
@@ -155,7 +168,6 @@ let data: Writable<dataType> = writable({
     },
   ],
 });
-
 
 export { data, baseStyle, styleUIConfigurations, UITypeEnums, StyleUiEnums };
 export type { captionElem, style, color, dataType };
