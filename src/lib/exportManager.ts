@@ -1,3 +1,4 @@
+import type { style } from "./captionDataManager";
 import { data, type dataType } from "./captionDataManager";
 
 let dat: dataType;
@@ -5,6 +6,31 @@ data.subscribe((value) => {
   dat = value;
 });
 
+enum FragmentType {
+  PARAGRAPH,
+  SPAN,
+  PEN,
+}
+
+function generateCaptionFragment(
+  fragmentType: FragmentType,
+  value: string,
+  //In ms
+  start?: number,
+  end?: number,
+  styles?: style
+) {
+  let typeString: string;
+  if (fragmentType == FragmentType.PARAGRAPH) typeString = "p";
+  else if (fragmentType == FragmentType.PEN) typeString = "pen";
+  else if (fragmentType == FragmentType.SPAN) typeString = "s";
+  else {
+    console.warn(`No fragment of type ${fragmentType} found`);
+    return "";
+  }
+  const startAndEnd = `t="${start}" d="${(end ?? 0) - (start ?? 0)}"`;
+  return `<${typeString} ${!!start ? startAndEnd : ""} TODOSTYLES>${value}</`;
+}
 function toMillis(time: string) {
   //split the time by :
   let t = time.split(":");
