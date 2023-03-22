@@ -12,6 +12,7 @@
   import Navbar from "$lib/components/Navbar.svelte";
   import Sidebar from "$lib/components/Sidebar.svelte";
   import Styler from "$lib/components/Styler.svelte";
+    import { exportToYtt } from "$lib/exportManager";
   import autoAnimate from "@formkit/auto-animate";
 
   import { onMount } from "svelte";
@@ -70,7 +71,7 @@
   <div class="mx-auto h-full max-w-4xl overflow-auto overflow-y-scroll p-5">
     <CaptionsArea />
 
-    <button class="glass btn-circle btn absolute bottom-0 left-0 m-10">
+    <button class="glass btn-circle btn absolute bottom-0 left-0 m-10" on:click={exportToYtt}>
       <Icon src={DocumentArrowDown} size="24" />
     </button>
   </div>

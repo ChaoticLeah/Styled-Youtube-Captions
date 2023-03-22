@@ -52,8 +52,8 @@
     </div>
   {/each}
 {/key}
-
-<div class="w-full min-h-12 mt-auto rounded-t-lg p-4 text-center bg-base-300">
+<!-- <div class="tooltip" data-tip="hello"></div> -->
+<div class="w-full min-h-12 mt-auto rounded-t-lg p-4 text-center bg-base-300 tooltip" data-tip="This is not an exact representation of how it will look. Double check when putting it on youtube on diffrent devices to see how it actually looks.">
   The quick brown fox jumps over the lazy dog
 </div>
 

@@ -17,7 +17,7 @@ type color = {
 
 type style = {
   id: string;
-  [StyleUiEnums.FONT]: "default" ;
+  [StyleUiEnums.FONT]: number;
   [StyleUiEnums.FONT_COLOR]: color;
   [StyleUiEnums.FONT_SIZE]: number;
   [StyleUiEnums.SHADOW_COLOR]: color;
@@ -64,14 +64,15 @@ const styleUIConfigurations: {
     name: "Font",
     forId: StyleUiEnums.FONT,
     data: [
-      { value: -1, label: "Default" },
+      // { value: -1, label: "Default" },
+      { value: 0, label: "Default" },
       { value: 1, label: "Courier New" },
       { value: 2, label: "Times New Roman" },
       { value: 3, label: "Lucida Console" },
+      { value: 4, label: "Roboto" },
       { value: 5, label: "Comic Sans Ms" },
       { value: 6, label: "Monotype Corsiva" },
-      { value: 7, label: "Carrois Gothic Sc" },
-      { value: "_", label: "Roboto" },
+      { value: 7, label: "Small Caps Arial" },
     ],
   },
   {
@@ -127,7 +128,7 @@ const styleUIConfigurations: {
 
 let baseStyle: style = {
   id: "default",
-  [StyleUiEnums.FONT]: "default",
+  [StyleUiEnums.FONT]:  0,
   [StyleUiEnums.FONT_COLOR]: {
     r:255,g:255,b:255,a:1
   },
