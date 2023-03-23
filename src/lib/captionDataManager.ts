@@ -18,16 +18,16 @@ type color = {
 };
 
 type style = {
-  id: number;
-  [StyleUiEnums.FONT]: number;
-  [StyleUiEnums.FONT_COLOR]: color;
-  [StyleUiEnums.FONT_SIZE]: number;
-  [StyleUiEnums.SHADOW_COLOR]: color;
-  [StyleUiEnums.SHADOW_DISTANCE]: number;
-  [StyleUiEnums.BACKGROUND_COLOR]: color;
-  [StyleUiEnums.BOLD]: boolean;
-  [StyleUiEnums.ITALIC]: boolean;
-  [StyleUiEnums.UNDERLINE]: boolean;
+  id?: number;
+  [StyleUiEnums.FONT]?: number;
+  [StyleUiEnums.FONT_COLOR]?: color;
+  [StyleUiEnums.FONT_SIZE]?: number;
+  [StyleUiEnums.SHADOW_COLOR]?: color;
+  [StyleUiEnums.SHADOW_DISTANCE]?: number;
+  [StyleUiEnums.BACKGROUND_COLOR]?: color;
+  [StyleUiEnums.BOLD]?: boolean;
+  [StyleUiEnums.ITALIC]?: boolean;
+  [StyleUiEnums.UNDERLINE]?: boolean;
   //Modifiers are things like animations that can modify any of the above set styles
   modifiers?: [];
 };
@@ -132,7 +132,7 @@ const styleUIConfigurations: {
 
 let baseStyle: style = {
   id: 0,
-  [StyleUiEnums.FONT]:  0,
+  [StyleUiEnums.FONT]: 0,
   [StyleUiEnums.FONT_COLOR]: {
     r: 255,
     g: 255,
@@ -163,8 +163,8 @@ let data: Writable<dataType> = writable({
   styles: [{ ...baseStyle }],
   captions: [
     {
-      startTime: "1",
-      endTime: "2",
+      startTime: "00:00:01.840",
+      endTime: "00:00:02.840",
       value: "test",
     },
   ],

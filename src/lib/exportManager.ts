@@ -1,4 +1,4 @@
-import type { style } from "./captionDataManager";
+import { StyleUiEnums, type style } from "./captionDataManager";
 import { data, type dataType } from "./captionDataManager";
 
 let dat: dataType;
@@ -7,9 +7,19 @@ data.subscribe((value) => {
 });
 
 enum FragmentType {
-  PARAGRAPH,
-  SPAN,
-  PEN,
+  PARAGRAPH = "p",
+  SPAN = "pen",
+  PEN = "s",
+}
+
+function captionFragmentStyleStringGenerator(styles: style) {
+  let builderString = "";
+  for (const key in styles) {
+    let styleData = styles[key as StyleUiEnums];
+    if (typeof styleData == "boolean") styleData = styleData ? 1 : 0;
+    builderString += ` ${key}="${styleData}"`;
+  }
+  return builderString;
 }
 
 function generateCaptionFragment(
@@ -20,16 +30,16 @@ function generateCaptionFragment(
   end?: number,
   styles?: style
 ) {
-  let typeString: string;
-  if (fragmentType == FragmentType.PARAGRAPH) typeString = "p";
-  else if (fragmentType == FragmentType.PEN) typeString = "pen";
-  else if (fragmentType == FragmentType.SPAN) typeString = "s";
-  else {
-    console.warn(`No fragment of type ${fragmentType} found`);
-    return "";
+  let typeString: string = fragmentType;
+  let extraStylesString: string = "";
+  if (styles) {
+    extraStylesString = captionFragmentStyleStringGenerator(styles);
   }
+
   const startAndEnd = `t="${start}" d="${(end ?? 0) - (start ?? 0)}"`;
-  return `<${typeString} ${!!start ? startAndEnd : ""} TODOSTYLES>${value}</`;
+  return `<${typeString} ${
+    !!start ? startAndEnd : ""
+  }${extraStylesString}>${value}</${typeString}>`;
 }
 
 function toMillis(time: string) {
@@ -59,10 +69,24 @@ function exportToYtt() {
 
   for (const captionIndex in dat.captions) {
     const captionElem = dat.captions[captionIndex];
+
     const startTime = toMillis(captionElem.startTime);
     const endTime = toMillis(captionElem.endTime);
     //ADD each styled bit here as a <s>
-    const captionFragment = `<p p="" t="${startTime}" d="${endTime - startTime}">​<s p="1">${captionElem.value}</s></p>`;
+    // const captionFragment = `<p p="" t="${startTime}" d="${
+    //   endTime - startTime
+    // }">​<s p="1">${captionElem.value}</s></p>`;
+    const captionFragment = generateCaptionFragment(
+      FragmentType.PARAGRAPH,
+      captionElem.value,
+      startTime,
+      endTime,
+      {
+        [StyleUiEnums.BOLD]: true,
+        [StyleUiEnums.FONT]: 10,
+      }
+    );
+    console.log(captionFragment);
   }
 
   const file = `<?xml version="1.0" encoding="utf-8" ?>
