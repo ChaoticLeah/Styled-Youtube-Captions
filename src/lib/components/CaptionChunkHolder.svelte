@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { captionElem } from "$lib/captionDataManager";
   import { Icon, Clock, XMark } from "svelte-hero-icons";
+  import TimeInput from "./TimeInput.svelte";
   // export let id : number;
   // export let captionData: captionElem;
 
@@ -22,9 +23,7 @@
     // } else inputColors[inputId] = 'base';
   }
 
-  function setStartTime(
-    event: Event & { currentTarget: EventTarget & HTMLInputElement }
-  ): any {
+  function setStartTime(event: Event): any {
     captionsData[id].startTime = (event?.target as HTMLInputElement).value;
   }
 
@@ -52,11 +51,9 @@
       <Icon src={Clock} size="24" />
     </div>
     <!-- outline outline-warning -->
-    <input
-      type="text"
+    <TimeInput
       placeholder="Start"
-      class="input-bordered input h-10 w-32"
-      value={captionsData[id].startTime}
+      bind:value={captionsData[id].startTime}
       on:input={setStartTime}
     />
     <p class="p-2">to</p>
