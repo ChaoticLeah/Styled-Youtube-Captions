@@ -83,6 +83,7 @@ function exportToYtt() {
       startTime,
       endTime,
       {
+        id: 0,
         [StyleUiEnums.BOLD]: true,
         [StyleUiEnums.FONT]: 10,
       }
