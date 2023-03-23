@@ -7,9 +7,7 @@
   $: isCorrect = true;
 
   function verifyInput(value: string): any {
-    console.log(value);
     isCorrect = INPUT_PATTERN.test(value.trim());
-    console.log(isCorrect);
   }
 
   function onInput(

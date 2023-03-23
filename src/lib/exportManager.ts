@@ -47,11 +47,11 @@ function toMillis(time: string) {
   //split the time by :
   let t = time.split(":");
   //get the hours
-  let hours = parseInt(t[0]);
+  let hours = parseFloat(t[0]);
   //get the minutes
-  let minutes = parseInt(t[1]);
+  let minutes = parseFloat(t[1]);
   //get the seconds
-  let seconds = parseInt(t[2]);
+  let seconds = parseFloat(t[2]);
 
   //convert the hours to milliseconds
   hours = hours * 60 * 60 * 1000;
