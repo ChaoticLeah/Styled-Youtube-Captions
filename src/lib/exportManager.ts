@@ -31,6 +31,7 @@ function generateCaptionFragment(
   const startAndEnd = `t="${start}" d="${(end ?? 0) - (start ?? 0)}"`;
   return `<${typeString} ${!!start ? startAndEnd : ""} TODOSTYLES>${value}</`;
 }
+
 function toMillis(time: string) {
   //split the time by :
   let t = time.split(":");

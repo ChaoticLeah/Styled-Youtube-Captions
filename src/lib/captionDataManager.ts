@@ -18,7 +18,7 @@ type color = {
 };
 
 type style = {
-  id: string;
+  id: number;
   [StyleUiEnums.FONT]: number;
   [StyleUiEnums.FONT_COLOR]: color;
   [StyleUiEnums.FONT_SIZE]: number;
@@ -46,15 +46,15 @@ enum UITypeEnums {
 }
 
 enum StyleUiEnums {
-  FONT,
-  FONT_COLOR,
-  FONT_SIZE,
-  SHADOW_COLOR,
-  SHADOW_DISTANCE,
-  BACKGROUND_COLOR,
-  BOLD,
-  ITALIC,
-  UNDERLINE,
+  FONT = "fs",
+  FONT_COLOR = "fc/fo",
+  FONT_SIZE = "sz",
+  SHADOW_COLOR = "ec",
+  SHADOW_DISTANCE = "et",
+  BACKGROUND_COLOR = "bc/bo",
+  BOLD = "b",
+  ITALIC = "i",
+  UNDERLINE = "u",
 }
 
 const styleUIConfigurations: {
@@ -131,7 +131,7 @@ const styleUIConfigurations: {
 ];
 
 let baseStyle: style = {
-  id: "default",
+  id: 0,
   [StyleUiEnums.FONT]:  0,
   [StyleUiEnums.FONT_COLOR]: {
     r: 255,
