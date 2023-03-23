@@ -36,6 +36,7 @@
     <div class="p-2">
       <Icon src={Clock} size="24" />
     </div>
+    <!-- outline outline-warning -->
     <input
       type="text"
       placeholder="Start"
@@ -54,7 +55,12 @@
 
     <!-- <button class="btn btn-ghost">LOL</button>
     <button class="btn btn-ghost">LOL</button> -->
-    <button class="btn-ghost btn btn-error ml-auto" on:click={(_event)=>{removeCaptionElem(id);}}>
+    <button
+      class="btn-error btn-ghost btn ml-auto"
+      on:click={(_event) => {
+        removeCaptionElem(id);
+      }}
+    >
       <Icon src={XMark} size="24" />
     </button>
   </div>

@@ -36,6 +36,7 @@ function generateCaptionFragment(
     extraStylesString = captionFragmentStyleStringGenerator(styles);
   }
 
+  //TODO clean up this logic
   const startAndEnd = `t="${start}" d="${(end ?? 0) - (start ?? 0)}"`;
   return `<${typeString} ${
     !!start ? startAndEnd : ""
@@ -86,7 +87,8 @@ function exportToYtt() {
         [StyleUiEnums.FONT]: 10,
       }
     );
-    console.log(captionFragment);
+    // console.log(captionFragment);
+    captions.push(captionFragment);
   }
 
   const file = `<?xml version="1.0" encoding="utf-8" ?>
@@ -95,9 +97,10 @@ function exportToYtt() {
 
     </head>
     <body>
-
+      ${captions.join("\n")}
     </body>
     </timedtext>`;
+  console.log(file);
 }
 
 export { exportToYtt };
