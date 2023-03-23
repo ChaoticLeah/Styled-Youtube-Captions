@@ -7,6 +7,21 @@
   export let id: number;
   export let captionsData: captionElem[];
 
+  //Makes sure it follows hh:mm:ss.ms rule by checking if its in that format and making sure the first and last char are numbers
+  //Valid Example: 00:01:02.003
+  const INPUT_PATTERN = /([0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3})?(^\d.*\d$)/gm;
+
+  let issueWithStart = false;
+  let issueWithEnd = false;
+
+  function updateTimes() {
+    //TODO verify the times are valid
+    //Verify that the time is in the correct format
+    // if (!INPUT_PATTERN.test(inputTime)) {
+    // 	inputColors[inputId] = 'red';
+    // } else inputColors[inputId] = 'base';
+  }
+
   function setStartTime(
     event: Event & { currentTarget: EventTarget & HTMLInputElement }
   ): any {
