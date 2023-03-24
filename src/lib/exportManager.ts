@@ -32,7 +32,7 @@ function captionFragmentStyleStringGenerator(styles: style) {
         color.g
       )}"`;
       if (key.includes("/")) {
-        builderString += ` ${key.split("/")[1]}="${color.a * 256}"`;
+        builderString += ` ${key.split("/")[1]}="${color.a * 254}"`;
       }
       continue;
     }
