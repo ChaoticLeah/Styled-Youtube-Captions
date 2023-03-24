@@ -87,6 +87,38 @@ function toMillis(time: string) {
   return total;
 }
 
+function download(data: string, filename: string, type?: string) {
+  var file = new Blob([data], { type: type });
+  //@ts-ignore
+  if (window.navigator.msSaveOrOpenBlob)
+    //@ts-ignore IE10+
+    window.navigator.msSaveOrOpenBlob(file, filename);
+  else {
+    // Others
+    var a = document.createElement("a"),
+      url = URL.createObjectURL(file);
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () {
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    }, 0);
+  }
+}
+
+function convertParrenStylesToYTT(input: string): string {
+  // Use a regular expression to match the pattern "(number)text(number)"
+  const regex = /\((\d+)\)(\w+)\((\d+)\)/g;
+
+  // Replace the matched pattern with the desired output format
+  const output = input.replace(regex, '<s p="$1">$2</s>');
+
+  return output;
+}
+
+//TODO add animation support
 function exportToYtt() {
   let captions = [];
 
@@ -101,13 +133,11 @@ function exportToYtt() {
     // }">​<s p="1">${captionElem.value}</s></p>`;
     const captionFragment = generateCaptionFragment(
       FragmentType.PARAGRAPH,
-      captionElem.value,
+      convertParrenStylesToYTT(captionElem.value),
       startTime,
       endTime,
       {
         id: 0,
-        // [StyleUiEnums.BOLD]: true,
-        // [StyleUiEnums.FONT]: 10,
       }
     );
     // console.log(captionFragment);
@@ -137,6 +167,8 @@ function exportToYtt() {
     </body>
     </timedtext>`;
   console.log(file);
+
+  download(file, "fancyFontTranscript.ytt")
 }
 
 export { exportToYtt };
