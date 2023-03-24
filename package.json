@@ -40,6 +40,7 @@
     "@formkit/auto-animate": "^1.0.0-beta.6",
     "browser-fs-access": "^0.33.0",
     "daisyui": "^2.51.3",
+    "rgb-hex": "^4.0.1",
     "svelte-french-toast": "^1.0.3",
     "svelte-toolbar": "^0.0.1",
     "yesvelte": "^0.0.2-next.41"

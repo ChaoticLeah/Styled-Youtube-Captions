@@ -32,7 +32,19 @@
       {:else if styleUIData.type == UITypeEnums.COLOR_PICKER}
         <ColorPicker
           bind:rgb={$data.styles[selectedStyle][styleUIData.forId]}
+          
         />
+        <!-- on:input={(event)=>{
+            // $data.styles[selectedStyle][styleUIData.forId]
+            let newData = $data;
+
+            newData.styles[selectedStyle][styleUIData.forId].r = event.detail.rgb.r;
+            newData.styles[selectedStyle][styleUIData.forId].g = event.detail.rgb.g;
+            newData.styles[selectedStyle][styleUIData.forId].b = event.detail.rgb.b;
+            newData.styles[selectedStyle][styleUIData.forId].a = event.detail.rgb.a;
+            
+            data.set(newData);
+          }} -->
       {:else if styleUIData.type == UITypeEnums.SLIDER}
         <input
           type="range"

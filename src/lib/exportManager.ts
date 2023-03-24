@@ -1,4 +1,5 @@
-import { StyleUiEnums, type style } from "./captionDataManager";
+import rgbHex from "rgb-hex";
+import { StyleUiEnums, type color, type style } from "./captionDataManager";
 import { data, type dataType } from "./captionDataManager";
 
 let dat: dataType;
@@ -8,14 +9,35 @@ data.subscribe((value) => {
 
 enum FragmentType {
   PARAGRAPH = "p",
-  SPAN = "pen",
-  PEN = "s",
+  SPAN = "s",
+  PEN = "pen",
 }
 
 function captionFragmentStyleStringGenerator(styles: style) {
   let builderString = "";
   for (const key in styles) {
     let styleData = styles[key as StyleUiEnums];
+
+    //Make sure its a color, and if is hex it
+    const color = styleData as color;
+    if (
+      color.r != undefined &&
+      color.g != undefined &&
+      color.b != undefined &&
+      color.b != undefined
+    ) {
+      builderString += ` ${key.split("/")[0]}="#${rgbHex(
+        color.r,
+        color.b,
+        color.g
+      )}"`;
+      if (key.includes("/")) {
+        builderString += ` ${key.split("/")[1]}="${color.a * 256}"`;
+      }
+      continue;
+    }
+    //The end of that color hack, if anyone has a better way please open a PR
+
     if (typeof styleData == "boolean") styleData = styleData ? 1 : 0;
     builderString += ` ${key}="${styleData}"`;
   }
@@ -24,7 +46,7 @@ function captionFragmentStyleStringGenerator(styles: style) {
 
 function generateCaptionFragment(
   fragmentType: FragmentType,
-  value: string,
+  value?: string,
   //In ms
   start?: number,
   end?: number,
@@ -38,9 +60,9 @@ function generateCaptionFragment(
 
   //TODO clean up this logic
   const startAndEnd = `t="${start}" d="${(end ?? 0) - (start ?? 0)}"`;
-  return `<${typeString} ${
-    !!start ? startAndEnd : ""
-  }${extraStylesString}>${value}</${typeString}>`;
+  return `<${typeString} ${!!start ? startAndEnd : ""}${extraStylesString}${
+    value ? `>${value}</${typeString}` : "/"
+  }>`;
 }
 
 function toMillis(time: string) {
@@ -66,7 +88,6 @@ function toMillis(time: string) {
 
 function exportToYtt() {
   let captions = [];
-  let captionStypes = [];
 
   for (const captionIndex in dat.captions) {
     const captionElem = dat.captions[captionIndex];
@@ -84,12 +105,25 @@ function exportToYtt() {
       endTime,
       {
         id: 0,
-        [StyleUiEnums.BOLD]: true,
-        [StyleUiEnums.FONT]: 10,
+        // [StyleUiEnums.BOLD]: true,
+        // [StyleUiEnums.FONT]: 10,
       }
     );
     // console.log(captionFragment);
     captions.push(captionFragment);
+  }
+
+  let captionStypes = [];
+
+  for (const style of dat.styles) {
+    const styleFragment = generateCaptionFragment(
+      FragmentType.PEN,
+      undefined,
+      undefined,
+      undefined,
+      style
+    );
+    console.log(styleFragment);
   }
 
   const file = `<?xml version="1.0" encoding="utf-8" ?>
