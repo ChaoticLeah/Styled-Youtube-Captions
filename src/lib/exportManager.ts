@@ -32,6 +32,7 @@ function captionFragmentStyleStringGenerator(styles: style) {
         color.g
       )}"`;
       if (key.includes("/")) {
+        //It goes to 254 due to a youtube bug where it wont work at all on 255 ):
         builderString += ` ${key.split("/")[1]}="${color.a * 254}"`;
       }
       continue;
@@ -113,7 +114,7 @@ function exportToYtt() {
     captions.push(captionFragment);
   }
 
-  let captionStypes = [];
+  let captionStyles = [];
 
   for (const style of dat.styles) {
     const styleFragment = generateCaptionFragment(
@@ -123,13 +124,13 @@ function exportToYtt() {
       undefined,
       style
     );
-    console.log(styleFragment);
+    captionStyles.push(styleFragment);
   }
 
   const file = `<?xml version="1.0" encoding="utf-8" ?>
     <timedtext format="3">
     <head>
-
+    ${captionStyles.join("\n")}
     </head>
     <body>
       ${captions.join("\n")}
