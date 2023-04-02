@@ -1,17 +1,11 @@
 import rgbHex from "rgb-hex";
-import { StyleUiEnums, type color, type style } from "./captionDataManager";
+import { StyleUiEnums, FragmentEnum, fragmentExportTypes, type color, type style } from "./captionDataManager";
 import { data, type dataType } from "./captionDataManager";
 
 let dat: dataType;
 data.subscribe((value) => {
   dat = value;
 });
-
-enum FragmentType {
-  PARAGRAPH = "p",
-  SPAN = "s",
-  PEN = "pen",
-}
 
 function captionFragmentStyleStringGenerator(styles: style) {
   let builderString = "";
@@ -46,14 +40,14 @@ function captionFragmentStyleStringGenerator(styles: style) {
 }
 
 function generateCaptionFragment(
-  fragmentType: FragmentType,
+  FragmentEnum: FragmentEnum,
   value?: string,
   //In ms
   start?: number,
   end?: number,
   styles?: style
 ) {
-  let typeString: string = fragmentType;
+  let typeString: string = FragmentEnum;
   let extraStylesString: string = "";
   if (styles) {
     extraStylesString = captionFragmentStyleStringGenerator(styles);
@@ -132,7 +126,7 @@ function exportToYtt() {
     //   endTime - startTime
     // }">​<s p="1">${captionElem.value}</s></p>`;
     const captionFragment = generateCaptionFragment(
-      FragmentType.PARAGRAPH,
+      FragmentEnum.PARAGRAPH,
       convertParrenStylesToYTT(captionElem.value),
       startTime,
       endTime,
@@ -146,9 +140,11 @@ function exportToYtt() {
 
   let captionStyles = [];
 
-  for (const style of dat.styles) {
+  for (const styleId in dat.styles) {
+    const style = dat.styles[styleId];
+    console.log(style)
     const styleFragment = generateCaptionFragment(
-      FragmentType.PEN,
+      FragmentEnum.PEN,
       undefined,
       undefined,
       undefined,

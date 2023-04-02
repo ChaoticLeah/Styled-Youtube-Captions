@@ -38,7 +38,7 @@
     </div> -->
     <div class="flex">
       <div
-        class="btn-group h-12 w-80 overflow-x-auto overflow-y-hidden rounded-md bg-base-200"
+        class="btn-group h-12 w-full overflow-x-auto overflow-y-hidden rounded-md bg-base-200"
       >
         {#each dat.styles as styleData, i}
           <button

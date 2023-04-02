@@ -17,14 +17,42 @@ type color = {
   a: number;
 };
 
+enum FragmentEnum {
+  PARAGRAPH = "p",
+  SPAN = "s",
+  PEN = "pen",
+  WRITE_SPOT = "ws",
+  WRITE_POSITION = "wp",
+}
+
+
+//Add Style Here
+enum StyleUiEnums {
+  FONT = "fs",
+  FONT_COLOR = "fc/fo",
+  FONT_SIZE = "sz",
+  HORIZONTAL_TEXT_ALIGNMENT = "ju",
+  SHADOW_COLOR = "ec",
+  SHADOW_DISTANCE = "et",
+  BACKGROUND_COLOR = "bc/bo",
+  SCRIPT_CASE = "of",
+  BOLD = "b",
+  ITALIC = "i",
+  UNDERLINE = "u",
+}
+
+
+//Add Style Here
 type style = {
   id?: number;
   [StyleUiEnums.FONT]?: number;
   [StyleUiEnums.FONT_COLOR]?: color;
   [StyleUiEnums.FONT_SIZE]?: number;
+  [StyleUiEnums.HORIZONTAL_TEXT_ALIGNMENT]?: number,
   [StyleUiEnums.SHADOW_COLOR]?: color;
   [StyleUiEnums.SHADOW_DISTANCE]?: number;
   [StyleUiEnums.BACKGROUND_COLOR]?: color;
+  [StyleUiEnums.SCRIPT_CASE]?: number;
   [StyleUiEnums.BOLD]?: boolean;
   [StyleUiEnums.ITALIC]?: boolean;
   [StyleUiEnums.UNDERLINE]?: boolean;
@@ -45,18 +73,8 @@ enum UITypeEnums {
   TOGGLE,
 }
 
-enum StyleUiEnums {
-  FONT = "fs",
-  FONT_COLOR = "fc/fo",
-  FONT_SIZE = "sz",
-  SHADOW_COLOR = "ec",
-  SHADOW_DISTANCE = "et",
-  BACKGROUND_COLOR = "bc/bo",
-  BOLD = "b",
-  ITALIC = "i",
-  UNDERLINE = "u",
-}
 
+//Add Style Here
 const styleUIConfigurations: {
   type: number;
   name: string;
@@ -68,7 +86,6 @@ const styleUIConfigurations: {
     name: "Font",
     forId: StyleUiEnums.FONT,
     data: [
-      // { value: -1, label: "Default" },
       { value: 0, label: "Default" },
       { value: 1, label: "Courier New" },
       { value: 2, label: "Times New Roman" },
@@ -92,6 +109,16 @@ const styleUIConfigurations: {
     data: { start: 0, end: 300 },
   },
   {
+    type: UITypeEnums.DROPDOWN,
+    name: "Horizontal text alignment",
+    forId: StyleUiEnums.HORIZONTAL_TEXT_ALIGNMENT,
+    data: [
+      { value: 0, label: "Left" },
+      { value: 1, label: "Right" },
+      { value: 2, label: "Center" },
+    ],
+  },
+  {
     type: UITypeEnums.COLOR_PICKER,
     name: "Shadow Color",
     forId: StyleUiEnums.SHADOW_COLOR,
@@ -109,6 +136,16 @@ const styleUIConfigurations: {
     name: "Background Color",
     forId: StyleUiEnums.BACKGROUND_COLOR,
     data: undefined,
+  },
+  {
+    type: UITypeEnums.DROPDOWN,
+    name: "Subscript/Superscript",
+    forId: StyleUiEnums.SCRIPT_CASE,
+    data: [
+      { value: 0, label: "Subscript" },
+      { value: 1, label: "Default" },
+      { value: 2, label: "Superscript" },
+    ],
   },
   {
     type: UITypeEnums.TOGGLE,
@@ -130,6 +167,22 @@ const styleUIConfigurations: {
   },
 ];
 
+//Add Style Here
+const fragmentExportTypes = {
+  [StyleUiEnums.FONT]: FragmentEnum.PEN,
+  [StyleUiEnums.FONT_COLOR]: FragmentEnum.PEN,
+  [StyleUiEnums.FONT_SIZE]: FragmentEnum.PEN,
+  [StyleUiEnums.HORIZONTAL_TEXT_ALIGNMENT]: FragmentEnum.WRITE_SPOT,
+  [StyleUiEnums.SHADOW_COLOR]: FragmentEnum.PEN,
+  [StyleUiEnums.SHADOW_DISTANCE]: FragmentEnum.PEN,
+  [StyleUiEnums.BACKGROUND_COLOR]: FragmentEnum.PEN,
+  [StyleUiEnums.SCRIPT_CASE]: FragmentEnum.PEN,
+  [StyleUiEnums.BOLD]: FragmentEnum.PEN,
+  [StyleUiEnums.ITALIC]: FragmentEnum.PEN,
+  [StyleUiEnums.UNDERLINE]: FragmentEnum.PEN,
+}
+
+//Add Style Here
 let baseStyle: style = {
   id: 0,
   [StyleUiEnums.FONT]: 0,
@@ -140,6 +193,7 @@ let baseStyle: style = {
     a: 1,
   },
   [StyleUiEnums.FONT_SIZE]: 100,
+  [StyleUiEnums.HORIZONTAL_TEXT_ALIGNMENT]: 2,
   [StyleUiEnums.SHADOW_COLOR]: {
     r: 0,
     g: 0,
@@ -153,6 +207,7 @@ let baseStyle: style = {
     b: 0,
     a: 1,
   },
+  [StyleUiEnums.SCRIPT_CASE]: 1,
   [StyleUiEnums.BOLD]: false,
   [StyleUiEnums.ITALIC]: false,
   [StyleUiEnums.UNDERLINE]: false,
@@ -170,5 +225,5 @@ let data: Writable<dataType> = writable({
   ],
 });
 
-export { data, baseStyle, styleUIConfigurations, UITypeEnums, StyleUiEnums };
+export { data, baseStyle, styleUIConfigurations, fragmentExportTypes, UITypeEnums, StyleUiEnums, FragmentEnum };
 export type { captionElem, style, color, dataType };

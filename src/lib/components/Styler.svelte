@@ -15,7 +15,8 @@
   });
 </script>
 
-{#key selectedStyle}
+<div class = "h-full overflow-y-scroll flex-grow flex flex-col px-5">
+  {#key selectedStyle}
   {#each styleUIConfigurations as styleUIData, i}
     <div class="ceneter my-2 flex items-center">
       <p class="mr-7">{styleUIData.name}</p>
@@ -64,11 +65,9 @@
     </div>
   {/each}
 {/key}
-<!-- <div class="tooltip" data-tip="hello"></div> -->
+
 <div class="w-full min-h-12 mt-auto rounded-t-lg p-4 text-center bg-base-300 tooltip" data-tip="This is not an exact representation of how it will look. Double check when putting it on youtube on diffrent devices to see how it actually looks.">
   The quick brown fox jumps over the lazy dog
 </div>
 
-<!-- <div class="card-actions justify-end bg-base-300">
-  <div class="badge badge-outline">Products</div>
-</div> -->
+</div>
