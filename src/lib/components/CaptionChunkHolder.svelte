@@ -9,6 +9,7 @@
   export let captionsData: captionElem[];
 
   function setStartTime(event: Event): any {
+    console.log((event?.target as HTMLInputElement).value);
     captionsData[id].startTime = (event?.target as HTMLInputElement).value;
   }
 

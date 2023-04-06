@@ -1,10 +1,9 @@
 <script lang="ts">
   import {
-    baseStyle,
+    generateNewStyle,
     data,
-    type captionElem,
     type dataType,
-    type style,
+    // type style,
   } from "$lib/captionDataManager";
   import CaptionChunkHolder from "$lib/components/CaptionChunkHolder.svelte";
   import CaptionsArea from "$lib/components/CaptionsArea.svelte";
@@ -12,7 +11,7 @@
   import Navbar from "$lib/components/Navbar.svelte";
   import Sidebar from "$lib/components/Sidebar.svelte";
   import Styler from "$lib/components/Styler.svelte";
-    import { exportToYtt } from "$lib/exportManager";
+  import { exportToYtt } from "$lib/exportManager";
   import autoAnimate from "@formkit/auto-animate";
 
   import { onMount } from "svelte";
@@ -55,8 +54,7 @@
       <button
         class="btn"
         on:click={(event) => {
-          let newStyle = Object.create(baseStyle);
-          newStyle.id = dat.styles.length.toString();
+          let newStyle = generateNewStyle(dat.styles.length);
           dat.styles = [...dat.styles, newStyle];
         }}>+</button
       >
@@ -71,7 +69,10 @@
   <div class="mx-auto h-full max-w-4xl overflow-auto overflow-y-scroll p-5">
     <CaptionsArea />
 
-    <button class="glass btn-circle btn absolute bottom-0 left-0 m-10" on:click={exportToYtt}>
+    <button
+      class="glass btn-circle btn absolute bottom-0 left-0 m-10"
+      on:click={exportToYtt}
+    >
       <Icon src={DocumentArrowDown} size="24" />
     </button>
   </div>

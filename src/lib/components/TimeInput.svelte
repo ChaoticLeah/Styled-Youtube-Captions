@@ -13,7 +13,7 @@
   function onInput(
     event: Event & { currentTarget: EventTarget & HTMLInputElement }
   ) {
-    const value = (event?.target as HTMLInputElement).value;
+    value = (event?.target as HTMLInputElement).value.trim();
     verifyInput(value);
   }
 

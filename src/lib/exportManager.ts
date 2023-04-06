@@ -1,63 +1,89 @@
 import rgbHex from "rgb-hex";
-import { StyleUiEnums, FragmentEnum, fragmentExportTypes, type color, type style } from "./captionDataManager";
+import {
+  StyleUiEnums,
+  FragmentEnum,
+  fragmentExportTypes,
+  type color,
+  type MixedStyle,
+  type ParagraphStyle,
+} from "./captionDataManager";
 import { data, type dataType } from "./captionDataManager";
+// import { build } from "vite";
 
 let dat: dataType;
 data.subscribe((value) => {
   dat = value;
 });
 
-function captionFragmentStyleStringGenerator(styles: style) {
-  let builderString = "";
-  for (const key in styles) {
-    let styleData = styles[key as StyleUiEnums];
+// function captionFragmentStyleStringGenerator(
+//   styles: MixedStyle | ParagraphStyle
+// ) {
+//   let builderString = "";
+//   for (const key in styles) {
+//     console.log(key);
 
-    //Make sure its a color, and if is hex it
-    const color = styleData as color;
-    if (
-      color.r != undefined &&
-      color.g != undefined &&
-      color.b != undefined &&
-      color.b != undefined
-    ) {
-      builderString += ` ${key.split("/")[0]}="#${rgbHex(
-        color.r,
-        color.b,
-        color.g
-      )}"`;
-      if (key.includes("/")) {
-        //It goes to 254 due to a youtube bug where it wont work at all on 255 ):
-        builderString += ` ${key.split("/")[1]}="${color.a * 254}"`;
-      }
-      continue;
-    }
-    //The end of that color hack, if anyone has a better way please open a PR
+//     let styleData = styles[key as StyleUiEnums];
 
-    if (typeof styleData == "boolean") styleData = styleData ? 1 : 0;
-    builderString += ` ${key}="${styleData}"`;
-  }
-  return builderString;
-}
+//     //Make sure its a color, and if is hex it
+//     const color = styleData as color;
+//     if (
+//       color.r != undefined &&
+//       color.g != undefined &&
+//       color.b != undefined &&
+//       color.b != undefined
+//     ) {
+//       builderString += ` ${key.split("/")[0]}="#${rgbHex(
+//         color.r,
+//         color.b,
+//         color.g
+//       )}"`;
+//       if (key.includes("/")) {
+//         //It goes to 254 due to a youtube bug where it wont work at all on 255 ):
+//         builderString += ` ${key.split("/")[1]}="${color.a * 254}"`;
+//       }
+//       continue;
+//     }
+//     //The end of that color hack, if anyone has a better way please open a PR
+
+//     if (typeof styleData == "boolean") styleData = styleData ? 1 : 0;
+//     builderString += ` ${key}="${styleData}"`;
+//   }
+//   console.log(builderString);
+//   return builderString;
+// }
 
 function generateCaptionFragment(
   FragmentEnum: FragmentEnum,
-  value?: string,
-  //In ms
-  start?: number,
-  end?: number,
-  styles?: style
+  styles: MixedStyle | ParagraphStyle,
+  value?: string
 ) {
   let typeString: string = FragmentEnum;
-  let extraStylesString: string = "";
-  if (styles) {
-    extraStylesString = captionFragmentStyleStringGenerator(styles);
+
+  // const startAndEnd = `t="${(styles as ParagraphStyle)[StyleUiEnums.START_TIME] ?? ""}" d="${(styles as ParagraphStyle)[StyleUiEnums.DURATION] ?? ""}"`;
+
+  let stylesString = "";
+  for (const [key, value] of Object.entries(styles)) {
+    const valueString =
+      typeof value === "string" ? `"${value}"` : value ? "1" : "0";
+    stylesString += `${key}=${valueString} `;
   }
 
-  //TODO clean up this logic
-  const startAndEnd = `t="${start}" d="${(end ?? 0) - (start ?? 0)}"`;
-  return `<${typeString} ${!!start ? startAndEnd : ""}${extraStylesString}${
-    value ? `>${value}</${typeString}` : "/"
-  }>`;
+  console.log(value, stylesString);
+  return `<${typeString} ${stylesString}>${value}</${typeString}>`;
+}
+
+function createFragment(
+  type: FragmentEnum,
+  inner: string,
+  attributes: MixedStyle | ParagraphStyle
+): string {
+  const attributeString = Object.entries(attributes)
+    .map(([key, value]) => `${key}="${value}"`)
+    .join(" ");
+
+  return `<${FragmentEnum} ${attributeString}>${convertParrenStylesToYTT(
+    inner
+  )}</${FragmentEnum}>`;
 }
 
 function toMillis(time: string) {
@@ -102,6 +128,20 @@ function download(data: string, filename: string, type?: string) {
   }
 }
 
+function extractRubyText(input: string): [string, string] | null {
+  // Define a regular expression that matches "[Hello]{Ruby Text}" patterns.
+  const regex = /(?<!\\)\[([^\\[\]]+)]{([^{}]+)}/;
+  // Use the `exec` method to search for the first match in the input string.
+  const match = regex.exec(input);
+  if (match) {
+    // If a match is found, return an array containing the two capture groups.
+    return [match[1], match[2]];
+  } else {
+    // If no match is found, return null.
+    return null;
+  }
+}
+
 function convertParrenStylesToYTT(input: string): string {
   // Use a regular expression to match the pattern "(number)text(number)"
   const regex = /\((\d+)\)(\w+)\((\d+)\)/g;
@@ -118,7 +158,7 @@ function exportToYtt() {
 
   for (const captionIndex in dat.captions) {
     const captionElem = dat.captions[captionIndex];
-
+    console.log(captionElem);
     const startTime = toMillis(captionElem.startTime);
     const endTime = toMillis(captionElem.endTime);
     //ADD each styled bit here as a <s>
@@ -127,44 +167,44 @@ function exportToYtt() {
     // }">​<s p="1">${captionElem.value}</s></p>`;
     const captionFragment = generateCaptionFragment(
       FragmentEnum.PARAGRAPH,
-      convertParrenStylesToYTT(captionElem.value),
-      startTime,
-      endTime,
       {
         id: 0,
-      }
+        [StyleUiEnums.START_TIME]: startTime,
+        [StyleUiEnums.DURATION]: endTime - startTime,
+      },
+      convertParrenStylesToYTT(captionElem.value)
     );
-    // console.log(captionFragment);
+    // // console.log(captionFragment);
     captions.push(captionFragment);
   }
 
-  let captionStyles = [];
+  // let captionStyles = [];
 
-  for (const styleId in dat.styles) {
-    const style = dat.styles[styleId];
-    console.log(style)
-    const styleFragment = generateCaptionFragment(
-      FragmentEnum.PEN,
-      undefined,
-      undefined,
-      undefined,
-      style
-    );
-    captionStyles.push(styleFragment);
-  }
+  // for (const styleId in dat.styles) {
+  //   const style = dat.styles[styleId];
+  //   console.log(style);
+  //   const styleFragment = generateCaptionFragment(
+  //     FragmentEnum.PEN,
+  //     undefined,
+  //     undefined,
+  //     undefined,
+  //     style
+  //   );
+  //   captionStyles.push(styleFragment);
+  // }
 
-  const file = `<?xml version="1.0" encoding="utf-8" ?>
-    <timedtext format="3">
-    <head>
-    ${captionStyles.join("\n")}
-    </head>
-    <body>
-      ${captions.join("\n")}
-    </body>
-    </timedtext>`;
-  console.log(file);
+  // const file = `<?xml version="1.0" encoding="utf-8" ?>
+  //   <timedtext format="3">
+  //   <head>
+  //   ${captionStyles.join("\n")}
+  //   </head>
+  //   <body>
+  //     ${captions.join("\n")}
+  //   </body>
+  //   </timedtext>`;
+  // console.log(file);
 
-  download(file, "fancyFontTranscript.ytt")
+  // download(file, "fancyFontTranscript.ytt");
 }
 
 export { exportToYtt };

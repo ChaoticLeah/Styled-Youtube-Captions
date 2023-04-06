@@ -1,13 +1,5 @@
 import { writable, type Writable } from "svelte/store";
 
-type captionElem = {
-  startTime: string;
-  endTime: string;
-  value: string;
-  //For if you want just 1 text elem to have a style.
-  customStyle?: style;
-};
-
 type color = {
   // hex: string;
   // opacity: number;
@@ -21,13 +13,21 @@ enum FragmentEnum {
   PARAGRAPH = "p",
   SPAN = "s",
   PEN = "pen",
-  WRITE_SPOT = "ws",
+  TEXT_ALIGNMENT = "ws",
   WRITE_POSITION = "wp",
 }
 
-
 //Add Style Here
-enum StyleUiEnums {
+enum StyleEnums {
+  START_TIME = "t",
+  DURATION = "d",
+  WRITE_POSITION = "wp",
+  PEN_ID_LINK = "p",
+  TEXT_ALIGNMENT = "ws",
+  STYLE_ID = "id",
+  ANCHOR_POINT = "ap",
+  X_COORD = "ah",
+  Y_COORD = "av",
   FONT = "fs",
   FONT_COLOR = "fc/fo",
   FONT_SIZE = "sz",
@@ -36,34 +36,74 @@ enum StyleUiEnums {
   SHADOW_DISTANCE = "et",
   BACKGROUND_COLOR = "bc/bo",
   SCRIPT_CASE = "of",
+  RUBY = "rb",
   BOLD = "b",
   ITALIC = "i",
   UNDERLINE = "u",
 }
 
-
-//Add Style Here
-type style = {
-  id?: number;
-  [StyleUiEnums.FONT]?: number;
-  [StyleUiEnums.FONT_COLOR]?: color;
-  [StyleUiEnums.FONT_SIZE]?: number;
-  [StyleUiEnums.HORIZONTAL_TEXT_ALIGNMENT]?: number,
-  [StyleUiEnums.SHADOW_COLOR]?: color;
-  [StyleUiEnums.SHADOW_DISTANCE]?: number;
-  [StyleUiEnums.BACKGROUND_COLOR]?: color;
-  [StyleUiEnums.SCRIPT_CASE]?: number;
-  [StyleUiEnums.BOLD]?: boolean;
-  [StyleUiEnums.ITALIC]?: boolean;
-  [StyleUiEnums.UNDERLINE]?: boolean;
-  //Modifiers are things like animations that can modify any of the above set styles
-  modifiers?: [];
+type captionUIElem = {
+  startTime: string;
+  endTime: string;
+  value: string;
+  //For if you want just 1 text elem to have a style.
+  customStyle?: MixedStyle;
 };
+
+type ParagraphStyle = {
+  [StyleEnums.START_TIME]: number;
+  [StyleEnums.DURATION]: number;
+  [StyleEnums.WRITE_POSITION]?: number;
+  [StyleEnums.PEN_ID_LINK]?: number;
+  [StyleEnums.TEXT_ALIGNMENT]?: number;
+};
+
+type SpanStyle = {
+  [StyleEnums.PEN_ID_LINK]: number;
+};
+
+//te isnt currently supported
+type PenStyle = {
+  //  No idea what hg does, something about text combination?
+  [StyleEnums.STYLE_ID]: number;
+  [StyleEnums.FONT]?: number;
+  [StyleEnums.FONT_COLOR]?: color;
+  [StyleEnums.FONT_SIZE]?: number;
+  [StyleEnums.SHADOW_DISTANCE]?: number;
+  [StyleEnums.BACKGROUND_COLOR]?: color;
+  [StyleEnums.SCRIPT_CASE]?: number;
+  [StyleEnums.RUBY]?: number;
+  [StyleEnums.BOLD]?: boolean;
+  [StyleEnums.ITALIC]?: boolean;
+  [StyleEnums.UNDERLINE]?: boolean;
+};
+
+type TextAlignmentStyle = {
+  //TODO add this when you figure it out
+};
+
+type WritePositionStyle = {
+  [StyleEnums.STYLE_ID]: number;
+  [StyleEnums.ANCHOR_POINT]?: number;
+  [StyleEnums.X_COORD]?: number;
+  [StyleEnums.Y_COORD]?: number;
+};
+
+// type Style = {
+//   ParagraphStyle?: ParagraphStyle;
+//   SpanStyle?: SpanStyle;
+//   PenStyle?: PenStyle;
+//   TextAlignmentStyle?: TextAlignmentStyle;
+//   WritePositionStyle?: WritePositionStyle;
+//   modifiers?: [];
+// };
+
+type MixedStyle = PenStyle & TextAlignmentStyle & WritePositionStyle;
 
 type dataType = {
   selectedStyleIndex: number;
-  styles: style[];
-  captions: captionElem[];
+  styles: MixedStyle[];
+  captions: captionUIElem[];
 };
 
 enum UITypeEnums {
@@ -73,18 +113,20 @@ enum UITypeEnums {
   TOGGLE,
 }
 
-
 //Add Style Here
+//TODO add defaults here
 const styleUIConfigurations: {
   type: number;
   name: string;
-  forId: StyleUiEnums;
+  forId: StyleEnums;
+  default?: any;
   data: any;
 }[] = [
   {
     type: UITypeEnums.DROPDOWN,
     name: "Font",
-    forId: StyleUiEnums.FONT,
+    forId: StyleEnums.FONT,
+    default: 0,
     data: [
       { value: 0, label: "Default" },
       { value: 1, label: "Courier New" },
@@ -99,48 +141,69 @@ const styleUIConfigurations: {
   {
     type: UITypeEnums.COLOR_PICKER,
     name: "Font Color",
-    forId: StyleUiEnums.FONT_COLOR,
+    forId: StyleEnums.FONT_COLOR,
+    default: {
+      r: 255,
+      g: 255,
+      b: 255,
+      a: 1,
+    },
     data: undefined,
   },
   {
     type: UITypeEnums.SLIDER,
     name: "Font Size",
-    forId: StyleUiEnums.FONT_SIZE,
+    forId: StyleEnums.FONT_SIZE,
+    default: 100,
     data: { start: 0, end: 300 },
   },
-  {
-    type: UITypeEnums.DROPDOWN,
-    name: "Horizontal text alignment",
-    forId: StyleUiEnums.HORIZONTAL_TEXT_ALIGNMENT,
-    data: [
-      { value: 0, label: "Left" },
-      { value: 1, label: "Right" },
-      { value: 2, label: "Center" },
-    ],
-  },
+  // {
+  //   type: UITypeEnums.DROPDOWN,
+  //   name: "Horizontal text alignment",
+  //   forId: StyleEnums.HORIZONTAL_TEXT_ALIGNMENT,
+  //   default: 0,
+  //   data: [
+  //     { value: 0, label: "Left" },
+  //     { value: 1, label: "Right" },
+  //     { value: 2, label: "Center" },
+  //   ],
+  // },
   {
     type: UITypeEnums.COLOR_PICKER,
     name: "Shadow Color",
-    forId: StyleUiEnums.SHADOW_COLOR,
+    forId: StyleEnums.SHADOW_COLOR,
+    default: {
+      r: 0,
+      g: 0,
+      b: 0,
+      a: 1,
+    },
     data: undefined,
   },
   {
     type: UITypeEnums.SLIDER,
     name: "Shadow Distance",
-    forId: StyleUiEnums.SHADOW_DISTANCE,
-
+    forId: StyleEnums.SHADOW_DISTANCE,
+    default: 0,
     data: { start: 0, end: 300 },
   },
   {
     type: UITypeEnums.COLOR_PICKER,
     name: "Background Color",
-    forId: StyleUiEnums.BACKGROUND_COLOR,
+    forId: StyleEnums.BACKGROUND_COLOR,
+    default: {
+      r: 0,
+      g: 0,
+      b: 0,
+      a: 0,
+    },
     data: undefined,
   },
   {
     type: UITypeEnums.DROPDOWN,
     name: "Subscript/Superscript",
-    forId: StyleUiEnums.SCRIPT_CASE,
+    forId: StyleEnums.SCRIPT_CASE,
+    default: 1,
     data: [
       { value: 0, label: "Subscript" },
       { value: 1, label: "Default" },
@@ -150,72 +213,56 @@ const styleUIConfigurations: {
   {
     type: UITypeEnums.TOGGLE,
     name: "Bold",
-    forId: StyleUiEnums.BOLD,
+    forId: StyleEnums.BOLD,
+    default: false,
     data: undefined,
   },
   {
     type: UITypeEnums.TOGGLE,
     name: "Italic",
-    forId: StyleUiEnums.ITALIC,
+    forId: StyleEnums.ITALIC,
+    default: false,
     data: undefined,
   },
   {
     type: UITypeEnums.TOGGLE,
     name: "Underline",
-    forId: StyleUiEnums.UNDERLINE,
+    forId: StyleEnums.UNDERLINE,
+    default: false,
     data: undefined,
   },
 ];
 
 //Add Style Here
 const fragmentExportTypes = {
-  [StyleUiEnums.FONT]: FragmentEnum.PEN,
-  [StyleUiEnums.FONT_COLOR]: FragmentEnum.PEN,
-  [StyleUiEnums.FONT_SIZE]: FragmentEnum.PEN,
-  [StyleUiEnums.HORIZONTAL_TEXT_ALIGNMENT]: FragmentEnum.WRITE_SPOT,
-  [StyleUiEnums.SHADOW_COLOR]: FragmentEnum.PEN,
-  [StyleUiEnums.SHADOW_DISTANCE]: FragmentEnum.PEN,
-  [StyleUiEnums.BACKGROUND_COLOR]: FragmentEnum.PEN,
-  [StyleUiEnums.SCRIPT_CASE]: FragmentEnum.PEN,
-  [StyleUiEnums.BOLD]: FragmentEnum.PEN,
-  [StyleUiEnums.ITALIC]: FragmentEnum.PEN,
-  [StyleUiEnums.UNDERLINE]: FragmentEnum.PEN,
-}
-
-//Add Style Here
-let baseStyle: style = {
-  id: 0,
-  [StyleUiEnums.FONT]: 0,
-  [StyleUiEnums.FONT_COLOR]: {
-    r: 255,
-    g: 255,
-    b: 255,
-    a: 1,
-  },
-  [StyleUiEnums.FONT_SIZE]: 100,
-  [StyleUiEnums.HORIZONTAL_TEXT_ALIGNMENT]: 2,
-  [StyleUiEnums.SHADOW_COLOR]: {
-    r: 0,
-    g: 0,
-    b: 0,
-    a: 1,
-  },
-  [StyleUiEnums.SHADOW_DISTANCE]: 1,
-  [StyleUiEnums.BACKGROUND_COLOR]: {
-    r: 0,
-    g: 0,
-    b: 0,
-    a: 1,
-  },
-  [StyleUiEnums.SCRIPT_CASE]: 1,
-  [StyleUiEnums.BOLD]: false,
-  [StyleUiEnums.ITALIC]: false,
-  [StyleUiEnums.UNDERLINE]: false,
+  [StyleEnums.FONT]: FragmentEnum.PEN,
+  [StyleEnums.FONT_COLOR]: FragmentEnum.PEN,
+  [StyleEnums.FONT_SIZE]: FragmentEnum.PEN,
+  [StyleEnums.HORIZONTAL_TEXT_ALIGNMENT]: FragmentEnum.TEXT_ALIGNMENT,
+  [StyleEnums.SHADOW_COLOR]: FragmentEnum.PEN,
+  [StyleEnums.SHADOW_DISTANCE]: FragmentEnum.PEN,
+  [StyleEnums.BACKGROUND_COLOR]: FragmentEnum.PEN,
+  [StyleEnums.SCRIPT_CASE]: FragmentEnum.PEN,
+  [StyleEnums.BOLD]: FragmentEnum.PEN,
+  [StyleEnums.ITALIC]: FragmentEnum.PEN,
+  [StyleEnums.UNDERLINE]: FragmentEnum.PEN,
 };
+
+function generateNewStyle(id: number): MixedStyle {
+  let newStyle: MixedStyle = {
+    id,
+  };
+  for (const config of styleUIConfigurations) {
+    //@ts-ignore
+    //TODO Investigate this error
+    newStyle[config.forId] = config.default;
+  }
+  return newStyle;
+}
 
 let data: Writable<dataType> = writable({
   selectedStyleIndex: 0,
-  styles: [{ ...baseStyle }],
+  styles: [{ ...generateNewStyle(0) }],
   captions: [
     {
       startTime: "00:00:01.840",
@@ -225,5 +272,19 @@ let data: Writable<dataType> = writable({
   ],
 });
 
-export { data, baseStyle, styleUIConfigurations, fragmentExportTypes, UITypeEnums, StyleUiEnums, FragmentEnum };
-export type { captionElem, style, color, dataType };
+export {
+  data,
+  generateNewStyle,
+  styleUIConfigurations,
+  fragmentExportTypes,
+  UITypeEnums,
+  StyleEnums as StyleUiEnums,
+  FragmentEnum,
+};
+export type {
+  captionUIElem as captionElem,
+  color,
+  dataType,
+  MixedStyle,
+  ParagraphStyle,
+};
