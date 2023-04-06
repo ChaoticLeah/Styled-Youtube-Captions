@@ -73,41 +73,6 @@ function generateCaptionFragment(
   }`;
 }
 
-function createFragment(
-  type: FragmentEnum,
-  inner: string,
-  attributes: MixedStyle | ParagraphStyle
-): string {
-  const attributeString = Object.entries(attributes)
-    .map(([key, value]) => `${key}="${value}"`)
-    .join(" ");
-
-  return `<${FragmentEnum} ${attributeString}>${convertParrenStylesToYTT(
-    inner
-  )}</${FragmentEnum}>`;
-}
-
-function toMillis(time: string) {
-  //split the time by :
-  let t = time.split(":");
-  //get the hours
-  let hours = parseFloat(t[0]);
-  //get the minutes
-  let minutes = parseFloat(t[1]);
-  //get the seconds
-  let seconds = parseFloat(t[2]);
-
-  //convert the hours to milliseconds
-  hours = hours * 60 * 60 * 1000;
-  //convert the minutes to milliseconds
-  minutes = minutes * 60 * 1000;
-  //convert the seconds to milliseconds
-  seconds = seconds * 1000;
-  //add the hours, minutes, and seconds to get the total milliseconds
-  let total = hours + minutes + seconds;
-  return total;
-}
-
 function download(data: string, filename: string, type?: string) {
   var file = new Blob([data], { type: type });
   //@ts-ignore
