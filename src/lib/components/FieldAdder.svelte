@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { captionElem } from "$lib/captionDataManager";
+  import { StyleUiEnums, type captionElem } from "$lib/captionDataManager";
   import { Icon, Plus } from "svelte-hero-icons";
 
   export let id: number;
@@ -8,8 +8,8 @@
     _event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
   ) {
     const newCaption: captionElem = {
-      startTime: "",
-      endTime: "",
+      [StyleUiEnums.START_TIME]: 0,
+      [StyleUiEnums.DURATION]: 1000,
       value: "",
     };
 

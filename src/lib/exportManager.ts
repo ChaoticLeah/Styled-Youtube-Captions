@@ -59,16 +59,14 @@ function generateCaptionFragment(
 ) {
   let typeString: string = FragmentEnum;
 
-  // const startAndEnd = `t="${(styles as ParagraphStyle)[StyleUiEnums.START_TIME] ?? ""}" d="${(styles as ParagraphStyle)[StyleUiEnums.DURATION] ?? ""}"`;
-
   let stylesString = "";
   for (const [key, value] of Object.entries(styles)) {
+    //TODO make this logic better
     const valueString =
       typeof value === "string" ? `"${value}"` : value ? "1" : "0";
     stylesString += `${key}=${valueString} `;
   }
 
-  console.log(value, stylesString);
   return `<${typeString} ${stylesString}>${value}</${typeString}>`;
 }
 
@@ -158,9 +156,8 @@ function exportToYtt() {
 
   for (const captionIndex in dat.captions) {
     const captionElem = dat.captions[captionIndex];
-    console.log(captionElem);
-    const startTime = toMillis(captionElem.startTime);
-    const endTime = toMillis(captionElem.endTime);
+    // const startTime = toMillis(captionElem[StyleUiEnums.START_TIME]);
+    // const endTime = toMillis(captionElem.endTime);
     //ADD each styled bit here as a <s>
     // const captionFragment = `<p p="" t="${startTime}" d="${
     //   endTime - startTime
@@ -169,14 +166,15 @@ function exportToYtt() {
       FragmentEnum.PARAGRAPH,
       {
         id: 0,
-        [StyleUiEnums.START_TIME]: startTime,
-        [StyleUiEnums.DURATION]: endTime - startTime,
+        [StyleUiEnums.START_TIME]: captionElem[StyleUiEnums.START_TIME],
+        [StyleUiEnums.DURATION]: captionElem[StyleUiEnums.DURATION],
       },
       convertParrenStylesToYTT(captionElem.value)
     );
     // // console.log(captionFragment);
     captions.push(captionFragment);
   }
+  console.log(captions);
 
   // let captionStyles = [];
 

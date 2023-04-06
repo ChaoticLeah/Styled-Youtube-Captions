@@ -42,13 +42,7 @@ enum StyleEnums {
   UNDERLINE = "u",
 }
 
-type captionUIElem = {
-  startTime: string;
-  endTime: string;
-  value: string;
-  //For if you want just 1 text elem to have a style.
-  customStyle?: MixedStyle;
-};
+type captionUIElem = ParagraphStyle & { value: string };
 
 type ParagraphStyle = {
   [StyleEnums.START_TIME]: number;
@@ -265,8 +259,8 @@ let data: Writable<dataType> = writable({
   styles: [{ ...generateNewStyle(0) }],
   captions: [
     {
-      startTime: "00:00:01.840",
-      endTime: "00:00:02.840",
+      [StyleEnums.START_TIME]: 0,
+      [StyleEnums.DURATION]: 1000,
       value: "test",
     },
   ],

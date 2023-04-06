@@ -1,20 +1,20 @@
 <script lang="ts">
-  import type { captionElem } from "$lib/captionDataManager";
+  import { StyleUiEnums, type captionElem } from "$lib/captionDataManager";
   import { Icon, Clock, XMark } from "svelte-hero-icons";
   import TimeInput from "./TimeInput.svelte";
-  // export let id : number;
-  // export let captionData: captionElem;
 
   export let id: number;
   export let captionsData: captionElem[];
 
-  function setStartTime(event: Event): any {
-    console.log((event?.target as HTMLInputElement).value);
-    captionsData[id].startTime = (event?.target as HTMLInputElement).value;
+  type TimeEvent = { detail: number };
+  let startTime = 0;
+  function setStartTime(event: TimeEvent): any {
+    startTime = event.detail;
+    captionsData[id][StyleUiEnums.START_TIME] = event.detail;
   }
 
-  function setEndTime(event: Event): any {
-    captionsData[id].endTime = (event?.target as HTMLInputElement).value;
+  function setEndTime(event: TimeEvent): any {
+    captionsData[id][StyleUiEnums.DURATION] = event.detail - startTime;
   }
 
   function setValue(
@@ -36,14 +36,15 @@
     </div>
     <TimeInput
       placeholder="Start"
-      bind:value={captionsData[id].startTime}
-      on:input={setStartTime}
+      value={captionsData[id][StyleUiEnums.START_TIME]}
+      on:timeChanged={setStartTime}
     />
     <p class="p-2">to</p>
     <TimeInput
       placeholder="End"
-      bind:value={captionsData[id].endTime}
-      on:input={setEndTime}
+      value={captionsData[id][StyleUiEnums.START_TIME] +
+        captionsData[id][StyleUiEnums.DURATION]}
+      on:timeChanged={setEndTime}
     />
 
     <!-- <button class="btn btn-ghost">LOL</button>
