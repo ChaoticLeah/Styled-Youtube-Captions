@@ -67,7 +67,10 @@ function generateCaptionFragment(
     stylesString += `${key}=${valueString} `;
   }
 
-  return `<${typeString} ${stylesString}>${value}</${typeString}>`;
+  // return `<${typeString} ${stylesString}>${value}</${typeString}>`;
+  return `<${typeString} ${stylesString}${
+    value ? `>${value}</${typeString}>` : `/>`
+  }`;
 }
 
 function createFragment(
@@ -156,12 +159,6 @@ function exportToYtt() {
 
   for (const captionIndex in dat.captions) {
     const captionElem = dat.captions[captionIndex];
-    // const startTime = toMillis(captionElem[StyleUiEnums.START_TIME]);
-    // const endTime = toMillis(captionElem.endTime);
-    //ADD each styled bit here as a <s>
-    // const captionFragment = `<p p="" t="${startTime}" d="${
-    //   endTime - startTime
-    // }">​<s p="1">${captionElem.value}</s></p>`;
     const captionFragment = generateCaptionFragment(
       FragmentEnum.PARAGRAPH,
       {
@@ -174,33 +171,25 @@ function exportToYtt() {
     // // console.log(captionFragment);
     captions.push(captionFragment);
   }
-  console.log(captions);
 
-  // let captionStyles = [];
+  let captionStyles = [];
 
-  // for (const styleId in dat.styles) {
-  //   const style = dat.styles[styleId];
-  //   console.log(style);
-  //   const styleFragment = generateCaptionFragment(
-  //     FragmentEnum.PEN,
-  //     undefined,
-  //     undefined,
-  //     undefined,
-  //     style
-  //   );
-  //   captionStyles.push(styleFragment);
-  // }
+  for (const styleId in dat.styles) {
+    const style = dat.styles[styleId];
+    const styleFragment = generateCaptionFragment(FragmentEnum.PEN, style);
+    captionStyles.push(styleFragment);
+  }
 
-  // const file = `<?xml version="1.0" encoding="utf-8" ?>
-  //   <timedtext format="3">
-  //   <head>
-  //   ${captionStyles.join("\n")}
-  //   </head>
-  //   <body>
-  //     ${captions.join("\n")}
-  //   </body>
-  //   </timedtext>`;
-  // console.log(file);
+  const file = `<?xml version="1.0" encoding="utf-8" ?>
+    <timedtext format="3">
+    <head>
+    ${captionStyles.join("\n")}
+    </head>
+    <body>
+      ${captions.join("\n")}
+    </body>
+    </timedtext>`;
+  console.log(file);
 
   // download(file, "fancyFontTranscript.ytt");
 }
