@@ -35,16 +35,17 @@
     <!-- <div class = "h-12 w-full bg-base-200 rounded-md">
       <button class=""></button>
     </div> -->
-    <div class="flex">
+    <div class="flex w-full justify-center">
       <div
-        class="btn-group h-12 w-full overflow-x-auto overflow-y-hidden rounded-md bg-base-200"
+        class="btn-group flex h-12 w-96 overflow-x-auto overflow-y-hidden rounded-md bg-base-200"
       >
         {#each dat.styles as styleData, i}
           <button
             class={`btn ${i == dat.selectedStyleIndex ? "btn-active " : ""}`}
             on:click={(event) => {
-              // dat.selectedStyleIndex = i;
               let newData = $data;
+              //Dont set it if its been pressed again.
+              if (newData.selectedStyleIndex == i) return;
               newData.selectedStyleIndex = i;
               data.set(newData);
             }}>{styleData.id}</button

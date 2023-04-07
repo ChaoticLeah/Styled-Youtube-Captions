@@ -1,11 +1,12 @@
 <script lang="ts">
   // @ts-nocheck
   import {
-    styleUIConfigurations,
+    styleUILinkerConfigerations,
     UITypeEnums,
     data,
   } from "$lib/captionDataManager";
   import ColorPicker from "svelte-awesome-color-picker";
+  import ColorPickerWrapper from "./ColorPickerWrapper.svelte";
 
   let selectedStyle: number;
 
@@ -16,48 +17,66 @@
 
 <div class="flex h-full flex-grow flex-col overflow-y-scroll px-5">
   {#key selectedStyle}
-    {#each styleUIConfigurations as styleUIData, i}
+    {#each styleUILinkerConfigerations as styleUIData, i}
       <div class="ceneter my-2 flex items-center">
         <p class="mr-7">{styleUIData.name}</p>
 
         {#if styleUIData.type == UITypeEnums.DROPDOWN}
           <select
             class="select-bordered select max-w-xs"
-            bind:value={$data.styles[selectedStyle][styleUIData.forId]}
+            bind:value={$data.styles[selectedStyle][
+              styleUIData.styleData[0].forId
+            ]}
           >
-            {#each styleUIConfigurations[i].data as arrDat, j}
+            {#each styleUILinkerConfigerations[i].styleData[0].data as arrDat, j}
               <option value={arrDat.value}>{arrDat.label}</option>
             {/each}
           </select>
         {:else if styleUIData.type == UITypeEnums.COLOR_PICKER}
-          <ColorPicker
-            bind:rgb={$data.styles[selectedStyle][styleUIData.forId]}
-          />
-          <!-- on:input={(event)=>{
-            // $data.styles[selectedStyle][styleUIData.forId]
-            let newData = $data;
-
-            newData.styles[selectedStyle][styleUIData.forId].r = event.detail.rgb.r;
-            newData.styles[selectedStyle][styleUIData.forId].g = event.detail.rgb.g;
-            newData.styles[selectedStyle][styleUIData.forId].b = event.detail.rgb.b;
-            newData.styles[selectedStyle][styleUIData.forId].a = event.detail.rgb.a;
-            
-            data.set(newData);
-          }} -->
+          {#if styleUIData.styleData[1] != undefined}
+            <ColorPickerWrapper
+              hex={$data.styles[selectedStyle][styleUIData.styleData[0].forId]}
+              alpha={$data.styles[selectedStyle][
+                styleUIData.styleData[1].forId
+              ]}
+              alphaEnabled={true}
+              on:colorChange={(event) => {
+                $data.styles[selectedStyle][styleUIData.styleData[0].forId] =
+                  event.detail.hex;
+                $data.styles[selectedStyle][styleUIData.styleData[1].forId] =
+                  event.detail.alpha;
+                console.log(event.detail.alpha);
+              }}
+            />
+            <!-- {$data.styles[selectedStyle][styleUIData.styleData[1].forId]} -->
+          {:else}
+            <ColorPickerWrapper
+              hex={$data.styles[selectedStyle][styleUIData.styleData[0].forId]}
+              alphaEnabled={false}
+              on:colorChange={(event) => {
+                $data.styles[selectedStyle][styleUIData.styleData[0].forId] =
+                  event.detail.hex;
+              }}
+            />
+          {/if}
         {:else if styleUIData.type == UITypeEnums.SLIDER}
           <input
             type="range"
-            min={styleUIData.data.start}
-            max={styleUIData.data.end}
+            min={styleUILinkerConfigerations[i].styleData[0].data.start}
+            max={styleUILinkerConfigerations[i].styleData[0].data.end}
             class="range"
-            bind:value={$data.styles[selectedStyle][styleUIData.forId]}
+            bind:value={$data.styles[selectedStyle][
+              styleUIData.styleData[0].forId
+            ]}
           />
         {:else if styleUIData.type == UITypeEnums.TOGGLE}
           <!-- @ts-ignore -->
           <input
             type="checkbox"
             class="toggle"
-            bind:checked={$data.styles[selectedStyle][styleUIData.forId]}
+            bind:checked={$data.styles[selectedStyle][
+              styleUIData.styleData[0].forId
+            ]}
           />
         {/if}
       </div>

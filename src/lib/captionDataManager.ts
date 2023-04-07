@@ -29,12 +29,14 @@ enum StyleEnums {
   X_COORD = "ah",
   Y_COORD = "av",
   FONT = "fs",
-  FONT_COLOR = "fc/fo",
+  FONT_COLOR = "fc",
+  FONT_OPACITY = "fo",
   FONT_SIZE = "sz",
   HORIZONTAL_TEXT_ALIGNMENT = "ju",
   SHADOW_COLOR = "ec",
   SHADOW_DISTANCE = "et",
-  BACKGROUND_COLOR = "bc/bo",
+  BACKGROUND_COLOR = "bc",
+  BACKGROUND_OPACITY = "bo",
   SCRIPT_CASE = "of",
   RUBY = "rb",
   BOLD = "b",
@@ -61,10 +63,12 @@ type PenStyle = {
   //  No idea what hg does, something about text combination?
   [StyleEnums.STYLE_ID]: number;
   [StyleEnums.FONT]?: number;
-  [StyleEnums.FONT_COLOR]?: color;
+  [StyleEnums.FONT_COLOR]?: string;
+  [StyleEnums.FONT_OPACITY]?: number;
   [StyleEnums.FONT_SIZE]?: number;
   [StyleEnums.SHADOW_DISTANCE]?: number;
-  [StyleEnums.BACKGROUND_COLOR]?: color;
+  [StyleEnums.BACKGROUND_COLOR]?: string;
+  [StyleEnums.BACKGROUND_OPACITY]?: number;
   [StyleEnums.SCRIPT_CASE]?: number;
   [StyleEnums.RUBY]?: number;
   [StyleEnums.BOLD]?: boolean;
@@ -108,122 +112,149 @@ enum UITypeEnums {
 }
 
 //Add Style Here
-//TODO add defaults here
-const styleUIConfigurations: {
-  type: number;
+
+const styleUILinkerConfigerations: {
+  type: UITypeEnums;
   name: string;
-  forId: StyleEnums;
-  default?: any;
-  data: any;
+  styleData: {
+    forId: StyleEnums;
+    default: any;
+    data: any;
+  }[];
 }[] = [
   {
     type: UITypeEnums.DROPDOWN,
     name: "Font",
-    forId: StyleEnums.FONT,
-    default: 0,
-    data: [
-      { value: 0, label: "Default" },
-      { value: 1, label: "Courier New" },
-      { value: 2, label: "Times New Roman" },
-      { value: 3, label: "Lucida Console" },
-      { value: 4, label: "Roboto" },
-      { value: 5, label: "Comic Sans Ms" },
-      { value: 6, label: "Monotype Corsiva" },
-      { value: 7, label: "Small Caps Arial" },
+    styleData: [
+      {
+        forId: StyleEnums.FONT,
+        default: 0,
+        data: [
+          { value: 0, label: "Default" },
+          { value: 1, label: "Courier New" },
+          { value: 2, label: "Times New Roman" },
+          { value: 3, label: "Lucida Console" },
+          { value: 4, label: "Roboto" },
+          { value: 5, label: "Comic Sans Ms" },
+          { value: 6, label: "Monotype Corsiva" },
+          { value: 7, label: "Small Caps Arial" },
+        ],
+      },
     ],
   },
   {
     type: UITypeEnums.COLOR_PICKER,
     name: "Font Color",
-    forId: StyleEnums.FONT_COLOR,
-    default: {
-      r: 255,
-      g: 255,
-      b: 255,
-      a: 1,
-    },
-    data: undefined,
+    styleData: [
+      {
+        forId: StyleEnums.FONT_COLOR,
+        default: "#ffffff",
+        data: undefined,
+      },
+      {
+        forId: StyleEnums.FONT_OPACITY,
+        default: 1,
+        data: undefined,
+      },
+    ],
   },
   {
     type: UITypeEnums.SLIDER,
     name: "Font Size",
-    forId: StyleEnums.FONT_SIZE,
-    default: 100,
-    data: { start: 0, end: 300 },
+    styleData: [
+      {
+        forId: StyleEnums.FONT_SIZE,
+        default: 100,
+        data: { start: 0, end: 300 },
+      },
+    ],
   },
-  // {
-  //   type: UITypeEnums.DROPDOWN,
-  //   name: "Horizontal text alignment",
-  //   forId: StyleEnums.HORIZONTAL_TEXT_ALIGNMENT,
-  //   default: 0,
-  //   data: [
-  //     { value: 0, label: "Left" },
-  //     { value: 1, label: "Right" },
-  //     { value: 2, label: "Center" },
-  //   ],
-  // },
   {
     type: UITypeEnums.COLOR_PICKER,
     name: "Shadow Color",
-    forId: StyleEnums.SHADOW_COLOR,
-    default: {
-      r: 0,
-      g: 0,
-      b: 0,
-      a: 1,
-    },
-    data: undefined,
+    styleData: [
+      {
+        forId: StyleEnums.SHADOW_COLOR,
+        default: "#ffffff",
+        data: undefined,
+      },
+    ],
   },
   {
     type: UITypeEnums.SLIDER,
     name: "Shadow Distance",
-    forId: StyleEnums.SHADOW_DISTANCE,
-    default: 0,
-    data: { start: 0, end: 300 },
+    styleData: [
+      {
+        forId: StyleEnums.SHADOW_DISTANCE,
+        default: 0,
+        data: { start: 0, end: 300 },
+      },
+    ],
   },
   {
     type: UITypeEnums.COLOR_PICKER,
     name: "Background Color",
-    forId: StyleEnums.BACKGROUND_COLOR,
-    default: {
-      r: 0,
-      g: 0,
-      b: 0,
-      a: 0,
-    },
-    data: undefined,
+    styleData: [
+      {
+        forId: StyleEnums.BACKGROUND_COLOR,
+        default: "#000000",
+        data: undefined,
+      },
+      {
+        forId: StyleEnums.BACKGROUND_OPACITY,
+        default: 0,
+        data: undefined,
+      },
+    ],
   },
+
   {
     type: UITypeEnums.DROPDOWN,
     name: "Subscript/Superscript",
-    forId: StyleEnums.SCRIPT_CASE,
-    default: 1,
-    data: [
-      { value: 0, label: "Subscript" },
-      { value: 1, label: "Default" },
-      { value: 2, label: "Superscript" },
+    styleData: [
+      {
+        forId: StyleEnums.SCRIPT_CASE,
+        default: 1,
+        data: [
+          { value: 0, label: "Subscript" },
+          { value: 1, label: "Default" },
+          { value: 2, label: "Superscript" },
+        ],
+      },
     ],
   },
   {
     type: UITypeEnums.TOGGLE,
     name: "Bold",
-    forId: StyleEnums.BOLD,
-    default: false,
-    data: undefined,
+    styleData: [
+      {
+        forId: StyleEnums.BOLD,
+        default: false,
+        data: undefined,
+      },
+    ],
   },
   {
     type: UITypeEnums.TOGGLE,
     name: "Italic",
-    forId: StyleEnums.ITALIC,
-    default: false,
-    data: undefined,
+    styleData: [
+      {
+        forId: StyleEnums.ITALIC,
+        default: false,
+        data: undefined,
+      },
+    ],
   },
   {
     type: UITypeEnums.TOGGLE,
     name: "Underline",
-    forId: StyleEnums.UNDERLINE,
-    default: false,
-    data: undefined,
+    styleData: [
+      {
+        forId: StyleEnums.UNDERLINE,
+        default: false,
+        data: undefined,
+      },
+    ],
   },
 ];
 
@@ -246,11 +277,14 @@ function generateNewStyle(id: number): MixedStyle {
   let newStyle: MixedStyle = {
     id,
   };
-  for (const config of styleUIConfigurations) {
-    //@ts-ignore
+  for (const config of styleUILinkerConfigerations) {
     //TODO Investigate this error
-    newStyle[config.forId] = config.default;
+    for (const iterator of config.styleData) {
+      //@ts-ignore
+      newStyle[iterator.forId] = iterator.default;
+    }
   }
+  console.log(newStyle);
   return newStyle;
 }
 
@@ -269,7 +303,7 @@ let data: Writable<dataType> = writable({
 export {
   data,
   generateNewStyle,
-  styleUIConfigurations,
+  styleUILinkerConfigerations,
   fragmentExportTypes,
   UITypeEnums,
   StyleEnums as StyleUiEnums,

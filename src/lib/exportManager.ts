@@ -15,6 +15,7 @@ data.subscribe((value) => {
   dat = value;
 });
 
+//TODO fix colors, and wrap them in their own thing
 // function captionFragmentStyleStringGenerator(
 //   styles: MixedStyle | ParagraphStyle
 // ) {
