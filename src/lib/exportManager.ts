@@ -1,19 +1,19 @@
-import rgbHex from "rgb-hex";
-import {
-  StyleUiEnums,
-  FragmentEnum,
-  fragmentExportTypes,
-  type color,
-  type MixedStyle,
-  type ParagraphStyle,
-} from "./captionDataManager";
-import { data, type dataType } from "./captionDataManager";
-// import { build } from "vite";
+// import rgbHex from "rgb-hex";
+// import {
+//   StyleUiEnums,
+//   FragmentEnum,
+//   fragmentExportTypes,
+//   type color,
+//   type MixedStyle,
+//   type ParagraphStyle,
+// } from "./captionDataManager";
+// import { data, type dataType } from "./captionDataManager";
+// // import { build } from "vite";
 
-let dat: dataType;
-data.subscribe((value) => {
-  dat = value;
-});
+// let dat: dataType;
+// data.subscribe((value) => {
+//   dat = value;
+// });
 
 //TODO fix colors, and wrap them in their own thing
 // function captionFragmentStyleStringGenerator(
@@ -53,26 +53,26 @@ data.subscribe((value) => {
 //   return builderString;
 // }
 
-function generateCaptionFragment(
-  FragmentEnum: FragmentEnum,
-  styles: MixedStyle | ParagraphStyle,
-  value?: string
-) {
-  let typeString: string = FragmentEnum;
+// function generateCaptionFragment(
+//   FragmentEnum: FragmentEnum,
+//   styles: MixedStyle | ParagraphStyle,
+//   value?: string
+// ) {
+//   let typeString: string = FragmentEnum;
 
-  let stylesString = "";
-  for (const [key, value] of Object.entries(styles)) {
-    //TODO make this logic better
-    const valueString =
-      typeof value === "string" ? `"${value}"` : value ? "1" : "0";
-    stylesString += `${key}=${valueString} `;
-  }
+//   let stylesString = "";
+//   for (const [key, value] of Object.entries(styles)) {
+//     //TODO make this logic better
+//     const valueString =
+//       typeof value === "string" ? `"${value}"` : value ? "1" : "0";
+//     stylesString += `${key}=${valueString} `;
+//   }
 
-  // return `<${typeString} ${stylesString}>${value}</${typeString}>`;
-  return `<${typeString} ${stylesString}${
-    value ? `>${value}</${typeString}>` : `/>`
-  }`;
-}
+//   // return `<${typeString} ${stylesString}>${value}</${typeString}>`;
+//   return `<${typeString} ${stylesString}${
+//     value ? `>${value}</${typeString}>` : `/>`
+//   }`;
+// }
 
 function download(data: string, filename: string, type?: string) {
   var file = new Blob([data], { type: type });
@@ -123,39 +123,39 @@ function convertParrenStylesToYTT(input: string): string {
 function exportToYtt() {
   let captions = [];
 
-  for (const captionIndex in dat.captions) {
-    const captionElem = dat.captions[captionIndex];
-    const captionFragment = generateCaptionFragment(
-      FragmentEnum.PARAGRAPH,
-      {
-        id: 0,
-        [StyleUiEnums.START_TIME]: captionElem[StyleUiEnums.START_TIME],
-        [StyleUiEnums.DURATION]: captionElem[StyleUiEnums.DURATION],
-      },
-      convertParrenStylesToYTT(captionElem.value)
-    );
-    // // console.log(captionFragment);
-    captions.push(captionFragment);
-  }
+  // for (const captionIndex in dat.captions) {
+  //   const captionElem = dat.captions[captionIndex];
+  //   const captionFragment = generateCaptionFragment(
+  //     FragmentEnum.PARAGRAPH,
+  //     {
+  //       id: 0,
+  //       [StyleUiEnums.START_TIME]: captionElem[StyleUiEnums.START_TIME],
+  //       [StyleUiEnums.DURATION]: captionElem[StyleUiEnums.DURATION],
+  //     },
+  //     convertParrenStylesToYTT(captionElem.value)
+  //   );
+  //   // // console.log(captionFragment);
+  //   captions.push(captionFragment);
+  // }
 
-  let captionStyles = [];
+  // let captionStyles = [];
 
-  for (const styleId in dat.styles) {
-    const style = dat.styles[styleId];
-    const styleFragment = generateCaptionFragment(FragmentEnum.PEN, style);
-    captionStyles.push(styleFragment);
-  }
+  // for (const styleId in dat.styles) {
+  //   const style = dat.styles[styleId];
+  //   const styleFragment = generateCaptionFragment(FragmentEnum.PEN, style);
+  //   captionStyles.push(styleFragment);
+  // }
 
-  const file = `<?xml version="1.0" encoding="utf-8" ?>
-    <timedtext format="3">
-    <head>
-    ${captionStyles.join("\n")}
-    </head>
-    <body>
-      ${captions.join("\n")}
-    </body>
-    </timedtext>`;
-  console.log(file);
+  // const file = `<?xml version="1.0" encoding="utf-8" ?>
+  //   <timedtext format="3">
+  //   <head>
+  //   ${captionStyles.join("\n")}
+  //   </head>
+  //   <body>
+  //     ${captions.join("\n")}
+  //   </body>
+  //   </timedtext>`;
+  // console.log(file);
 
   // download(file, "fancyFontTranscript.ytt");
 }
