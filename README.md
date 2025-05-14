@@ -9,11 +9,11 @@
 
 <div align="center">
   <h3>
-    <a href="https://kevinwh0.github.io/Styled-Youtube-Captions/">
+    <a href="https://ChaoticLeah.github.io/Styled-Youtube-Captions/">
       Website
     </a>
     <span> | </span>
-    <a href="https://github.com/KevinWh0/Styled-Youtube-Captions/releases/">
+    <a href="https://github.com/ChaoticLeah/Styled-Youtube-Captions/releases/">
       Download
     </a>
   </h3>
@@ -60,7 +60,7 @@ As you can see in the image above it lets you create fancy captions for youtube.
 3. Make any edits you want
 4. Export and enjoy!
 
-<a href="https://github.com/KevinWh0/Styled-Youtube-Captions/issues">Report any bugs here</a>
+<a href="https://github.com/ChaoticLeah/Styled-Youtube-Captions/issues">Report any bugs here</a>
 
 
 ## What still needs doing?
